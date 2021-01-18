@@ -33,14 +33,14 @@ export default function Login({ navigation }) {
               />
             </View>
 
-            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('HomeAdmin')}>
+            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('BerandaAdmin')}>
               <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={{ position: 'absolute', right: 20, bottom: 20 }}>
-          <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('HomeUser')}>
+          <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('BerandaUser')}>
             <Text style={styles.nextText}>Lewati</Text>
             <Icon
               name={'chevron-forward-circle-outline'}

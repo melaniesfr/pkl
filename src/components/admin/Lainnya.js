@@ -6,7 +6,7 @@ export default function Lainnya({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('BahasaUser')} style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.navigate('BahasaAdmin')} style={styles.button}>
           <Text style={styles.menu}>Bahasa</Text>
           <Icon
             name={'chevron-forward-outline'}
@@ -17,7 +17,7 @@ export default function Lainnya({ navigation }) {
       </View>
 
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('TentangUser')} style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.navigate('TentangAdmin')} style={styles.button}>
           <Text style={styles.menu}>Tentang Aplikasi</Text>
           <Icon
             name={'chevron-forward-outline'}

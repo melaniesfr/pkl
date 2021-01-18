@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'rea
 
 import list from '../../images/list-icon.png';
 import category from '../../images/category-icon.png';
-import other from '../../images/other-icon.png';
+import other from '../../images/settings-icon.png';
 
-export default function Home({ navigation }) {
+export default function Beranda({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -14,12 +14,12 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.card}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('UMKMUser')}>
             <Image source={list} style={styles.icon} />
             <Text style={styles.iconText}>UMKM</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('KategoriUser')}>
             <Image source={category} style={styles.icon} />
             <Text style={styles.iconText}>Kategori</Text>
           </TouchableOpacity>
