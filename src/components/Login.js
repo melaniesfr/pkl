@@ -1,25 +1,53 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function App() {
+export default function Login({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ position: 'relative', flex: 1 }}>
+      <View style={{ position: 'relative', flex: 1, backgroundColor: 'white' }}>
         <View style={styles.container}>
           <View style={styles.boxLogin}>
             <Text style={styles.title}>LOGIN</Text>
-            <TextInput placeholder="Email" style={styles.input} />
-            <TextInput placeholder="Password" style={styles.input} />
+            <View style={styles.input}>
+              <Icon
+                name={'mail-outline'}
+                size={20}
+                style={{ marginTop: 13, marginRight: 5 }}
+              />
+              <TextInput
+                placeholder="Email"
+                keyboardType="email-address"
+              />
+            </View>
 
-            <TouchableOpacity style={styles.loginButton}>
+            <View style={styles.input}>
+              <Icon
+                name={'key-outline'}
+                size={20}
+                style={{ marginTop: 11, marginRight: 5 }}
+              />
+              <TextInput
+                placeholder="Password"
+                secureTextEntry={true}
+              />
+            </View>
+
+            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('HomeAdmin')}>
               <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={{ position: 'absolute', right: 20, bottom: 20 }}>
-          <TouchableOpacity style={styles.nextButton}>
+          <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('HomeUser')}>
             <Text style={styles.nextText}>Lewati</Text>
+            <Icon
+              name={'chevron-forward-circle-outline'}
+              size={20}
+              color={'white'}
+              style={{ marginLeft: 5 }}
+            />
           </TouchableOpacity>
         </View>
       </View>
@@ -36,11 +64,11 @@ const styles = StyleSheet.create({
   boxLogin: {
     width: '80%',
     height: 250,
-    borderWidth: 1,
-    borderColor: 'grey',
+    backgroundColor: 'white',
     borderTopStartRadius: 25,
     borderBottomEndRadius: 25,
-    padding: 20
+    padding: 20,
+    elevation: 10
   },
   title: {
     fontSize: 20,
@@ -52,7 +80,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'grey',
     marginBottom: 10,
-    paddingLeft: 10
+    paddingLeft: 5,
+    flexDirection: 'row'
   },
   loginButton: {
     marginTop: 10,
@@ -62,7 +91,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    elevation: 5
   },
   loginText: {
     color: 'white',
@@ -72,10 +102,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#2eb877',
     padding: 10,
     borderRadius: 5,
-    width: 75,
+    width: 100,
     height: 50,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'row',
+    elevation: 5
   },
   nextText: {
     color: 'white',
