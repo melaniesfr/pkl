@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity, Image } from 'react-native';
 import axios from 'axios';
-import test from '../../images/test.jpg';
 
 export default function CRUD({ navigation }) {
   const [data, setData] = useState();
@@ -28,7 +27,7 @@ export default function CRUD({ navigation }) {
     return (
       <TouchableOpacity onPress={() => navigation.navigate('DetailUMKMAdmin')}>
         <View style={{ borderBottomWidth: 1, borderBottomColor: '#ccc', padding: 5, marginVertical: 10, flexDirection: 'row' }}>
-          <Image source={test} style={{ width: 100, height: 67 }} />
+          <Image source={{uri: `https://picsum.photos/900/600?random=${item.id}`}} style={{ width: 100, height: 67 }} />
           <View style={{ marginLeft: 10 }}>
             <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{ item.produk }</Text>
             <Text style={{ fontSize: 15 }}>{ item.pemilik }</Text>
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     paddingHorizontal: 20,
     paddingTop: 10
   }
