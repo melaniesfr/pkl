@@ -18,6 +18,7 @@ import UMKMAdmin from '../components/admin/UMKM';
 import KategoriAdmin from '../components/admin/Kategori';
 import CRUDAdmin from '../components/admin/CRUD';
 import PostUMKMAdmin from '../components/admin/PostUMKM';
+import DetailUMKMAdmin from '../components/admin/DetailUMKM';
 import ProfilAdmin from '../components/admin/Profil';
 import LainnyaAdmin from '../components/admin/Lainnya';
 import BahasaAdmin from '../components/admin/Bahasa';
@@ -114,6 +115,11 @@ export default function RootStack() {
       <Stack.Screen name="PostUMKMAdmin" component={PostUMKMAdmin}
         options={{
           title: 'Tambah UMKM'
+        }}
+      />
+      <Stack.Screen name="DetailUMKMAdmin" component={DetailUMKMAdmin}
+        options={{
+          title: 'Detail UMKM'
         }}
       />
       <Stack.Screen name="ProfilAdmin" component={ProfilAdmin}
