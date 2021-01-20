@@ -1,16 +1,15 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Splash from '../components/SplashScreen';
 import Login from '../components/Login';
 
 // User
-import BerandaUser from '../components/user/Beranda';
-import UMKMUser from '../components/user/UMKM';
-import KategoriUser from '../components/user/Kategori';
-import LainnyaUser from '../components/user/Lainnya';
-import BahasaUser from '../components/user/Bahasa';
-import TentangUser from '../components/user/Tentang';
+import BerandaMenuUser from '../components/user/menus/BerandaMenu';
+import KategoriMenuUser from '../components/user/menus/KategoriMenu';
+import PengaturanMenuUser from '../components/user/menus/PengaturanMenu';
 
 // Admin
 import BerandaAdmin from '../components/admin/Beranda';
@@ -25,59 +24,73 @@ import BahasaAdmin from '../components/admin/Bahasa';
 import TentangAdmin from '../components/admin/Tentang';
 
 const Stack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
+
+function UserTabScreen() {
+  return (
+    <Tab.Navigator
+      initialRouteName="UserTabScreen"
+      activeColor="#fff"
+      shifting={true}
+    >
+      <Tab.Screen
+        name="BerandaMenuUser"
+        component={BerandaMenuUser}
+        options={{
+          tabBarLabel: 'Beranda',
+          tabBarColor: '#2eb877',
+          tabBarIcon: ({ color }) => (
+            <Icon name="home-sharp" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="KategoriMenuUser"
+        component={KategoriMenuUser}
+        options={{
+          tabBarLabel: 'Kategori',
+          tabBarColor: 'tomato',
+          tabBarIcon: ({ color }) => (
+            <Icon name="grid-sharp" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="PengaturanMenuUser"
+        component={PengaturanMenuUser}
+        options={{
+          tabBarLabel: 'Pengaturan',
+          tabBarColor: 'crimson',
+          tabBarIcon: ({ color }) => (
+            <Icon name="settings-sharp" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 export default function RootStack() {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: { backgroundColor: '#2eb877' },
-        headerTintColor: 'white'
-      }}
-    >
+    <Stack.Navigator>
+      <Stack.Screen name="Splash" component={Splash}
+        options={({ navigation, route }) => ({
+          title: 'Splash Screen',
+          headerShown: false
+        })}
+      />
       <Stack.Screen name="Login" component={Login}
         options={({ navigation, route }) => ({
           title: 'Page Login',
           headerShown: false
         })}
       />
-
-      {/* ================================================================================================= */}
-
-      {/* Stack User */}
-      <Stack.Screen name="BerandaUser" component={BerandaUser}
+      <Stack.Screen name="UserScreen" component={UserTabScreen}
         options={{
-          title: 'Beranda',
-          headerLeft: null,
-          headerTitleAlign: 'center'
+          title: 'User Screen',
+          headerShown: false
         }}
       />
-      <Stack.Screen name="UMKMUser" component={UMKMUser}
-        options={{
-          title: 'Daftar UMKM'
-        }}
-      />
-      <Stack.Screen name="KategoriUser" component={KategoriUser}
-        options={{
-          title: 'Kategori UMKM'
-        }}
-      />
-      <Stack.Screen name="LainnyaUser" component={LainnyaUser}
-        options={{
-          title: 'Lainnya'
-        }}
-      />
-      <Stack.Screen name="BahasaUser" component={BahasaUser}
-        options={{
-          title: 'Pilih Bahasa'
-        }}
-      />
-      <Stack.Screen name="TentangUser" component={TentangUser}
-        options={{
-          title: 'Tentang Aplikasi'
-        }}
-      />
-
-      {/* ================================================================================================= */}
 
       {/* Stack Admin */}
       <Stack.Screen name="BerandaAdmin" component={BerandaAdmin}

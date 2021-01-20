@@ -40,7 +40,7 @@ export default function Login({ navigation }) {
         </View>
 
         <View style={{ position: 'absolute', right: 20, bottom: 20 }}>
-          <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('BerandaUser')}>
+          <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('UserScreen')}>
             <Text style={styles.nextText}>Lewati</Text>
             <Icon
               name={'chevron-forward-circle-outline'}
