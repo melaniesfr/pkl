@@ -38,7 +38,7 @@ export default function Lainnya({ navigation }) {
       </View>
 
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('LogoutAdmin')} style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
           <Icon
             name={'log-out-outline'}
             size={23}

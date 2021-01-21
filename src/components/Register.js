@@ -1,37 +1,55 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
 
-export default function Login({ navigation }) {
+export default function Register({ navigation }) {
   const [ data, setData ] = useState({
+    nama: '',
     email: '',
     password: '',
-    check_textInputChange: false,
+    check_textNamaChange: false,
+    check_textEmailChange: false,
     secureTextEntry: true
   });
 
-  const textInputChange = (val) => {
-    if (val.length !== 0) {
+  const onChangeNama = (value) => {
+    if (value.length !== 0) {
       setData({
         ...data,
-        email: val,
-        check_textInputChange: true
+        nama: value,
+        check_textNamaChange: true
       });
     } else {
       setData({
         ...data,
-        email: val,
-        check_textInputChange: false
+        nama: value,
+        check_textNamaChange: false
       });
     }
   };
 
-  const handlePasswordChange = (val) => {
+  const onChangeEmail = (value) => {
+    if (value.length !== 0) {
+      setData({
+        ...data,
+        email: value,
+        check_textEmailChange: true
+      });
+    } else {
+      setData({
+        ...data,
+        email: value,
+        check_textEmailChange: false
+      });
+    }
+  };
+
+  const onChangePassword = (value) => {
     setData({
       ...data,
-      password: val
+      password: value
     });
   };
 
@@ -42,12 +60,55 @@ export default function Login({ navigation }) {
     });
   };
 
+  const userRegistration = () => {
+    fetch('http://192.168.43.89/pkl/registration.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        nama: data.nama,
+        email: data.email,
+        password: data.password
+      })
+    })
+    .then((res) => res.json())
+    .then((resJson) => {
+      // Alert.alert('Success!', 'Registrasi berhasil!');
+      // Alert.alert('Success!', resJson);
+      Alert.alert('Alert!', resJson);
+    })
+    .catch((err) => console.log(err));
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={{ position: 'relative', flex: 1, backgroundColor: '#ddd' }}>
         <View style={styles.container}>
-          <View style={styles.boxLogin}>
-            <Text style={styles.title}>LOGIN</Text>
+          <View style={styles.boxRegister}>
+            <Text style={styles.title}>REGISTER</Text>
+            <View style={styles.input}>
+              <Icon
+                name={'person-outline'}
+                size={20}
+                style={{ marginTop: 13, marginRight: 5 }}
+              />
+              <TextInput
+                placeholder="Nama"
+                onChangeText={(value) => onChangeNama(value)}
+              />
+              { data.check_textNamaChange ?
+              <Animatable.View animation="bounceIn" style={{ position: 'absolute', marginTop: 13, right: 5 }}>
+                <Feather
+                  name="check-circle"
+                  color="green"
+                  size={20}
+                />
+              </Animatable.View>
+              : null }
+            </View>
+
             <View style={styles.input}>
               <Icon
                 name={'mail-outline'}
@@ -58,9 +119,9 @@ export default function Login({ navigation }) {
                 placeholder="Email"
                 keyboardType="email-address"
                 autoCapitalize="none"
-                onChangeText={(val) => textInputChange(val)}
+                onChangeText={(value) => onChangeEmail(value)}
               />
-              { data.check_textInputChange ?
+              { data.check_textEmailChange ?
               <Animatable.View animation="bounceIn" style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 <Feather
                   name="check-circle"
@@ -79,9 +140,9 @@ export default function Login({ navigation }) {
               />
               <TextInput
                 placeholder="Password"
-                secureTextEntry={ data.secureTextEntry ? true : false }
+                secureTextEntry={ data.secureTextEntry }
                 autoCapitalize="none"
-                onChangeText={(val) => handlePasswordChange(val)}
+                onChangeText={(value) => onChangePassword(value)}
               />
               <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 { data.secureTextEntry ?
@@ -99,26 +160,19 @@ export default function Login({ navigation }) {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('AdminScreen')}>
-              <Text style={styles.loginText}>LOGIN</Text>
+            <TouchableOpacity style={styles.registerButton} onPress={ userRegistration }>
+              <Text style={styles.registerText}>REGISTER</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')}>
-              <Text style={styles.registerText}>Buat Akun</Text>
+            <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Login')}>
+              <Icon
+                name={'chevron-back-outline'}
+                size={20}
+                style={{ position: 'absolute', left: 100 }}
+              />
+              <Text style={styles.backText}>Kembali</Text>
             </TouchableOpacity>
           </View>
-        </View>
-
-        <View style={{ position: 'absolute', right: 20, bottom: 20 }}>
-          <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('UserScreen')}>
-            <Text style={styles.nextText}>Lewati</Text>
-            <Icon
-              name={'chevron-forward-circle-outline'}
-              size={20}
-              color={'white'}
-              style={{ marginLeft: 5 }}
-            />
-          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -131,9 +185,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  boxLogin: {
+  boxRegister: {
     width: '80%',
-    height: 290,
+    height: 350,
     backgroundColor: 'white',
     borderTopStartRadius: 25,
     borderBottomEndRadius: 25,
@@ -153,41 +207,28 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     flexDirection: 'row'
   },
-  loginButton: {
+  registerButton: {
     marginTop: 10,
     width: '100%',
     height: 10,
-    backgroundColor: '#4a94d9',
+    backgroundColor: '#2eb877',
     borderRadius: 50,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 5
   },
-  loginText: {
-    color: 'white',
-    fontSize: 15
-  },
-  registerButton: {
-    marginTop: 20,
-    alignItems: 'center'
-  },
   registerText: {
-    textDecorationLine: 'underline'
-  },
-  nextButton: {
-    backgroundColor: '#2eb877',
-    padding: 10,
-    borderRadius: 5,
-    width: 100,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    elevation: 5
-  },
-  nextText: {
     color: 'white',
     fontSize: 15
-  }
+  },
+  backButton: {
+    marginTop: 20,
+    alignItems: 'center',
+    position: 'relative'
+  },
+  backText: {
+    textDecorationLine: 'underline',
+    marginLeft: 18
+  },
 });

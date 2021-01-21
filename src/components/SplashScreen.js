@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import logo from './../images/logo.png';
+import * as Animatable from 'react-native-animatable';
 
 export default function SplashScreen({ navigation }) {
   useEffect(() => {
@@ -11,9 +12,16 @@ export default function SplashScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Image source={ logo } style={styles.logo} />
-      <Text style={styles.logoTextTop}>USAHA MIKRO UNGGULAN</Text>
-      <Text style={styles.logoTextBottom}>KABUPATEN BLITAR</Text>
+      <Animatable.Image
+        source={ logo } style={styles.logo}
+        animation="bounceIn"
+        duration={1500}
+      />
+
+      <Animatable.View animation="fadeInUpBig" style={{ alignItems: 'center' }}>
+        <Text style={styles.logoTextTop}>USAHA MIKRO UNGGULAN</Text>
+        <Text style={styles.logoTextBottom}>KABUPATEN BLITAR</Text>
+      </Animatable.View>
     </View>
   );
 };

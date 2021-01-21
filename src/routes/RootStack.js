@@ -5,6 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Icon from 'react-native-vector-icons/Ionicons';
 import Splash from '../components/SplashScreen';
 import Login from '../components/Login';
+import Register from '../components/Register';
 
 // User
 import BerandaMenuUser from '../components/user/menus/BerandaMenu';
@@ -145,6 +146,12 @@ export default function RootStack() {
       <Stack.Screen name="Login" component={Login}
         options={({ navigation, route }) => ({
           title: 'Page Login',
+          headerShown: false
+        })}
+      />
+      <Stack.Screen name="Register" component={Register}
+        options={({ navigation, route }) => ({
+          title: 'Page Register',
           headerShown: false
         })}
       />
