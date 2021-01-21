@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
@@ -8,30 +8,30 @@ export default function Login({ navigation }) {
   const [ data, setData ] = useState({
     email: '',
     password: '',
-    check_textInputChange: false,
+    check_textEmailChange: false,
     secureTextEntry: true
   });
 
-  const textInputChange = (val) => {
-    if (val.length !== 0) {
+  const onChangeEmail = (value) => {
+    if (value.length !== 0) {
       setData({
         ...data,
-        email: val,
-        check_textInputChange: true
+        email: value,
+        check_textEmailChange: true
       });
     } else {
       setData({
         ...data,
-        email: val,
-        check_textInputChange: false
+        email: value,
+        check_textEmailChange: false
       });
     }
   };
 
-  const handlePasswordChange = (val) => {
+  const onChangePassword = (value) => {
     setData({
       ...data,
-      password: val
+      password: value
     });
   };
 
@@ -40,6 +40,31 @@ export default function Login({ navigation }) {
       ...data,
       secureTextEntry: !data.secureTextEntry
     });
+  };
+
+  const userLogin = () => {
+    fetch('http://192.168.43.89/pkl/login.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password
+      })
+    })
+    .then((res) => res.json())
+    .then((resJson) => {
+      if (resJson === 'Data admin cocok') {
+        navigation.navigate('AdminScreen', { email: data.email });
+      } else if (resJson === 'Data user cocok') {
+        Alert.alert('Success!', resJson);
+      } else {
+        Alert.alert('Error!', resJson);
+      }
+    })
+    .catch((err) => console.log(err));
   };
 
   return (
@@ -58,9 +83,9 @@ export default function Login({ navigation }) {
                 placeholder="Email"
                 keyboardType="email-address"
                 autoCapitalize="none"
-                onChangeText={(val) => textInputChange(val)}
+                onChangeText={(value) => onChangeEmail(value)}
               />
-              { data.check_textInputChange ?
+              { data.check_textEmailChange ?
               <Animatable.View animation="bounceIn" style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 <Feather
                   name="check-circle"
@@ -81,7 +106,7 @@ export default function Login({ navigation }) {
                 placeholder="Password"
                 secureTextEntry={ data.secureTextEntry ? true : false }
                 autoCapitalize="none"
-                onChangeText={(val) => handlePasswordChange(val)}
+                onChangeText={(value) => onChangePassword(value)}
               />
               <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 { data.secureTextEntry ?
@@ -99,7 +124,7 @@ export default function Login({ navigation }) {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('AdminScreen')}>
+            <TouchableOpacity style={styles.loginButton} onPress={ userLogin }>
               <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
 

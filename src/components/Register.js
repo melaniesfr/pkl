@@ -75,9 +75,13 @@ export default function Register({ navigation }) {
     })
     .then((res) => res.json())
     .then((resJson) => {
-      // Alert.alert('Success!', 'Registrasi berhasil!');
-      // Alert.alert('Success!', resJson);
-      Alert.alert('Alert!', resJson);
+      if (resJson === 'User sudah ada, silakan coba lagi') {
+        Alert.alert('Peringatan!', resJson);
+      } else if (resJson === 'Registrasi berhasil') {
+        Alert.alert('Success!', resJson);
+      } else {
+        Alert.alert('Error!', resJson);
+      }
     })
     .catch((err) => console.log(err));
   };
