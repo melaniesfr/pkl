@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, TextInput, ActivityIndicator, Image, TouchableOpacity, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import noImage from '../../images/noImage.png';
+import noImage from '../../../images/noImage.png';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function PostUMKM({ navigation }) {

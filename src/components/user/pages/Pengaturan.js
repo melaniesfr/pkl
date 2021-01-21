@@ -7,6 +7,11 @@ export default function Pengaturan({ navigation }) {
     <View style={styles.container}>
       <View style={styles.card}>
         <TouchableOpacity onPress={() => navigation.navigate('BahasaUser')} style={styles.button}>
+          <Icon
+            name={'language-outline'}
+            size={23}
+            style={{ position: 'relative', left: 0, marginRight: 10 }}
+          />
           <Text style={styles.menu}>Bahasa</Text>
           <Icon
             name={'chevron-forward-outline'}
@@ -18,6 +23,11 @@ export default function Pengaturan({ navigation }) {
 
       <View style={styles.card}>
         <TouchableOpacity onPress={() => navigation.navigate('TentangUser')} style={styles.button}>
+          <Icon
+            name={'alert-circle-outline'}
+            size={23}
+            style={{ position: 'relative', left: 0, marginRight: 10 }}
+          />
           <Text style={styles.menu}>Tentang Aplikasi</Text>
           <Icon
             name={'chevron-forward-outline'}

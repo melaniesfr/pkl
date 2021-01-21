@@ -7,6 +7,11 @@ export default function Lainnya({ navigation }) {
     <View style={styles.container}>
       <View style={styles.card}>
         <TouchableOpacity onPress={() => navigation.navigate('BahasaAdmin')} style={styles.button}>
+          <Icon
+            name={'language-outline'}
+            size={23}
+            style={{ position: 'relative', left: 0, marginRight: 10 }}
+          />
           <Text style={styles.menu}>Bahasa</Text>
           <Icon
             name={'chevron-forward-outline'}
@@ -18,7 +23,28 @@ export default function Lainnya({ navigation }) {
 
       <View style={styles.card}>
         <TouchableOpacity onPress={() => navigation.navigate('TentangAdmin')} style={styles.button}>
+          <Icon
+            name={'alert-circle-outline'}
+            size={23}
+            style={{ position: 'relative', left: 0, marginRight: 10 }}
+          />
           <Text style={styles.menu}>Tentang Aplikasi</Text>
+          <Icon
+            name={'chevron-forward-outline'}
+            size={25}
+            style={{ position: 'absolute', right: 10 }}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.card}>
+        <TouchableOpacity onPress={() => navigation.navigate('LogoutAdmin')} style={styles.button}>
+          <Icon
+            name={'log-out-outline'}
+            size={23}
+            style={{ position: 'relative', left: 0, marginRight: 10 }}
+          />
+          <Text style={styles.menu}>Logout</Text>
           <Icon
             name={'chevron-forward-outline'}
             size={25}
