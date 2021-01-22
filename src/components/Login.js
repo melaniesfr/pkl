@@ -63,6 +63,13 @@ export default function Login({ navigation }) {
       } else {
         Alert.alert('Error!', resJson);
       }
+
+      setData({
+        ...data,
+        email: '',
+        password: '',
+        check_textEmailChange: false
+      });
     })
     .catch((err) => console.log(err));
   };
@@ -83,6 +90,7 @@ export default function Login({ navigation }) {
                 placeholder="Email"
                 keyboardType="email-address"
                 autoCapitalize="none"
+                value={ data.email }
                 onChangeText={(value) => onChangeEmail(value)}
               />
               { data.check_textEmailChange ?
@@ -106,6 +114,7 @@ export default function Login({ navigation }) {
                 placeholder="Password"
                 secureTextEntry={ data.secureTextEntry ? true : false }
                 autoCapitalize="none"
+                value={ data.password }
                 onChangeText={(value) => onChangePassword(value)}
               />
               <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
@@ -157,7 +166,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   boxLogin: {
-    width: '80%',
+    width: '90%',
     height: 290,
     backgroundColor: 'white',
     borderTopStartRadius: 25,

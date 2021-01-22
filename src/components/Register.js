@@ -75,13 +75,22 @@ export default function Register({ navigation }) {
     })
     .then((res) => res.json())
     .then((resJson) => {
-      if (resJson === 'User sudah ada, silakan coba lagi') {
-        Alert.alert('Peringatan!', resJson);
-      } else if (resJson === 'Registrasi berhasil') {
+      if (resJson === 'Registrasi berhasil') {
         Alert.alert('Success!', resJson);
+      } else if (resJson === 'User sudah ada, silakan coba lagi') {
+        Alert.alert('Peringatan!', resJson);
       } else {
         Alert.alert('Error!', resJson);
       }
+
+      setData({
+        ...data,
+        nama: '',
+        email: '',
+        password: '',
+        check_textNamaChange: false,
+        check_textEmailChange: false
+      });
     })
     .catch((err) => console.log(err));
   };
@@ -100,6 +109,7 @@ export default function Register({ navigation }) {
               />
               <TextInput
                 placeholder="Nama"
+                value={ data.nama }
                 onChangeText={(value) => onChangeNama(value)}
               />
               { data.check_textNamaChange ?
@@ -123,6 +133,7 @@ export default function Register({ navigation }) {
                 placeholder="Email"
                 keyboardType="email-address"
                 autoCapitalize="none"
+                value={ data.email }
                 onChangeText={(value) => onChangeEmail(value)}
               />
               { data.check_textEmailChange ?
@@ -146,6 +157,7 @@ export default function Register({ navigation }) {
                 placeholder="Password"
                 secureTextEntry={ data.secureTextEntry }
                 autoCapitalize="none"
+                value={ data.password }
                 onChangeText={(value) => onChangePassword(value)}
               />
               <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
@@ -172,7 +184,7 @@ export default function Register({ navigation }) {
               <Icon
                 name={'chevron-back-outline'}
                 size={20}
-                style={{ position: 'absolute', left: 100 }}
+                style={{ position: 'absolute', left: 120 }}
               />
               <Text style={styles.backText}>Kembali</Text>
             </TouchableOpacity>
@@ -190,7 +202,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   boxRegister: {
-    width: '80%',
+    width: '90%',
     height: 350,
     backgroundColor: 'white',
     borderTopStartRadius: 25,
