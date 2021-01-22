@@ -7,9 +7,15 @@ import Splash from '../components/SplashScreen';
 import Login from '../components/Login';
 import Register from '../components/Register';
 
+// Visitor
+import BerandaMenuVisitor from '../components/visitor/menus/BerandaMenu';
+import KategoriMenuVisitor from '../components/visitor/menus/KategoriMenu';
+import PengaturanMenuVisitor from '../components/visitor/menus/PengaturanMenu';
+
 // User
 import BerandaMenuUser from '../components/user/menus/BerandaMenu';
 import KategoriMenuUser from '../components/user/menus/KategoriMenu';
+import ProfilMenuUser from '../components/user/menus/ProfilMenu';
 import PengaturanMenuUser from '../components/user/menus/PengaturanMenu';
 
 // Admin
@@ -23,6 +29,52 @@ import PengaturanMenuAdmin from '../components/admin/menus/PengaturanMenu';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
+
+function VisitorTabScreen() {
+  return (
+    <Tab.Navigator
+      initialRouteName="VisitorTabScreen"
+      activeColor="#fff"
+      shifting={true}
+    >
+      <Tab.Screen
+        name="BerandaMenuVisitor"
+        component={BerandaMenuVisitor}
+        options={{
+          tabBarLabel: 'Beranda',
+          tabBarColor: '#2eb877',
+          tabBarIcon: ({ color }) => (
+            <Icon name="home-sharp" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="KategoriMenuVisitor"
+        component={KategoriMenuVisitor}
+        options={{
+          tabBarLabel: 'Kategori',
+          tabBarColor: 'tomato',
+          tabBarIcon: ({ color }) => (
+            <Icon name="grid-sharp" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="PengaturanMenuVisitor"
+        component={PengaturanMenuVisitor}
+        options={{
+          tabBarLabel: 'Pengaturan',
+          tabBarColor: 'crimson',
+          tabBarIcon: ({ color }) => (
+            <Icon name="settings-sharp" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+
+// ===========================================================================================
 
 function UserTabScreen() {
   return (
@@ -54,6 +106,17 @@ function UserTabScreen() {
         }}
       />
       <Tab.Screen
+        name="ProfilMenuUser"
+        component={ProfilMenuUser}
+        options={{
+          tabBarLabel: 'Profil',
+          tabBarColor: 'purple',
+          tabBarIcon: ({ color }) => (
+            <Icon name="person-sharp" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="PengaturanMenuUser"
         component={PengaturanMenuUser}
         options={{
@@ -67,6 +130,8 @@ function UserTabScreen() {
     </Tab.Navigator>
   );
 };
+
+// ===========================================================================================
 
 function AdminTabScreen() {
   return (
@@ -134,6 +199,8 @@ function AdminTabScreen() {
   );
 };
 
+// ===========================================================================================
+
 export default function RootStack() {
   return (
     <Stack.Navigator>
@@ -154,6 +221,12 @@ export default function RootStack() {
           title: 'Page Register',
           headerShown: false
         })}
+      />
+      <Stack.Screen name="VisitorScreen" component={VisitorTabScreen}
+        options={{
+          title: 'Visitor Screen',
+          headerShown: false
+        }}
       />
       <Stack.Screen name="UserScreen" component={UserTabScreen}
         options={{

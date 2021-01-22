@@ -5,11 +5,11 @@ import noImage from '../../../images/noImage.png';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function PostUMKM({ navigation }) {
-  const [loading, setLoading] = useState(false);
+  const [ loading, setLoading ] = useState(false);
   
-  const [avatarSource, setAvatarSource] = useState(null);
-  const [imgSource, setImgSource] = useState(null);
-  const [isUploading, setIsUploading] = useState(false);
+  const [ avatarSource, setAvatarSource ] = useState(null);
+  const [ imgSource, setImgSource ] = useState(null);
+  const [ isUploading, setIsUploading ] = useState(false);
 
   const selectImage = async () => {
     ImagePicker.showImagePicker({noData: true, mediaType: 'photo', allowsEditing: true, quality: 0.7}, (response) => {

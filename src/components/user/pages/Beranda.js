@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions }
 import axios from 'axios';
 
 export default function UMKM() {
-  const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const [ data, setData ] = useState();
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const getData = () => {
     setIsLoading(true);

@@ -59,7 +59,7 @@ export default function Login({ navigation }) {
       if (resJson === 'Data admin cocok') {
         navigation.navigate('AdminScreen', { email: data.email });
       } else if (resJson === 'Data user cocok') {
-        Alert.alert('Success!', resJson);
+        navigation.navigate('UserScreen', { email: data.email });
       } else {
         Alert.alert('Error!', resJson);
       }
@@ -144,7 +144,7 @@ export default function Login({ navigation }) {
         </View>
 
         <View style={{ position: 'absolute', right: 20, bottom: 20 }}>
-          <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('UserScreen')}>
+          <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('VisitorScreen')}>
             <Text style={styles.nextText}>Lewati</Text>
             <Icon
               name={'chevron-forward-circle-outline'}

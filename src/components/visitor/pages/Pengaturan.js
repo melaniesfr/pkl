@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function Lainnya({ navigation }) {
+export default function Pengaturan({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('BahasaUser')} style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.navigate('BahasaVisitor')} style={styles.button}>
           <Icon
             name={'language-outline'}
             size={23}
@@ -22,29 +22,13 @@ export default function Lainnya({ navigation }) {
       </View>
 
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('TentangUser')} style={styles.button}>
+        <TouchableOpacity onPress={() => navigation.navigate('TentangVisitor')} style={styles.button}>
           <Icon
             name={'alert-circle-outline'}
             size={23}
             style={{ position: 'relative', left: 0, marginRight: 10 }}
           />
           <Text style={styles.menu}>Tentang Aplikasi</Text>
-          <Icon
-            name={'chevron-forward-outline'}
-            size={25}
-            style={{ position: 'absolute', right: 10 }}
-          />
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
-          <Icon
-            name={'log-out-outline'}
-            size={23}
-            style={{ position: 'relative', left: 0, marginRight: 10 }}
-          />
-          <Text style={styles.menu}>Logout</Text>
           <Icon
             name={'chevron-forward-outline'}
             size={25}

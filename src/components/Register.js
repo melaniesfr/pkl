@@ -77,6 +77,7 @@ export default function Register({ navigation }) {
     .then((resJson) => {
       if (resJson === 'Registrasi berhasil') {
         Alert.alert('Success!', resJson);
+        navigation.navigate('Login');
       } else if (resJson === 'User sudah ada, silakan coba lagi') {
         Alert.alert('Peringatan!', resJson);
       } else {
