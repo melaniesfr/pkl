@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions, StatusBar } from 'react-native';
 import axios from 'axios';
 
-export default function UMKM() {
+export default function UMKM({ navigation }) {
   const [ data, setData ] = useState();
   const [ isLoading, setIsLoading ] = useState(false);
 
   const getData = () => {
     setIsLoading(true);
 
+    // axios.get('http://pkl-dinkop.epizy.com/pkl/view.php')
+    // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/view.php')
     axios.get('http://192.168.43.89/pkl/view.php')
     .then((res) => {
       setData(res.data);
@@ -41,6 +43,7 @@ export default function UMKM() {
 
   return (
     <View style={styles.container}>
+      <Text></Text>
       <FlatList
         data={ data }
         renderItem={ renderItem }

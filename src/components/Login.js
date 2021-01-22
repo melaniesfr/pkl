@@ -43,6 +43,8 @@ export default function Login({ navigation }) {
   };
 
   const userLogin = () => {
+    // fetch('http://pkl-dinkop.epizy.com/pkl/login.php', {
+    // fetch('http://pkl-dinkop.000webhostapp.com/pkl/login.php', {
     fetch('http://192.168.43.89/pkl/login.php', {
       method: 'POST',
       headers: {
@@ -57,9 +59,15 @@ export default function Login({ navigation }) {
     .then((res) => res.json())
     .then((resJson) => {
       if (resJson === 'Data admin cocok') {
-        navigation.navigate('AdminScreen', { email: data.email });
+        navigation.navigate('AdminScreen', {
+          screen: 'ProfilAdmin',
+          params: { email: data.email }
+        });
       } else if (resJson === 'Data user cocok') {
-        navigation.navigate('UserScreen', { email: data.email });
+        navigation.navigate('UserScreen', {
+          screen: 'ProfilUser',
+          params: { email: data.email }
+        });
       } else {
         Alert.alert('Error!', resJson);
       }
