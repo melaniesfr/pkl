@@ -8,7 +8,7 @@ export default function TambahMenu({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#4a94d9' },
+        headerStyle: { backgroundColor: '#2eb877' },
         headerTintColor: 'white'
       }}
     >

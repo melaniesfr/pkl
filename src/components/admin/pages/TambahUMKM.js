@@ -56,8 +56,6 @@ export default function PostUMKM({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Text style={styles.title}>Form Tambah UMKM</Text>
-
         <View style={styles.card}>
           <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 20 }} onPress={selectImage}>
             { !avatarSource && <Image source={ noImage } style={{ width: 150, height: 100, resizeMode: 'contain' }} /> }
@@ -94,14 +92,7 @@ export default function PostUMKM({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-  title: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginTop: 20,
-    marginBottom: 10
+    alignItems: 'center'
   },
   card: {
     height: 515,
@@ -109,14 +100,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 15,
     elevation: 10,
-    padding: 20
+    padding: 20,
+    marginTop: 20
   },
   input: {
     height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
-    marginVertical: 5
+    marginVertical: 5,
+    borderRadius: 5
   },
   button: {
     backgroundColor: '#4a94d9',

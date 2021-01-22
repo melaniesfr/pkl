@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function Lainnya({ navigation }) {
+export default function Pengaturan({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('BahasaAdmin')} style={styles.button}>
+        <TouchableOpacity style={{ position: 'relative', flexDirection: 'row', marginBottom: 10 }} onPress={() => navigation.navigate('BahasaAdmin')}>
           <Icon
             name={'language-outline'}
             size={23}
@@ -16,13 +16,13 @@ export default function Lainnya({ navigation }) {
           <Icon
             name={'chevron-forward-outline'}
             size={25}
-            style={{ position: 'absolute', right: 10 }}
+            style={{ position: 'absolute', right: 0 }}
           />
         </TouchableOpacity>
-      </View>
 
-      <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('TentangAdmin')} style={styles.button}>
+        <View style={styles.line}></View>
+
+        <TouchableOpacity style={{ position: 'relative', flexDirection: 'row', marginTop: 10 }} onPress={() => navigation.navigate('TentangAdmin')}>
           <Icon
             name={'alert-circle-outline'}
             size={23}
@@ -32,24 +32,15 @@ export default function Lainnya({ navigation }) {
           <Icon
             name={'chevron-forward-outline'}
             size={25}
-            style={{ position: 'absolute', right: 10 }}
+            style={{ position: 'absolute', right: 0 }}
           />
         </TouchableOpacity>
       </View>
 
-      <View style={styles.card}>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
-          <Icon
-            name={'log-out-outline'}
-            size={23}
-            style={{ position: 'relative', left: 0, marginRight: 10 }}
-          />
-          <Text style={styles.menu}>Logout</Text>
-          <Icon
-            name={'chevron-forward-outline'}
-            size={25}
-            style={{ position: 'absolute', right: 10 }}
-          />
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>Versi Aplikasi 0.0.1</Text>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.buttonText}>Log Out</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -59,24 +50,45 @@ export default function Lainnya({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'white'
+    alignItems: 'center'
   },
   card: {
-    height: 50,
-    width: '93%',
+    width: '100%',
     backgroundColor: 'white',
-    borderRadius: 15,
-    elevation: 10,
-    padding: 10,
     marginTop: 20,
-    paddingLeft: 20,
-    justifyContent: 'center'
+    padding: 20,
+    elevation: 3
+  },
+  line: {
+    width: '95%',
+    height: 0.5,
+    backgroundColor: '#ddd',
+    marginVertical: 10,
+    alignSelf: 'center'
   },
   menu: {
     fontSize: 18
   },
+  footer: {
+    width: '90%',
+    marginTop: 20
+  },
+  footerText: {
+    fontSize: 15,
+    color: '#799cba',
+    marginBottom: 10,
+    marginLeft: 8
+  },
   button: {
-    flexDirection: 'row'
+    backgroundColor: 'white',
+    padding: 13,
+    borderRadius: 10,
+    elevation: 5
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#2eb877',
+    fontWeight: 'bold',
+    textAlign: 'center'
   }
 });

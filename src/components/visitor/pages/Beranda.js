@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions, StatusBar } from 'react-native';
 import axios from 'axios';
 
 export default function UMKM() {
@@ -50,6 +50,8 @@ export default function UMKM() {
         horizontal={ false }
         numColumns={ 2 }
       />
+      
+      <StatusBar backgroundColor={ '#2eb877' } />
     </View>
   );
 };
@@ -58,8 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white'
+    justifyContent: 'center'
   },
   image: {
     width: (Dimensions.get('window').width / 2) - 15,

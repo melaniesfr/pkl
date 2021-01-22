@@ -8,8 +8,8 @@ export default function BerandaMenu({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: '#2eb877' },
-        headerTintColor: 'white'
+        headerStyle: { backgroundColor: 'white' },
+        headerTintColor: '#2eb877'
       }}
     >
       <Stack.Screen name="BerandaUser" component={BerandaUser}

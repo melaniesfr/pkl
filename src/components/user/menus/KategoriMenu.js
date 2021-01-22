@@ -8,7 +8,7 @@ export default function KategoriMenu({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: 'tomato' },
+        headerStyle: { backgroundColor: '#2eb877' },
         headerTintColor: 'white'
       }}
     >

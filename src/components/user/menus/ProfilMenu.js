@@ -8,7 +8,7 @@ export default function ProfilMenu({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: 'purple' },
+        headerStyle: { backgroundColor: '#2eb877' },
         headerTintColor: 'white'
       }}
     >

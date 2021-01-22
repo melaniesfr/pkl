@@ -11,7 +11,7 @@ export default function PengaturanMenu({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: 'crimson' },
+        headerStyle: { backgroundColor: '#2eb877' },
         headerTintColor: 'white'
       }}
     >

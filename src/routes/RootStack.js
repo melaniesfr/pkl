@@ -34,7 +34,8 @@ function VisitorTabScreen() {
   return (
     <Tab.Navigator
       initialRouteName="VisitorTabScreen"
-      activeColor="#fff"
+      activeColor="#2eb877"
+      inactiveColor="grey"
       shifting={true}
     >
       <Tab.Screen
@@ -42,9 +43,9 @@ function VisitorTabScreen() {
         component={BerandaMenuVisitor}
         options={{
           tabBarLabel: 'Beranda',
-          tabBarColor: '#2eb877',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="home-sharp" color={color} size={26} />
+            <Icon name="home-outline" color={color} size={26} />
           ),
         }}
       />
@@ -53,9 +54,9 @@ function VisitorTabScreen() {
         component={KategoriMenuVisitor}
         options={{
           tabBarLabel: 'Kategori',
-          tabBarColor: 'tomato',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="grid-sharp" color={color} size={26} />
+            <Icon name="grid-outline" color={color} size={26} />
           ),
         }}
       />
@@ -64,9 +65,9 @@ function VisitorTabScreen() {
         component={PengaturanMenuVisitor}
         options={{
           tabBarLabel: 'Pengaturan',
-          tabBarColor: 'crimson',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="settings-sharp" color={color} size={26} />
+            <Icon name="settings-outline" color={color} size={26} />
           ),
         }}
       />
@@ -80,7 +81,8 @@ function UserTabScreen() {
   return (
     <Tab.Navigator
       initialRouteName="UserTabScreen"
-      activeColor="#fff"
+      activeColor="#2eb877"
+      inactiveColor="grey"
       shifting={true}
     >
       <Tab.Screen
@@ -88,9 +90,9 @@ function UserTabScreen() {
         component={BerandaMenuUser}
         options={{
           tabBarLabel: 'Beranda',
-          tabBarColor: '#2eb877',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="home-sharp" color={color} size={26} />
+            <Icon name="home-outline" color={color} size={26} />
           ),
         }}
       />
@@ -99,9 +101,9 @@ function UserTabScreen() {
         component={KategoriMenuUser}
         options={{
           tabBarLabel: 'Kategori',
-          tabBarColor: 'tomato',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="grid-sharp" color={color} size={26} />
+            <Icon name="grid-outline" color={color} size={26} />
           ),
         }}
       />
@@ -110,9 +112,9 @@ function UserTabScreen() {
         component={ProfilMenuUser}
         options={{
           tabBarLabel: 'Profil',
-          tabBarColor: 'purple',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="person-sharp" color={color} size={26} />
+            <Icon name="person-outline" color={color} size={26} />
           ),
         }}
       />
@@ -121,9 +123,9 @@ function UserTabScreen() {
         component={PengaturanMenuUser}
         options={{
           tabBarLabel: 'Pengaturan',
-          tabBarColor: 'crimson',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="settings-sharp" color={color} size={26} />
+            <Icon name="settings-outline" color={color} size={26} />
           ),
         }}
       />
@@ -137,7 +139,8 @@ function AdminTabScreen() {
   return (
     <Tab.Navigator
       initialRouteName="AdminTabScreen"
-      activeColor="#fff"
+      activeColor="#2eb877"
+      inactiveColor="grey"
       shifting={true}
     >
       <Tab.Screen
@@ -145,9 +148,9 @@ function AdminTabScreen() {
         component={BerandaMenuAdmin}
         options={{
           tabBarLabel: 'Beranda',
-          tabBarColor: '#2eb877',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="home-sharp" color={color} size={26} />
+            <Icon name="home-outline" color={color} size={26} />
           ),
         }}
       />
@@ -156,9 +159,9 @@ function AdminTabScreen() {
         component={KategoriMenuAdmin}
         options={{
           tabBarLabel: 'Kategori',
-          tabBarColor: 'tomato',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="grid-sharp" color={color} size={26} />
+            <Icon name="grid-outline" color={color} size={26} />
           ),
         }}
       />
@@ -167,9 +170,9 @@ function AdminTabScreen() {
         component={TambahMenuAdmin}
         options={{
           tabBarLabel: 'Tambah',
-          tabBarColor: '#4a94d9',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="add-circle-sharp" color={color} size={26} />
+            <Icon name="add-circle-outline" color={color} size={26} />
           ),
         }}
       />
@@ -178,9 +181,9 @@ function AdminTabScreen() {
         component={ProfilMenuAdmin}
         options={{
           tabBarLabel: 'Profil',
-          tabBarColor: 'purple',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="person-sharp" color={color} size={26} />
+            <Icon name="person-outline" color={color} size={26} />
           ),
         }}
       />
@@ -189,9 +192,9 @@ function AdminTabScreen() {
         component={PengaturanMenuAdmin}
         options={{
           tabBarLabel: 'Pengaturan',
-          tabBarColor: 'crimson',
+          tabBarColor: 'white',
           tabBarIcon: ({ color }) => (
-            <Icon name="settings-sharp" color={color} size={26} />
+            <Icon name="settings-outline" color={color} size={26} />
           ),
         }}
       />
