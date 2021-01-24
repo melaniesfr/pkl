@@ -43,9 +43,8 @@ export default function Login({ navigation }) {
   };
 
   const userLogin = () => {
-    // fetch('http://pkl-dinkop.epizy.com/pkl/login.php', {
-    // fetch('http://pkl-dinkop.000webhostapp.com/pkl/login.php', {
-    fetch('http://192.168.43.89/pkl/login.php', {
+    // fetch('http://192.168.43.89/pkl/login.php', {
+    fetch('http://pkl-dinkop.000webhostapp.com/pkl/login.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

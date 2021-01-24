@@ -27,9 +27,8 @@ export default function PostUMKM({ navigation }) {
 
   uploadImage = async (image_uri) => {
     setIsUploading(true);
-    // let base_url = 'http://pkl-dinkop.epizy.com/pkl/images/';
-    // let base_url = 'http://pkl-dinkop.000webhostapp.com/pkl/images/';
-    let base_url = 'http://192.168.43.89/pkl/images/';
+    // let base_url = 'http://192.168.43.89/pkl/images/';
+    let base_url = 'http://pkl-dinkop.000webhostapp.com/pkl/images/';
     let uploadData = new FormData();
     uploadData.append('submit', 'ok');
     uploadData.append('file', {type: 'image/jpg', uri: image_uri, name: 'uploadimagetmp.jpg'});

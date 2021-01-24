@@ -61,9 +61,8 @@ export default function Register({ navigation }) {
   };
 
   const userRegistration = () => {
-      // fetch('http://pkl-dinkop.epizy.com/pkl/registration.php', {
-      // fetch('http://pkl-dinkop.000webhostapp.com/pkl/registration.php', {
-      fetch('http://192.168.43.89/pkl/registration.php', {
+      // fetch('http://192.168.43.89/pkl/registration.php', {
+      fetch('http://pkl-dinkop.000webhostapp.com/pkl/registration.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
