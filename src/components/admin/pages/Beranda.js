@@ -26,7 +26,7 @@ export default function UMKM({ navigation }) {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('DetailUMKMAdmin', { item: item })}>
         <View style={{ margin: 5, position: 'relative' }}>
           <Image source={{uri: `https://picsum.photos/900/600?random=${item.id}`}} style={styles.image} />
 
@@ -42,7 +42,6 @@ export default function UMKM({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text></Text>
       <FlatList
         data={ data }
         renderItem={ renderItem }

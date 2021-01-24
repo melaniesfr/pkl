@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import BerandaVisitor from '../pages/Beranda';
+import DetailUMKMVisitor from '../pages/DetailUMKM';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,12 @@ export default function BerandaMenu({ navigation }) {
           title: 'Beranda',
           headerLeft: null,
           headerTitleAlign: 'center'
+        }}
+      />
+      <Stack.Screen name="DetailUMKMVisitor" component={DetailUMKMVisitor}
+        options={{
+          title: 'Detail',
+          headerShown: false
         }}
       />
     </Stack.Navigator>
