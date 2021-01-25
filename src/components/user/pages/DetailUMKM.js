@@ -28,9 +28,10 @@ export default function DetailUMKM({ route, navigation }) {
 
           <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('BerandaUser')}>
             <Icon
-              name={'chevron-back-circle-outline'}
+              name={'chevron-back-circle'}
               size={45}
               color={'white'}
+              style={{ opacity: 0.5 }}
             />
           </TouchableOpacity>
         </View>
@@ -64,6 +65,37 @@ export default function DetailUMKM({ route, navigation }) {
             <View style={{ marginTop: 8 }}>
               <Text style={styles.informationTitle}>No. Telp / WA</Text>
               <Text style={styles.informationData}>{ data.telp }</Text>
+            </View>
+
+            <View style={{ marginTop: 8 }}>
+              <Text style={styles.informationTitle}>Harga</Text>
+              <Text style={styles.informationData}>Rp harga</Text>
+            </View>
+            
+            <View style={{ marginTop: 8 }}>
+              <Text style={styles.informationTitle}>Sosial Media</Text>
+
+              <View style={{ flexDirection: 'row', marginTop: 3 }}>
+                <Icon
+                  name={'logo-facebook'}
+                  size={18}
+                  color={'white'}
+                  style={{ marginRight: 5 }}
+                />
+                <Text style={styles.informationData}>Facebook</Text>
+                <Text style={{ color: '#454545', marginLeft: 8 }}>: Nama Facebook</Text>
+              </View>
+
+              <View style={{ flexDirection: 'row', marginTop: 3 }}>
+                <Icon
+                  name={'logo-instagram'}
+                  size={18}
+                  color={'white'}
+                  style={{ marginRight: 5 }}
+                />
+                <Text style={styles.informationData}>Instagram</Text>
+                <Text style={{ color: '#454545', marginLeft: 5 }}>: Nama Instagram</Text>
+              </View>
             </View>
           </View>
         </Animatable.View>

@@ -32,7 +32,7 @@ export default function UMKM({ navigation }) {
 
           <View style={{ position: 'absolute', bottom: 0, height: 27, width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}>
             <View style={{ position: 'absolute', bottom: 5, left: 5 }}>
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>{ item.produk }</Text>
+              <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{ item.produk }</Text>
             </View>
           </View>
         </View>

@@ -13,8 +13,8 @@ export default function Profil({ route, navigation }) {
   // Alert.alert(userEmail);
 
   const [ data, setData ] = useState({
-    nama: 'Testing',
-    email: 'testing@gmail.com',
+    nama: 'User Aplikasi',
+    email: 'user@gmail.com',
     password: 'user',
     secureTextEntry: true
   });

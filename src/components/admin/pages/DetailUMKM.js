@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 
 export default function DetailUMKM({ route, navigation }) {
   const { item } = route.params;
 
-  const [data, setData] = useState({
+  const [ data, setData ] = useState({
     id: item.id,
     produk: item.produk,
     pemilik: item.pemilik,
@@ -15,6 +15,24 @@ export default function DetailUMKM({ route, navigation }) {
     kecamatan: item.kecamatan,
     telp: item.telp
   });
+
+  const deleteData = () => {
+    fetch('http://pkl-dinkop.000webhostapp.com/pkl/delete_umkm.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: data.id
+      })
+    })
+    .then((res) => res.json())
+    .then((resJson) => {
+      navigation.navigate('BerandaAdmin');
+    })
+    .catch((err) => console.log(err));
+  };
 
   return (
     <ScrollView>
@@ -28,9 +46,10 @@ export default function DetailUMKM({ route, navigation }) {
 
           <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('BerandaAdmin')}>
             <Icon
-              name={'chevron-back-circle-outline'}
+              name={'chevron-back-circle'}
               size={45}
               color={'white'}
+              style={{ opacity: 0.5 }}
             />
           </TouchableOpacity>
         </View>
@@ -65,6 +84,37 @@ export default function DetailUMKM({ route, navigation }) {
               <Text style={styles.informationTitle}>No. Telp / WA</Text>
               <Text style={styles.informationData}>{ data.telp }</Text>
             </View>
+
+            <View style={{ marginTop: 8 }}>
+              <Text style={styles.informationTitle}>Harga</Text>
+              <Text style={styles.informationData}>Rp harga</Text>
+            </View>
+            
+            <View style={{ marginTop: 8 }}>
+              <Text style={styles.informationTitle}>Sosial Media</Text>
+
+              <View style={{ flexDirection: 'row', marginTop: 3 }}>
+                <Icon
+                  name={'logo-facebook'}
+                  size={18}
+                  color={'white'}
+                  style={{ marginRight: 5 }}
+                />
+                <Text style={styles.informationData}>Facebook</Text>
+                <Text style={{ color: '#454545', marginLeft: 8 }}>: Nama Facebook</Text>
+              </View>
+
+              <View style={{ flexDirection: 'row', marginTop: 3 }}>
+                <Icon
+                  name={'logo-instagram'}
+                  size={18}
+                  color={'white'}
+                  style={{ marginRight: 5 }}
+                />
+                <Text style={styles.informationData}>Instagram</Text>
+                <Text style={{ color: '#454545', marginLeft: 5 }}>: Nama Instagram</Text>
+              </View>
+            </View>
           </View>
         </Animatable.View>
 
@@ -73,22 +123,32 @@ export default function DetailUMKM({ route, navigation }) {
           animation={'fadeInUpBig'}
         >
           <TouchableOpacity style={styles.editButton}>
-              <Icon
-                name={'create'}
-                size={15}
-                color={'white'}
-                style={{ marginRight: 5, marginTop: 3 }}
-              />
+            <Icon
+              name={'create'}
+              size={15}
+              color={'white'}
+              style={{ marginRight: 5, marginTop: 3 }}
+            />
             <Text style={{ color: 'white', fontSize: 15 }}>Ubah</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.deleteButton}>
-              <Icon
-                name={'trash'}
-                size={15}
-                color={'white'}
-                style={{ marginRight: 5, marginTop: 3 }}
-              />
+          <TouchableOpacity
+            onPress={() => Alert.alert(
+              'Peringatan!',
+              'Anda yakin akan menghapus UMKM ini?',
+              [
+                {text: 'Tidak', onPress: () => console.log('Button tidak clicked')},
+                {text: 'Ya', onPress: () => deleteData()}
+              ]
+            )}
+            style={styles.deleteButton}
+          >
+            <Icon
+              name={'trash'}
+              size={15}
+              color={'white'}
+              style={{ marginRight: 5, marginTop: 3 }}
+            />
             <Text style={{ color: 'white', fontSize: 15 }}>Hapus</Text>
           </TouchableOpacity>
         </Animatable.View>
@@ -147,7 +207,8 @@ const styles = StyleSheet.create({
     width: '95%',
     alignSelf: 'center',
     justifyContent: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 20
   },
   editButton: {
     backgroundColor: '#4a94d9',

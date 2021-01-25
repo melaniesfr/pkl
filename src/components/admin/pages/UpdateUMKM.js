@@ -4,16 +4,18 @@ import ImagePicker from 'react-native-image-picker';
 import noImage from '../../../images/noImage.png';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function PostUMKM({ navigation }) {
+export default function PostUMKM({ route, navigation }) {
+  const { item } = route.params;
   const [ loading, setLoading ] = useState(false);
 
   const [ data, setData ] = useState({
-    produk: '',
-    pemilik: '',
-    deskripsi: '',
-    desa: '',
-    kecamatan: '',
-    telp: ''
+    id: item.id,
+    produk: item.produk,
+    pemilik: item.pemilik,
+    deskripsi: item.deskripsi,
+    desa: item.desa,
+    kecamatan: item.kecamatan,
+    telp: item.telp
   });
 
   const onChangeProduk = (value) => {
@@ -87,42 +89,28 @@ export default function PostUMKM({ navigation }) {
     })
   };
 
-  const saveData = () => {
-    setLoading(true);
-
-    fetch('http://pkl-dinkop.000webhostapp.com/pkl/insert_umkm.php', {
+  const updateData = () => {
+    fetch('http://pkl-dinkop.000webhostapp.com/pkl/update_umkm.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        produk: data.produk,
-        pemilik: data.pemilik,
-        deskripsi: data.deskripsi,
-        desa: data.desa,
-        kecamatan: data.kecamatan,
-        telp: data.telp
+        id: item.id,
+        produk: item.produk,
+        pemilik: item.pemilik,
+        deskripsi: item.deskripsi,
+        desa: item.desa,
+        kecamatan: item.kecamatan,
+        telp: item.telp
       })
     })
     .then((res) => res.json())
     .then((resJson) => {
-      setLoading(false);
-
-      if (resJson === 'Tambah UMKM berhasil') {
+      if (resJson === 'Ubah UMKM berhasil') {
         Alert.alert('Success!', resJson);
-  
-        setData({
-          ...data,
-          produk: '',
-          pemilik: '',
-          deskripsi: '',
-          desa: '',
-          kecamatan: '',
-          telp: ''
-        });
-  
-        setAvatarSource(null);
+        navigation.navigate('UpdateUMKMAdmin');
       } else {
         Alert.alert('Error!', resJson);
       }
@@ -149,7 +137,7 @@ export default function PostUMKM({ navigation }) {
           <TextInput placeholder={'Kecamatan'} style={styles.input} onChangeText={(value) => onChangeKecamatan(value)} value={ data.kecamatan } />
           <TextInput placeholder={'No. HP/WA'} keyboardType={'number-pad'} style={styles.input} onChangeText={(value) => onChangeTelp(value)} value={ data.telp } />
 
-          <TouchableOpacity onPress={ saveData }>
+          <TouchableOpacity onPress={ updateData }>
             <View style={styles.button}>
               <Icon
                 name={'save-sharp'}
@@ -189,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   button: {
-    backgroundColor: '#4a94d9',
+    backgroundColor: '#2eb877',
     padding: 10,
     borderRadius: 10,
     marginTop: 15,
