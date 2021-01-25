@@ -122,7 +122,7 @@ export default function DetailUMKM({ route, navigation }) {
           style={styles.footer}
           animation={'fadeInUpBig'}
         >
-          <TouchableOpacity style={styles.editButton}>
+          <TouchableOpacity style={[styles.editButton, { elevation: 3 }]}>
             <Icon
               name={'create'}
               size={15}
@@ -141,7 +141,7 @@ export default function DetailUMKM({ route, navigation }) {
                 {text: 'Ya', onPress: () => deleteData()}
               ]
             )}
-            style={styles.deleteButton}
+            style={[styles.deleteButton, { elevation: 3 }]}
           >
             <Icon
               name={'trash'}
