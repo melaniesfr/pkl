@@ -11,6 +11,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
     produk: item.produk,
     pemilik: item.pemilik,
     deskripsi: item.deskripsi,
+    kategori: item.kategori,
     desa: item.desa,
     kecamatan: item.kecamatan,
     telp: item.telp
@@ -73,6 +74,11 @@ export default function DetailUMKMAdmin({ route, navigation }) {
             <View>
               <Text style={styles.informationTitle}>Deskripsi</Text>
               <Text style={styles.informationData}>{ data.deskripsi }</Text>
+            </View>
+
+            <View style={{ marginTop: 8 }}>
+              <Text style={styles.informationTitle}>Kategori</Text>
+              <Text style={styles.informationData}>{ data.kategori }</Text>
             </View>
 
             <View style={{ marginTop: 8 }}>

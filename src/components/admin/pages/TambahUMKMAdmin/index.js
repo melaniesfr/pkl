@@ -2,15 +2,21 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, TextInput, ActivityIndicator, Image, TouchableOpacity, Alert } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Picker } from '@react-native-picker/picker';
 import { IMNoImage } from '../../../../assets/images';
 
 export default function TambahUMKMAdmin({ navigation }) {
   const [ loading, setLoading ] = useState(false);
 
+  const dataKategori = [
+    '- Pilih Kategori -', 'Fashion', 'Kerajinan', 'Kuliner', 'Makanan Olahan', 'Minuman Olahan'
+  ];
+
   const [ data, setData ] = useState({
     produk: '',
     pemilik: '',
     deskripsi: '',
+    kategori: '',
     desa: '',
     kecamatan: '',
     telp: ''
@@ -26,6 +32,10 @@ export default function TambahUMKMAdmin({ navigation }) {
 
   const onChangeDeskripsi = (value) => {
     setData({...data, deskripsi: value});
+  };
+
+  const onChangeKategori = (value) => {
+    setData({...data, kategori: value});
   };
 
   const onChangeDesa = (value) => {
@@ -58,7 +68,7 @@ export default function TambahUMKMAdmin({ navigation }) {
     });
   };
 
-  uploadImage = async (image_uri) => {
+  uploadImage = async(image_uri) => {
     setIsUploading(true);
     // let base_url = 'http://192.168.43.89/pkl/images/';
     let base_url = 'http://pkl-dinkop.000webhostapp.com/pkl/images/';
@@ -100,6 +110,7 @@ export default function TambahUMKMAdmin({ navigation }) {
         produk: data.produk,
         pemilik: data.pemilik,
         deskripsi: data.deskripsi,
+        kategori: data.kategori,
         desa: data.desa,
         kecamatan: data.kecamatan,
         telp: data.telp
@@ -145,6 +156,20 @@ export default function TambahUMKMAdmin({ navigation }) {
           <TextInput placeholder={'Nama Produk'} style={styles.input} onChangeText={(value) => onChangeProduk(value)} value={ data.produk } />
           <TextInput placeholder={'Nama Pemilik'} style={styles.input} onChangeText={(value) => onChangePemilik(value)} value={ data.pemilik } />
           <TextInput placeholder={'Deskripsi Produk'} style={styles.input} onChangeText={(value) => onChangeDeskripsi(value)} value={ data.deskripsi } />
+
+          <View>
+            <Text style={{ marginTop: 5, fontSize: 15, color: '#bbb' }}>Kategori</Text>
+            <Picker
+              selectedValue={ data.kategori }
+              style={{ height: 40, color: '#ccc' }}
+              onValueChange={ (value) => onChangeKategori(value) }
+            >
+              { dataKategori.map((item, index) => (
+                <Picker.Item key={index} label={item} value={item} />
+              ))}
+            </Picker>
+          </View>
+
           <TextInput placeholder={'Desa'} style={styles.input} onChangeText={(value) => onChangeDesa(value)} value={ data.desa } />
           <TextInput placeholder={'Kecamatan'} style={styles.input} onChangeText={(value) => onChangeKecamatan(value)} value={ data.kecamatan } />
           <TextInput placeholder={'No. HP/WA'} keyboardType={'number-pad'} style={styles.input} onChangeText={(value) => onChangeTelp(value)} value={ data.telp } />
@@ -172,7 +197,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   card: {
-    height: 515,
+    height: 580,
     width: '93%',
     backgroundColor: 'white',
     borderRadius: 15,
