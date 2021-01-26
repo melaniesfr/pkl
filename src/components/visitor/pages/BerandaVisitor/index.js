@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions, StatusBar } from 'react-native';
 import axios from 'axios';
 
-export default function UMKM({ navigation }) {
+export default function BerandaVisitor({ navigation }) {
   const [ data, setData ] = useState();
   const [ isLoading, setIsLoading ] = useState(false);
 

@@ -1,19 +1,10 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Login, Register, Splash } from '../components/primary';
-
-// Visitor
-import BerandaMenuVisitor from '../components/visitor/menus/BerandaMenu';
-import KategoriMenuVisitor from '../components/visitor/menus/KategoriMenu';
-import PengaturanMenuVisitor from '../components/visitor/menus/PengaturanMenu';
-
-// User
+import { BerandaMenuVisitor, KategoriMenuVisitor, PengaturanMenuVisitor } from '../components/visitor';
 import { BerandaMenuUser, KategoriMenuUser, ProfilMenuUser, PengaturanMenuUser } from '../components/user';
-
-// Admin
 import { BerandaMenuAdmin, KategoriMenuAdmin, TambahMenuAdmin, ProfilMenuAdmin, PengaturanMenuAdmin } from '../components/admin'
 
 // ===========================================================================================
@@ -31,7 +22,7 @@ function VisitorTabScreen() {
     >
       <Tab.Screen
         name="BerandaMenuVisitor"
-        component={BerandaMenuVisitor}
+        component={ BerandaMenuVisitor }
         options={{
           tabBarLabel: 'Beranda',
           tabBarColor: 'white',
@@ -42,7 +33,7 @@ function VisitorTabScreen() {
       />
       <Tab.Screen
         name="KategoriMenuVisitor"
-        component={KategoriMenuVisitor}
+        component={ KategoriMenuVisitor }
         options={{
           tabBarLabel: 'Kategori',
           tabBarColor: 'white',
@@ -53,7 +44,7 @@ function VisitorTabScreen() {
       />
       <Tab.Screen
         name="PengaturanMenuVisitor"
-        component={PengaturanMenuVisitor}
+        component={ PengaturanMenuVisitor }
         options={{
           tabBarLabel: 'Pengaturan',
           tabBarColor: 'white',
@@ -237,5 +228,3 @@ export default function RootStack() {
     </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({});

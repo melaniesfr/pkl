@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Tentang() {
+export default function BahasaVisitor() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Tentang Page in Visitor</Text>
+      <Text>Bahasa Page in Visitor</Text>
     </View>
   );
 };

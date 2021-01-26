@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import KategoriVisitor from '../pages/Kategori';
+import { KategoriVisitor } from '../../pages';
 
 const Stack = createStackNavigator();
 
@@ -12,7 +12,7 @@ export default function KategoriMenu({ navigation }) {
         headerTintColor: 'white'
       }}
     >
-      <Stack.Screen name="KategoriVisitor" component={KategoriVisitor}
+      <Stack.Screen name="KategoriVisitor" component={ KategoriVisitor }
         options={{
           title: 'Kategori',
           headerLeft: null,
