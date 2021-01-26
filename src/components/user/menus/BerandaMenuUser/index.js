@@ -1,11 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import BerandaUser from '../pages/Beranda';
-import DetailUMKMUser from '../pages/DetailUMKM';
+import { BerandaUser, DetailUMKMUser } from '../../pages'
 
 const Stack = createStackNavigator();
 
-export default function BerandaMenu({ navigation }) {
+export default function BerandaMenuUser({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -13,14 +12,14 @@ export default function BerandaMenu({ navigation }) {
         headerTintColor: '#2eb877'
       }}
     >
-      <Stack.Screen name="BerandaUser" component={BerandaUser}
+      <Stack.Screen name="BerandaUser" component={ BerandaUser }
         options={{
           title: 'Beranda',
           headerLeft: null,
           headerTitleAlign: 'center'
         }}
       />
-      <Stack.Screen name="DetailUMKMUser" component={DetailUMKMUser}
+      <Stack.Screen name="DetailUMKMUser" component={ DetailUMKMUser }
         options={{
           title: 'Detail',
           headerShown: false

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import IMLogo from '../../../assets/images';
+import { IMLogo } from '../../../assets/images';
 
 export default function Splash({ navigation }) {
   useEffect(() => {

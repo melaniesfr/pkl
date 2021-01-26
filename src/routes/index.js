@@ -3,9 +3,6 @@ import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import Splash from '../components/SplashScreen';
-// import Login from '../components/Login';
-// import Register from '../components/Register';
 import { Login, Register, Splash } from '../components/primary';
 
 // Visitor
@@ -14,17 +11,9 @@ import KategoriMenuVisitor from '../components/visitor/menus/KategoriMenu';
 import PengaturanMenuVisitor from '../components/visitor/menus/PengaturanMenu';
 
 // User
-import BerandaMenuUser from '../components/user/menus/BerandaMenu';
-import KategoriMenuUser from '../components/user/menus/KategoriMenu';
-import ProfilMenuUser from '../components/user/menus/ProfilMenu';
-import PengaturanMenuUser from '../components/user/menus/PengaturanMenu';
+import { BerandaMenuUser, KategoriMenuUser, ProfilMenuUser, PengaturanMenuUser } from '../components/user';
 
 // Admin
-// import BerandaMenuAdmin from '../components/admin/menus/BerandaMenu';
-// import KategoriMenuAdmin from '../components/admin/menus/KategoriMenu';
-// import TambahMenuAdmin from '../components/admin/menus/TambahMenu';
-// import ProfilMenuAdmin from '../components/admin/menus/ProfilMenu';
-// import PengaturanMenuAdmin from '../components/admin/menus/PengaturanMenu';
 import { BerandaMenuAdmin, KategoriMenuAdmin, TambahMenuAdmin, ProfilMenuAdmin, PengaturanMenuAdmin } from '../components/admin'
 
 // ===========================================================================================
@@ -100,7 +89,7 @@ function UserTabScreen() {
       />
       <Tab.Screen
         name="KategoriMenuUser"
-        component={KategoriMenuUser}
+        component={ KategoriMenuUser }
         options={{
           tabBarLabel: 'Kategori',
           tabBarColor: 'white',
@@ -111,7 +100,7 @@ function UserTabScreen() {
       />
       <Tab.Screen
         name="ProfilMenuUser"
-        component={ProfilMenuUser}
+        component={ ProfilMenuUser }
         options={{
           tabBarLabel: 'Profil',
           tabBarColor: 'white',
@@ -122,7 +111,7 @@ function UserTabScreen() {
       />
       <Tab.Screen
         name="PengaturanMenuUser"
-        component={PengaturanMenuUser}
+        component={ PengaturanMenuUser }
         options={{
           tabBarLabel: 'Pengaturan',
           tabBarColor: 'white',

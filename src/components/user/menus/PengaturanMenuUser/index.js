@@ -1,9 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import PengaturanUser from '../pages/Pengaturan';
-import BahasaUser from '../pages/Bahasa';
-import TentangUser from '../pages/Tentang';
-import LogoutUser from '../pages/Logout';
+import { PengaturanUser, BahasaUser, TentangUser, LogoutUser } from '../../pages';
 
 const Stack = createStackNavigator();
 
@@ -15,24 +12,24 @@ export default function PengaturanMenu({ navigation }) {
         headerTintColor: 'white'
       }}
     >
-      <Stack.Screen name="PengaturanUser" component={PengaturanUser}
+      <Stack.Screen name="PengaturanUser" component={ PengaturanUser }
         options={{
           title: 'Pengaturan',
           headerLeft: null,
           headerTitleAlign: 'center'
         }}
       />
-      <Stack.Screen name="BahasaUser" component={BahasaUser}
+      <Stack.Screen name="BahasaUser" component={ BahasaUser }
         options={{
           title: 'Pilih Bahasa'
         }}
       />
-      <Stack.Screen name="TentangUser" component={TentangUser}
+      <Stack.Screen name="TentangUser" component={ TentangUser }
         options={{
           title: 'Tentang Aplikasi'
         }}
       />
-      <Stack.Screen name="LogoutUser" component={LogoutUser}
+      <Stack.Screen name="LogoutUser" component={ LogoutUser }
         options={{
           title: 'Logout'
         }}

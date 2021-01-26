@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function Pengaturan({ navigation }) {
+export default function PengaturanUser({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import KategoriUser from '../pages/Kategori';
+import { ProfilUser } from '../../pages';
 
 const Stack = createStackNavigator();
 
-export default function KategoriMenu({ navigation }) {
+export default function ProfilMenu({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -12,9 +12,9 @@ export default function KategoriMenu({ navigation }) {
         headerTintColor: 'white'
       }}
     >
-      <Stack.Screen name="KategoriUser" component={KategoriUser}
+      <Stack.Screen name="ProfilUser" component={ ProfilUser }
         options={{
-          title: 'Kategori',
+          title: 'Profil',
           headerLeft: null,
           headerTitleAlign: 'center'
         }}

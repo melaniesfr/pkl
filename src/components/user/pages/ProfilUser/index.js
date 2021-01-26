@@ -4,9 +4,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
-import IMUser from '../../../assets/images';
+import { IMUser } from '../../../../assets/images';
 
-export default function Profil({ route, navigation }) {
+export default function ProfilUser({ route, navigation }) {
   // const routes = useRoute();
   // const userEmail = JSON.parse(routes.params);
   // Alert.alert(userEmail);

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-nati
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 
-export default function DetailUMKM({ route, navigation }) {
+export default function DetailUMKMUser({ route, navigation }) {
   const { item } = route.params;
 
   const [data, setData] = useState({

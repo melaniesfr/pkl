@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Logout() {
+export default function TentangUser() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Logout Page in User</Text>
+      <Text>Tentang Page in User</Text>
     </View>
   );
 };
