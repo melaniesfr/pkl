@@ -49,7 +49,7 @@ export default function KategoriUser({ navigation }) {
         onRefresh={ getData }
         horizontal={ false }
         numColumns={ 2 }
-        style={{ marginTop: 10, marginBottom: 10 }}
+        style={{ marginVertical: 10 }}
       />
     </View>
   );

@@ -101,16 +101,14 @@ export default function ProfilUser({ route, navigation }) {
           </View>
         </View>
 
-        <TouchableOpacity>
-          <View style={styles.button}>
-            <Icon
-              name={'create'}
-              size={20}
-              color={'white'}
-              style={{ marginRight: 5 }}
-            />
-            <Text style={{ color: 'white', fontSize: 15 }}>Edit</Text>
-          </View>
+        <TouchableOpacity style={styles.button}>
+          <Icon
+            name={'create'}
+            size={20}
+            color={'white'}
+            style={{ marginRight: 5 }}
+          />
+          <Text style={{ color: 'white', fontSize: 15 }}>Edit</Text>
         </TouchableOpacity>
       </View>
     </View>

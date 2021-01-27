@@ -4,7 +4,7 @@ import { ProfilUser } from '../../pages';
 
 const Stack = createStackNavigator();
 
-export default function ProfilMenu({ navigation }) {
+export default function ProfilMenuUser({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{

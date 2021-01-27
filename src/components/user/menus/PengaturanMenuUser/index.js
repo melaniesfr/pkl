@@ -4,7 +4,7 @@ import { PengaturanUser, BahasaUser, TentangUser, LogoutUser } from '../../pages
 
 const Stack = createStackNavigator();
 
-export default function PengaturanMenu({ navigation }) {
+export default function PengaturanMenuUser({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{

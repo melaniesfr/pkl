@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { KategoriVisitor } from '../../pages';
+import { KategoriVisitor, DetailPerKategoriVisitor, DetailKategoriVisitor } from '../../pages';
 
 const Stack = createStackNavigator();
 
-export default function KategoriMenu({ navigation }) {
+export default function KategoriMenuVisitor({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -17,6 +17,17 @@ export default function KategoriMenu({ navigation }) {
           title: 'Kategori',
           headerLeft: null,
           headerTitleAlign: 'center'
+        }}
+      />
+      <Stack.Screen name="DetailPerKategoriVisitor" component={ DetailPerKategoriVisitor }
+        options={{
+          title: 'Daftar UMKM'
+        }}
+      />
+      <Stack.Screen name="DetailKategoriVisitor" component={ DetailKategoriVisitor }
+        options={{
+          title: 'Detail UMKM',
+          headerShown: false
         }}
       />
     </Stack.Navigator>

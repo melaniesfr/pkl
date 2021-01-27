@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native';
 import axios from 'axios';
 
-export default function BerandaAdmin({ navigation }) {
-  const [ data, setData ] = useState();
-  const [ isLoading, setIsLoading ] = useState(false);
+export default function DetailPerKategoriVisitor({ route, navigation }) {
+  const { item } = route.params;
+
+  const [ data, setData ] = useState([]);
 
   const getData = () => {
-    setIsLoading(true);
-
     // axios.get('http://192.168.43.89/pkl/view.php')
-    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/view.php')
+    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/view_kategori.php')
     .then((res) => {
-      setData(res.data);
+      for (var i=0; i < res.data.length; i++) {
+        if (item.kategori === res.data[i].kategori) {
+          setData(data => [...data, res.data[i]]);
+        }
+      }
     })
     .catch((err) => console.log(err))
-    .finally(() => {
-      setIsLoading(false);
-    })
   };
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function BerandaAdmin({ navigation }) {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate('DetailUMKMAdmin', { item: item })}>
+      <TouchableOpacity onPress={() => navigation.navigate('DetailKategoriVisitor', { item: item })}>
         <View style={{ margin: 5, position: 'relative' }}>
           <Image source={{uri: `https://picsum.photos/900/600?random=${item.id}`}} style={styles.image} />
 
@@ -46,14 +46,10 @@ export default function BerandaAdmin({ navigation }) {
         data={ data }
         renderItem={ renderItem }
         keyExtractor={ (item) => item.id }
-        refreshing={ isLoading }
-        onRefresh={ getData }
         horizontal={ false }
         numColumns={ 2 }
         style={{ marginVertical: 8 }}
       />
-
-      <StatusBar backgroundColor={ '#2eb877' } />
     </View>
   );
 };

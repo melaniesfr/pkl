@@ -50,6 +50,7 @@ export default function BerandaVisitor({ navigation }) {
         onRefresh={ getData }
         horizontal={ false }
         numColumns={ 2 }
+        style={{ marginVertical: 8 }}
       />
       
       <StatusBar backgroundColor={ '#2eb877' } />

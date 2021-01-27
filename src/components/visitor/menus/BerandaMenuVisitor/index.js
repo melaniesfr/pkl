@@ -4,7 +4,7 @@ import { BerandaVisitor, DetailUMKMVisitor } from '../../pages';
 
 const Stack = createStackNavigator();
 
-export default function BerandaMenu({ navigation }) {
+export default function BerandaMenuVisitor({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{

@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { KategoriAdmin } from '../../pages';
+import { KategoriAdmin, DetailPerKategoriAdmin, DetailKategoriAdmin } from '../../pages';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +17,17 @@ export default function KategoriMenuAdmin({ navigation }) {
           title: 'Kategori',
           headerLeft: null,
           headerTitleAlign: 'center'
+        }}
+      />
+      <Stack.Screen name="DetailPerKategoriAdmin" component={ DetailPerKategoriAdmin }
+        options={{
+          title: 'Daftar UMKM'
+        }}
+      />
+      <Stack.Screen name="DetailKategoriAdmin" component={ DetailKategoriAdmin }
+        options={{
+          title: 'Detail UMKM',
+          headerShown: false
         }}
       />
     </Stack.Navigator>
