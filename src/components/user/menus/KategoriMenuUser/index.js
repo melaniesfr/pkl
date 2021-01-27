@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { KategoriUser } from '../../pages';
+import { KategoriUser, DetailPerKategori, DetailKategoriUser } from '../../pages';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +17,17 @@ export default function KategoriMenuUser({ navigation }) {
           title: 'Kategori',
           headerLeft: null,
           headerTitleAlign: 'center'
+        }}
+      />
+      <Stack.Screen name="DetailPerKategoriUser" component={ DetailPerKategori }
+        options={{
+          title: 'Daftar UMKM'
+        }}
+      />
+      <Stack.Screen name="DetailKategoriUser" component={ DetailKategoriUser }
+        options={{
+          title: 'Detail UMKM',
+          headerShown: false
         }}
       />
     </Stack.Navigator>
