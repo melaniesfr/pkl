@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { BerandaVisitor, DetailUMKMVisitor } from '../../pages';
+import { colors, fonts } from '../../../../utils';
 
 const Stack = createStackNavigator();
 
@@ -8,8 +9,9 @@ export default function BerandaMenuVisitor({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: 'white' },
-        headerTintColor: '#2eb877'
+        headerStyle: { backgroundColor: colors.white },
+        headerTintColor: colors.green1,
+        headerTitleStyle: { fontFamily: fonts.primary[700] }
       }}
     >
       <Stack.Screen name="BerandaVisitor" component={ BerandaVisitor }

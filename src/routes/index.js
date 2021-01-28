@@ -29,7 +29,7 @@ function VisitorTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="home-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -40,7 +40,7 @@ function VisitorTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="grid-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -51,7 +51,7 @@ function VisitorTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="settings-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
     </Tab.Navigator>
@@ -76,7 +76,7 @@ function UserTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="home-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -87,7 +87,7 @@ function UserTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="grid-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -98,7 +98,7 @@ function UserTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="person-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -109,7 +109,7 @@ function UserTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="settings-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
     </Tab.Navigator>
@@ -134,7 +134,7 @@ function AdminTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="home-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -145,7 +145,7 @@ function AdminTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="grid-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -156,7 +156,7 @@ function AdminTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="add-circle-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -167,7 +167,7 @@ function AdminTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="person-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -178,7 +178,7 @@ function AdminTabScreen() {
           tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="settings-outline" color={color} size={26} />
-          ),
+          )
         }}
       />
     </Tab.Navigator>
