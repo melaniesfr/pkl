@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Touchabl
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
+import { colors, fonts } from '../../../utils';
 
 export default function Register({ navigation }) {
   const [ data, setData ] = useState({
@@ -99,7 +100,7 @@ export default function Register({ navigation }) {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ position: 'relative', flex: 1, backgroundColor: '#ddd' }}>
+      <View style={styles.page}>
         <View style={styles.container}>
           <View style={styles.boxRegister}>
             <Text style={styles.title}>REGISTER</Text>
@@ -118,7 +119,7 @@ export default function Register({ navigation }) {
               <Animatable.View animation="bounceIn" style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 <Feather
                   name="check-circle"
-                  color="green"
+                  color={colors.green}
                   size={20}
                 />
               </Animatable.View>
@@ -142,7 +143,7 @@ export default function Register({ navigation }) {
               <Animatable.View animation="bounceIn" style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 <Feather
                   name="check-circle"
-                  color="green"
+                  color={colors.green}
                   size={20}
                 />
               </Animatable.View>
@@ -166,13 +167,13 @@ export default function Register({ navigation }) {
                 { data.secureTextEntry ?
                 <Feather
                   name="eye-off"
-                  color="grey"
+                  color={colors.grey}
                   size={20}
                 />
                 :
                 <Feather
                   name="eye"
-                  color="grey"
+                  color={colors.grey}
                   size={20}
                 /> }
               </TouchableOpacity>
@@ -198,6 +199,11 @@ export default function Register({ navigation }) {
 };
 
 const styles = StyleSheet.create({
+  page: {
+    position: 'relative',
+    flex: 1,
+    backgroundColor: colors.grey1
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -206,7 +212,7 @@ const styles = StyleSheet.create({
   boxRegister: {
     width: '90%',
     height: 350,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderTopStartRadius: 25,
     borderBottomEndRadius: 25,
     padding: 20,
@@ -216,11 +222,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     paddingBottom: 10,
-    fontWeight: 'bold'
+    fontFamily: fonts.primary[800],
+    color: colors.dark1
   },
   input: {
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: colors.grey,
     marginBottom: 10,
     paddingLeft: 5,
     flexDirection: 'row'
@@ -229,7 +236,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     height: 10,
-    backgroundColor: '#2eb877',
+    backgroundColor: colors.green1,
     borderRadius: 50,
     flex: 1,
     alignItems: 'center',
@@ -237,8 +244,9 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   registerText: {
-    color: 'white',
-    fontSize: 15
+    color: colors.white,
+    fontSize: 15,
+    fontFamily: fonts.primary[600]
   },
   backButton: {
     marginTop: 20,
@@ -247,6 +255,8 @@ const styles = StyleSheet.create({
   },
   backText: {
     textDecorationLine: 'underline',
-    marginLeft: 18
+    marginLeft: 18,
+    fontFamily: fonts.primary.normal,
+    color: colors.dark1
   },
 });

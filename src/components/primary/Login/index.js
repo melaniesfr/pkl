@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Touchabl
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
+import { colors, fonts } from '../../../utils';
 
 export default function Login({ navigation }) {
   const [ data, setData ] = useState({
@@ -83,7 +84,7 @@ export default function Login({ navigation }) {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={{ position: 'relative', flex: 1, backgroundColor: '#ddd' }}>
+      <View style={styles.page}>
         <View style={styles.container}>
           <View style={styles.boxLogin}>
             <Text style={styles.title}>LOGIN</Text>
@@ -104,7 +105,7 @@ export default function Login({ navigation }) {
               <Animatable.View animation="bounceIn" style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 <Feather
                   name="check-circle"
-                  color="green"
+                  color={colors.green}
                   size={20}
                 />
               </Animatable.View>
@@ -128,13 +129,13 @@ export default function Login({ navigation }) {
                 { data.secureTextEntry ?
                 <Feather
                   name="eye-off"
-                  color="grey"
+                  color={colors.grey}
                   size={20}
                 />
                 :
                 <Feather
                   name="eye"
-                  color="grey"
+                  color={colors.grey}
                   size={20}
                 /> }
               </TouchableOpacity>
@@ -156,7 +157,7 @@ export default function Login({ navigation }) {
             <Icon
               name={'chevron-forward-circle-outline'}
               size={20}
-              color={'white'}
+              color={colors.white}
               style={{ marginLeft: 5 }}
             />
           </TouchableOpacity>
@@ -167,6 +168,11 @@ export default function Login({ navigation }) {
 };
 
 const styles = StyleSheet.create({
+  page: {
+    position: 'relative',
+    flex: 1,
+    backgroundColor: colors.grey1
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -175,7 +181,7 @@ const styles = StyleSheet.create({
   boxLogin: {
     width: '90%',
     height: 290,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderTopStartRadius: 25,
     borderBottomEndRadius: 25,
     padding: 20,
@@ -185,11 +191,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     paddingBottom: 10,
-    fontWeight: 'bold'
+    fontFamily: fonts.primary[800],
+    color: colors.dark1
   },
   input: {
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: colors.grey,
     marginBottom: 10,
     paddingLeft: 5,
     flexDirection: 'row'
@@ -198,7 +205,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     height: 10,
-    backgroundColor: '#4a94d9',
+    backgroundColor: colors.blue1,
     borderRadius: 50,
     flex: 1,
     alignItems: 'center',
@@ -206,18 +213,21 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   loginText: {
-    color: 'white',
-    fontSize: 15
+    color: colors.white,
+    fontSize: 15,
+    fontFamily: fonts.primary[600]
   },
   registerButton: {
     marginTop: 20,
     alignItems: 'center'
   },
   registerText: {
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
+    fontFamily: fonts.primary.normal,
+    color: colors.dark1
   },
   nextButton: {
-    backgroundColor: '#2eb877',
+    backgroundColor: colors.green1,
     padding: 10,
     borderRadius: 5,
     width: 100,
@@ -228,7 +238,8 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   nextText: {
-    color: 'white',
-    fontSize: 15
+    color: colors.white,
+    fontSize: 15,
+    fontFamily: fonts.primary[600]
   }
 });

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { IMLogo } from '../../../assets/images';
+import { IMLogo } from '../../../assets';
+import { colors, fonts } from '../../../utils';
 
 export default function Splash({ navigation }) {
   useEffect(() => {
@@ -29,19 +30,19 @@ export default function Splash({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center'
   },
   logoTextTop: {
-    color: 'red',
+    color: colors.green1,
     fontSize: 25,
-    fontWeight: '700'
+    fontFamily: fonts.primary[800]
   },
   logoTextBottom: {
-    color: 'black',
+    color: colors.dark1,
     fontSize: 25,
-    fontWeight: '700'
+    fontFamily: fonts.primary[800]
   },
   logo: {
     width: 300,

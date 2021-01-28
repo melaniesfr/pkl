@@ -2,10 +2,11 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { colors } from '../utils';
 import { Login, Register, Splash } from '../components/primary';
 import { BerandaMenuVisitor, KategoriMenuVisitor, PengaturanMenuVisitor } from '../components/visitor';
 import { BerandaMenuUser, KategoriMenuUser, ProfilMenuUser, PengaturanMenuUser } from '../components/user';
-import { BerandaMenuAdmin, KategoriMenuAdmin, TambahMenuAdmin, ProfilMenuAdmin, PengaturanMenuAdmin } from '../components/admin'
+import { BerandaMenuAdmin, KategoriMenuAdmin, TambahMenuAdmin, ProfilMenuAdmin, PengaturanMenuAdmin } from '../components/admin';
 
 // ===========================================================================================
 
@@ -16,8 +17,8 @@ function VisitorTabScreen() {
   return (
     <Tab.Navigator
       initialRouteName="VisitorTabScreen"
-      activeColor="#2eb877"
-      inactiveColor="grey"
+      activeColor={colors.green1}
+      inactiveColor={colors.grey}
       shifting={true}
     >
       <Tab.Screen
@@ -25,7 +26,7 @@ function VisitorTabScreen() {
         component={ BerandaMenuVisitor }
         options={{
           tabBarLabel: 'Beranda',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="home-outline" color={color} size={26} />
           ),
@@ -36,7 +37,7 @@ function VisitorTabScreen() {
         component={ KategoriMenuVisitor }
         options={{
           tabBarLabel: 'Kategori',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="grid-outline" color={color} size={26} />
           ),
@@ -47,7 +48,7 @@ function VisitorTabScreen() {
         component={ PengaturanMenuVisitor }
         options={{
           tabBarLabel: 'Pengaturan',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="settings-outline" color={color} size={26} />
           ),
@@ -63,8 +64,8 @@ function UserTabScreen() {
   return (
     <Tab.Navigator
       initialRouteName="UserTabScreen"
-      activeColor="#2eb877"
-      inactiveColor="grey"
+      activeColor={colors.green1}
+      inactiveColor={colors.grey}
       shifting={true}
     >
       <Tab.Screen
@@ -72,7 +73,7 @@ function UserTabScreen() {
         component={BerandaMenuUser}
         options={{
           tabBarLabel: 'Beranda',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="home-outline" color={color} size={26} />
           ),
@@ -83,7 +84,7 @@ function UserTabScreen() {
         component={ KategoriMenuUser }
         options={{
           tabBarLabel: 'Kategori',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="grid-outline" color={color} size={26} />
           ),
@@ -94,7 +95,7 @@ function UserTabScreen() {
         component={ ProfilMenuUser }
         options={{
           tabBarLabel: 'Profil',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="person-outline" color={color} size={26} />
           ),
@@ -105,7 +106,7 @@ function UserTabScreen() {
         component={ PengaturanMenuUser }
         options={{
           tabBarLabel: 'Pengaturan',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="settings-outline" color={color} size={26} />
           ),
@@ -121,8 +122,8 @@ function AdminTabScreen() {
   return (
     <Tab.Navigator
       initialRouteName="AdminTabScreen"
-      activeColor="#2eb877"
-      inactiveColor="grey"
+      activeColor={colors.green1}
+      inactiveColor={colors.grey}
       shifting={true}
     >
       <Tab.Screen
@@ -130,7 +131,7 @@ function AdminTabScreen() {
         component={BerandaMenuAdmin }
         options={{
           tabBarLabel: 'Beranda',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="home-outline" color={color} size={26} />
           ),
@@ -141,7 +142,7 @@ function AdminTabScreen() {
         component={ KategoriMenuAdmin }
         options={{
           tabBarLabel: 'Kategori',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="grid-outline" color={color} size={26} />
           ),
@@ -152,7 +153,7 @@ function AdminTabScreen() {
         component={ TambahMenuAdmin }
         options={{
           tabBarLabel: 'Tambah',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="add-circle-outline" color={color} size={26} />
           ),
@@ -163,7 +164,7 @@ function AdminTabScreen() {
         component={ ProfilMenuAdmin }
         options={{
           tabBarLabel: 'Profil',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="person-outline" color={color} size={26} />
           ),
@@ -174,7 +175,7 @@ function AdminTabScreen() {
         component={ PengaturanMenuAdmin }
         options={{
           tabBarLabel: 'Pengaturan',
-          tabBarColor: 'white',
+          tabBarColor: colors.white,
           tabBarIcon: ({ color }) => (
             <Icon name="settings-outline" color={color} size={26} />
           ),
