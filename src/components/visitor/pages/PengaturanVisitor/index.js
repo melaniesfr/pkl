@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { colors, fonts } from '../../../../utils';
 
 export default function PengaturanVisitor({ navigation }) {
   return (
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     marginTop: 20,
     padding: 20,
     elevation: 3
@@ -62,12 +63,13 @@ const styles = StyleSheet.create({
   line: {
     width: '95%',
     height: 0.5,
-    backgroundColor: '#ddd',
+    backgroundColor: colors.grey1,
     marginVertical: 10,
     alignSelf: 'center'
   },
   menu: {
-    fontSize: 18
+    fontSize: 18,
+    fontFamily: fonts.primary.normal
   },
   footer: {
     width: '90%',
@@ -75,20 +77,21 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 15,
-    color: '#799cba',
+    color: colors.blue2,
     marginBottom: 10,
-    marginLeft: 8
+    marginLeft: 8,
+    fontFamily: fonts.primary.normal
   },
   button: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     padding: 13,
     borderRadius: 10,
     elevation: 5
   },
   buttonText: {
     fontSize: 18,
-    color: '#2eb877',
-    fontWeight: 'bold',
-    textAlign: 'center'
+    color: colors.green1,
+    textAlign: 'center',
+    fontFamily: fonts.primary[800]
   }
 });

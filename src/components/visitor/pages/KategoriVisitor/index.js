@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Dimensions, Image, FlatList } from 'react-native';
 import axios from 'axios';
-import { ICFoods, ICFood, ICFashion, ICHandmade, ICDrink } from '../../../../assets/icons';
+import { ICFoods, ICFood, ICFashion, ICHandmade, ICDrink } from '../../../../assets';
+import { colors, fonts } from '../../../../utils';
+
 
 export default function KategoriVisitor({ navigation }) {
   const [ data, setData ] = useState();
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   card: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     elevation: 10,
     margin: 5,
     borderRadius: 10,
@@ -76,10 +78,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   text: {
-    color: 'black',
     fontSize: 18,
     textAlign: 'center',
     marginTop: 7,
-    color: '#2eb877'
+    color: colors.green1,
+    fontFamily: fonts.primary[600]
   }
 });

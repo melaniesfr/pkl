@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, TextInput, 
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Picker } from '@react-native-picker/picker';
-import { IMNoImage } from '../../../../assets/images';
+import { IMNoImage } from '../../../../assets';
+import { colors, fonts } from '../../../../utils';
 
 export default function TambahUMKMAdmin({ navigation }) {
   const [ loading, setLoading ] = useState(false);
@@ -158,10 +159,10 @@ export default function TambahUMKMAdmin({ navigation }) {
           <TextInput placeholder={'Deskripsi Produk'} style={styles.input} onChangeText={(value) => onChangeDeskripsi(value)} value={ data.deskripsi } />
 
           <View>
-            <Text style={{ marginTop: 5, fontSize: 15, color: '#bbb' }}>Kategori</Text>
+            <Text style={{ marginTop: 5, fontSize: 15, color: colors.grey3, fontFamily: fonts.primary.normal }}>Kategori</Text>
             <Picker
               selectedValue={ data.kategori }
-              style={{ height: 40, color: '#ccc' }}
+              style={{ height: 40, color: colors.grey2 }}
               onValueChange={ (value) => onChangeKategori(value) }
             >
               { dataKategori.map((item, index) => (
@@ -179,10 +180,10 @@ export default function TambahUMKMAdmin({ navigation }) {
               <Icon
                 name={'save-sharp'}
                 size={15}
-                color={'white'}
+                color={colors.white}
                 style={{ marginRight: 5 }}
               />
-              <Text style={{ color: 'white', fontSize: 15 }}>{ loading ? 'Menyimpan...' : 'Simpan' }</Text>
+              <Text style={styles.textButton}>{ loading ? 'Menyimpan...' : 'Simpan' }</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
   card: {
     height: 580,
     width: '93%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 15,
     elevation: 10,
     padding: 20,
@@ -208,13 +209,13 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: colors.grey2,
     padding: 10,
     marginVertical: 5,
     borderRadius: 5
   },
   button: {
-    backgroundColor: '#4a94d9',
+    backgroundColor: colors.blue1,
     padding: 10,
     borderRadius: 10,
     marginTop: 15,
@@ -222,5 +223,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  textButton: {
+    color: colors.white,
+    fontSize: 15,
+    fontFamily: fonts.primary.normal
   }
 });

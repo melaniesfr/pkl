@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native';
 import axios from 'axios';
+import { colors, fonts } from '../../../../utils';
 
 export default function DetailPerKategoriVisitor({ route, navigation }) {
   const { item } = route.params;
@@ -30,9 +31,9 @@ export default function DetailPerKategoriVisitor({ route, navigation }) {
         <View style={{ margin: 5, position: 'relative' }}>
           <Image source={{uri: `https://picsum.photos/900/600?random=${item.id}`}} style={styles.image} />
 
-          <View style={{ position: 'absolute', bottom: 0, height: 27, width: '100%', backgroundColor: 'rgba(0, 0, 0, 0.3)' }}>
-            <View style={{ position: 'absolute', bottom: 5, left: 5 }}>
-              <Text style={{ color: 'white', fontSize: 13, fontWeight: 'bold' }}>{ item.produk }</Text>
+          <View style={styles.garisHitam}>
+            <View style={styles.wadahText}>
+              <Text style={styles.text}>{ item.produk }</Text>
             </View>
           </View>
         </View>
@@ -64,5 +65,24 @@ const styles = StyleSheet.create({
     width: (Dimensions.get('window').width / 2) - 15,
     height: (Dimensions.get('window').height / 6),
     borderRadius: 5
+  },
+  garisHitam: {
+    position: 'absolute',
+    bottom: 0,
+    height: 25,
+    width: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    borderBottomLeftRadius: 5,
+    borderBottomEndRadius: 5
+  },
+  wadahText: {
+    position: 'absolute',
+    bottom: 5,
+    left: 5
+  },
+  text: {
+    color: colors.white,
+    fontFamily: fonts.primary[800],
+    fontSize: 12
   }
 });

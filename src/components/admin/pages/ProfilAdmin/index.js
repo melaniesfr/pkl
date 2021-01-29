@@ -4,7 +4,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
-import { IMUser } from '../../../../assets/images';
+import { IMUser } from '../../../../assets';
+import { colors, fonts } from '../../../../utils';
 
 export default function ProfilAdmin({ route, navigation }) {
   // const routes = useRoute();
@@ -76,8 +77,8 @@ export default function ProfilAdmin({ route, navigation }) {
         <Image source={ IMUser } style={styles.image} />
 
         <View style={styles.data}>
-          <Text>{ data.nama }</Text>
-          <Text>{ data.email }</Text>
+          <Text style={styles.textData}>{ data.nama }</Text>
+          <Text style={styles.textData}>{ data.email }</Text>
           <View>
             <TextInput
               secureTextEntry={ data.secureTextEntry ? true : false }
@@ -88,13 +89,13 @@ export default function ProfilAdmin({ route, navigation }) {
               { data.secureTextEntry ?
               <Feather
                 name="eye-off"
-                color="grey"
+                color={colors.grey}
                 size={20}
               />
               :
               <Feather
                 name="eye"
-                color="grey"
+                color={colors.grey}
                 size={20}
               /> }
             </TouchableOpacity>
@@ -105,10 +106,10 @@ export default function ProfilAdmin({ route, navigation }) {
           <Icon
             name={'create'}
             size={20}
-            color={'white'}
+            color={colors.white}
             style={{ marginRight: 5 }}
           />
-          <Text style={{ color: 'white', fontSize: 15 }}>Edit</Text>
+          <Text style={styles.textButton}>Edit</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   card: {
     height: 385,
     width: '93%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 15,
     elevation: 10,
     padding: 20
@@ -138,8 +139,12 @@ const styles = StyleSheet.create({
   data: {
     alignSelf: 'center'
   },
+  textData: {
+    color: colors.dark1,
+    fontFamily: fonts.primary[600]
+  },
   button: {
-    backgroundColor: '#4a94d9',
+    backgroundColor: colors.blue1,
     padding: 10,
     borderRadius: 10,
     marginTop: 15,
@@ -147,5 +152,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  textButton: {
+    color: colors.white,
+    fontSize: 15,
+    fontFamily: fonts.primary.normal
   }
 });
