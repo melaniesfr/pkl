@@ -1,59 +1,25 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { colors } from '../utils';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Login, Register, Splash } from '../components/primary';
 import { BerandaMenuVisitor, KategoriMenuVisitor, PengaturanMenuVisitor } from '../components/visitor';
 import { BerandaMenuUser, KategoriMenuUser, ProfilMenuUser, PengaturanMenuUser } from '../components/user';
 import { BerandaMenuAdmin, KategoriMenuAdmin, TambahMenuAdmin, ProfilMenuAdmin, PengaturanMenuAdmin } from '../components/admin';
+import { BottomNavigatorVisitor } from '../components/visitor/navigator';
+import { BottomNavigatorUser } from '../components/user/navigator';
+import { BottomNavigatorAdmin } from '../components/admin/navigator';
 
 // ===========================================================================================
 
 const Stack = createStackNavigator();
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 function VisitorTabScreen() {
   return (
-    <Tab.Navigator
-      initialRouteName="VisitorTabScreen"
-      activeColor={colors.green1}
-      inactiveColor={colors.grey}
-      shifting={true}
-    >
-      <Tab.Screen
-        name="BerandaMenuVisitor"
-        component={ BerandaMenuVisitor }
-        options={{
-          tabBarLabel: 'Beranda',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="home-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="KategoriMenuVisitor"
-        component={ KategoriMenuVisitor }
-        options={{
-          tabBarLabel: 'Kategori',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="grid-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="PengaturanMenuVisitor"
-        component={ PengaturanMenuVisitor }
-        options={{
-          tabBarLabel: 'Pengaturan',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="settings-outline" color={color} size={26} />
-          )
-        }}
-      />
+    <Tab.Navigator tabBar={props => <BottomNavigatorVisitor { ...props } />}>
+      <Tab.Screen name="Beranda" component={ BerandaMenuVisitor } />
+      <Tab.Screen name="Kategori" component={ KategoriMenuVisitor } />
+      <Tab.Screen name="Pengaturan" component={ PengaturanMenuVisitor } />
     </Tab.Navigator>
   );
 };
@@ -62,56 +28,11 @@ function VisitorTabScreen() {
 
 function UserTabScreen() {
   return (
-    <Tab.Navigator
-      initialRouteName="UserTabScreen"
-      activeColor={colors.green1}
-      inactiveColor={colors.grey}
-      shifting={true}
-    >
-      <Tab.Screen
-        name="BerandaMenuUser"
-        component={BerandaMenuUser}
-        options={{
-          tabBarLabel: 'Beranda',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="home-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="KategoriMenuUser"
-        component={ KategoriMenuUser }
-        options={{
-          tabBarLabel: 'Kategori',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="grid-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="ProfilMenuUser"
-        component={ ProfilMenuUser }
-        options={{
-          tabBarLabel: 'Profil',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="person-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="PengaturanMenuUser"
-        component={ PengaturanMenuUser }
-        options={{
-          tabBarLabel: 'Pengaturan',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="settings-outline" color={color} size={26} />
-          )
-        }}
-      />
+    <Tab.Navigator tabBar={props => <BottomNavigatorUser { ...props } />}>
+      <Tab.Screen name="Beranda" component={ BerandaMenuUser } />
+      <Tab.Screen name="Kategori" component={ KategoriMenuUser } />
+      <Tab.Screen name="Profil" component={ ProfilMenuUser } />
+      <Tab.Screen name="Pengaturan" component={ PengaturanMenuUser } />
     </Tab.Navigator>
   );
 };
@@ -120,67 +41,12 @@ function UserTabScreen() {
 
 function AdminTabScreen() {
   return (
-    <Tab.Navigator
-      initialRouteName="AdminTabScreen"
-      activeColor={colors.green1}
-      inactiveColor={colors.grey}
-      shifting={true}
-    >
-      <Tab.Screen
-        name="BerandaMenuAdmin"
-        component={BerandaMenuAdmin }
-        options={{
-          tabBarLabel: 'Beranda',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="home-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="KategoriMenuAdmin"
-        component={ KategoriMenuAdmin }
-        options={{
-          tabBarLabel: 'Kategori',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="grid-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="TambahMenuAdmin"
-        component={ TambahMenuAdmin }
-        options={{
-          tabBarLabel: 'Tambah',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="add-circle-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="ProfilMenuAdmin"
-        component={ ProfilMenuAdmin }
-        options={{
-          tabBarLabel: 'Profil',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="person-outline" color={color} size={26} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="PengaturanMenuAdmin"
-        component={ PengaturanMenuAdmin }
-        options={{
-          tabBarLabel: 'Pengaturan',
-          tabBarColor: colors.white,
-          tabBarIcon: ({ color }) => (
-            <Icon name="settings-outline" color={color} size={26} />
-          )
-        }}
-      />
+    <Tab.Navigator tabBar={props => <BottomNavigatorAdmin { ...props } />}>
+      <Tab.Screen name="Beranda" component={ BerandaMenuAdmin } />
+      <Tab.Screen name="Kategori" component={ KategoriMenuAdmin } />
+      <Tab.Screen name="Tambah" component={ TambahMenuAdmin } />
+      <Tab.Screen name="Profil" component={ ProfilMenuAdmin } />
+      <Tab.Screen name="Pengaturan" component={ PengaturanMenuAdmin } />
     </Tab.Navigator>
   );
 };
