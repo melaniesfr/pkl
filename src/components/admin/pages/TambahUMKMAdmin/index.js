@@ -166,7 +166,7 @@ export default function TambahUMKMAdmin({ navigation }) {
               onValueChange={ (value) => onChangeKategori(value) }
             >
               { dataKategori.map((item, index) => (
-                <Picker.Item key={index} label={item} value={item} />
+                <Picker.Item key={index} label={item} value={index} />
               ))}
             </Picker>
           </View>
@@ -175,16 +175,14 @@ export default function TambahUMKMAdmin({ navigation }) {
           <TextInput placeholder={'Kecamatan'} style={styles.input} onChangeText={(value) => onChangeKecamatan(value)} value={ data.kecamatan } />
           <TextInput placeholder={'No. HP/WA'} keyboardType={'number-pad'} style={styles.input} onChangeText={(value) => onChangeTelp(value)} value={ data.telp } />
 
-          <TouchableOpacity onPress={ saveData }>
-            <View style={styles.button}>
-              <Icon
-                name={'save-sharp'}
-                size={15}
-                color={colors.white}
-                style={{ marginRight: 5 }}
-              />
-              <Text style={styles.textButton}>{ loading ? 'Menyimpan...' : 'Simpan' }</Text>
-            </View>
+          <TouchableOpacity onPress={ saveData } style={styles.button}>
+            <Icon
+              name={'save-sharp'}
+              size={15}
+              color={colors.white}
+              style={{ marginRight: 5 }}
+            />
+            <Text style={styles.textButton}>{ loading ? 'Menyimpan...' : 'Simpan' }</Text>
           </TouchableOpacity>
         </View>
       </View>

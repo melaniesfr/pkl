@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 import { colors, fonts } from '../../../utils';
 import { ICStar } from '../../../assets';
+import Gap from '../Gap';
 
 export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
   return (
@@ -96,6 +97,16 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
               </View>
             </View>
           </View>
+
+          <View>
+            <Gap height={20} />
+            <View style={{ flexDirection: 'row', borderBottomWidth: 2, borderBottomColor: colors.green1, marginBottom: 20 }}>
+              <Gap width={20} />
+              <Text style={styles.review}>Reviews</Text>
+            </View>
+            <Text style={{ textAlign: 'center', fontFamily: fonts.primary.normal, color: colors.dark1 }}>Belum ada review</Text>
+            <Gap height={20} />
+          </View>
         </Animatable.View>
       </View>
     </ScrollView>
@@ -159,5 +170,11 @@ const styles = StyleSheet.create({
   informationData: {
     color: colors.white,
     fontFamily: fonts.primary.normal
+  },
+  review: {
+    fontSize: 17,
+    color: colors.dark1,
+    fontFamily: fonts.primary[600],
+    marginBottom: 15
   }
 });
