@@ -49,6 +49,7 @@ export default function DetailPerKategoriUser({ route, navigation }) {
         keyExtractor={ (item) => item.id }
         horizontal={ false }
         numColumns={ 2 }
+        showsVerticalScrollIndicator={ false }
         style={{ marginVertical: 8 }}
       />
     </View>

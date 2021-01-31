@@ -1,30 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, FlatList, Dimensions, StatusBar } from 'react-native';
-import axios from 'axios';
+import React from 'react';
+import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, fonts } from '../../../../utils';
+import { Beranda } from '../../../primary';
 
 export default function BerandaUser({ navigation }) {
-  const [ data, setData ] = useState();
-  const [ isLoading, setIsLoading ] = useState(false);
-
-  const getData = () => {
-    setIsLoading(true);
-
-    // axios.get('http://192.168.43.89/pkl/view.php')
-    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/view.php')
-    .then((res) => {
-      setData(res.data);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      setIsLoading(false);
-    })
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => navigation.navigate('DetailUMKMUser', { item: item })}>
@@ -42,29 +21,13 @@ export default function BerandaUser({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={ data }
-        renderItem={ renderItem }
-        keyExtractor={ (item) => item.id }
-        refreshing={ isLoading }
-        onRefresh={ getData }
-        horizontal={ false }
-        numColumns={ 2 }
-        style={{ marginVertical: 8 }}
-      />
-
-      <StatusBar backgroundColor={ colors.green1 } />
-    </View>
+    <Beranda
+      renderItem={ renderItem }
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   image: {
     width: (Dimensions.get('window').width / 2) - 15,
     height: (Dimensions.get('window').height / 6),
