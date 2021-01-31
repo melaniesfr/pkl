@@ -8,5 +8,7 @@ import Pengaturan from './Pengaturan';
 import Bahasa from './Bahasa';
 import Tentang from './Tentang';
 import Profil from './Profil';
+import Kategori from './Kategori';
+import DetailPerKategori from './DetailPerKategori';
 
-export { Login, Register, Splash, Gap, DetailUMKM, Beranda, Pengaturan, Bahasa, Tentang, Profil };
+export { Login, Register, Splash, Gap, DetailUMKM, Beranda, Pengaturan, Bahasa, Tentang, Profil, Kategori, DetailPerKategori };
