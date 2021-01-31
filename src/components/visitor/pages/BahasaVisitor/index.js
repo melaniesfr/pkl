@@ -1,23 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { colors, fonts } from '../../../../utils';
+import { Bahasa } from '../../../primary';
 
 export default function BahasaVisitor() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Bahasa Page in Visitor</Text>
-    </View>
+    <Bahasa
+      title={'Bahasa Page in Visitor'}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  text: {
-    color: colors.dark1,
-    fontFamily: fonts.primary.normal
-  }
-});

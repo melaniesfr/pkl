@@ -1,23 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { colors, fonts } from '../../../../utils';
+import { Tentang } from '../../../primary';
 
 export default function TentangAdmin() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Tentang Page in Admin</Text>
-    </View>
+    <Tentang
+      title={'Tentang Page in Admin'}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  text: {
-    color: colors.dark1,
-    fontFamily: fonts.primary.normal
-  }
-});
