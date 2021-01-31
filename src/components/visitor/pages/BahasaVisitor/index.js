@@ -1,9 +1,9 @@
 import React from 'react';
-import { Bahasa } from '../../../primary';
+import { Kosong } from '../../../primary';
 
 export default function BahasaVisitor() {
   return (
-    <Bahasa
+    <Kosong
       title={'Bahasa Page in Visitor'}
     />
   );

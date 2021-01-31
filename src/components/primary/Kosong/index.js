@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { colors, fonts } from '../../../utils';
 
-export default function Bahasa({ title }) {
+export default function Kosong({ title }) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{ title }</Text>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Tentang } from '../../../primary';
+import { Kosong } from '../../../primary';
 
 export default function TentangVisitor() {
   return (
-    <Tentang
+    <Kosong
       title={'Tentang Page in Visitor'}
     />
   );

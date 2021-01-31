@@ -5,10 +5,9 @@ import Gap from './Gap';
 import DetailUMKM from './DetailUMKM';
 import Beranda from './Beranda';
 import Pengaturan from './Pengaturan';
-import Bahasa from './Bahasa';
-import Tentang from './Tentang';
 import Profil from './Profil';
 import Kategori from './Kategori';
 import DetailPerKategori from './DetailPerKategori';
+import Kosong from './Kosong';
 
-export { Login, Register, Splash, Gap, DetailUMKM, Beranda, Pengaturan, Bahasa, Tentang, Profil, Kategori, DetailPerKategori };
+export { Login, Register, Splash, Gap, DetailUMKM, Beranda, Pengaturan, Profil, Kategori, DetailPerKategori, Kosong };

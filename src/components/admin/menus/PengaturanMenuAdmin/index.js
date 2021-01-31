@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { PengaturanAdmin, BahasaAdmin, TentangAdmin, LogoutAdmin } from '../../pages';
+import { PengaturanAdmin, BahasaAdmin, TentangAdmin } from '../../pages';
 import { colors, fonts } from '../../../../utils';
 
 const Stack = createStackNavigator();
@@ -29,11 +29,6 @@ export default function PengaturanMenuAdmin({ navigation }) {
       <Stack.Screen name="TentangAdmin" component={ TentangAdmin }
         options={{
           title: 'Tentang Aplikasi'
-        }}
-      />
-      <Stack.Screen name="LogoutAdmin" component={ LogoutAdmin }
-        options={{
-          title: 'Logout'
         }}
       />
     </Stack.Navigator>

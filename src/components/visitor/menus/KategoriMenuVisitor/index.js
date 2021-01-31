@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { KategoriVisitor, DetailPerKategoriVisitor, DetailKategoriVisitor } from '../../pages';
+import { KategoriVisitor, DetailPerKategoriVisitor, DetailUMKMVisitor } from '../../pages';
 import { colors, fonts } from '../../../../utils';
 
 const Stack = createStackNavigator();
@@ -26,7 +26,7 @@ export default function KategoriMenuVisitor({ navigation }) {
           title: 'Daftar UMKM'
         }}
       />
-      <Stack.Screen name="DetailKategoriVisitor" component={ DetailKategoriVisitor }
+      <Stack.Screen name="DetailKategoriVisitor" component={ DetailUMKMVisitor }
         options={{
           title: 'Detail UMKM',
           headerShown: false
