@@ -4,8 +4,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
 import { colors, fonts } from '../../../utils';
+import md5 from 'md5';
 
 export default function Login({ navigation }) {
+  const [ pass, setPass ] = useState('');
+
   const [ data, setData ] = useState({
     email: '',
     password: '',
@@ -29,11 +32,15 @@ export default function Login({ navigation }) {
     }
   };
 
-  const onChangePassword = (value) => {
-    setData({
-      ...data,
-      password: value
-    });
+  const onChangePassword = () => {
+    if (pass.length !== 0) {
+      let encodePass = md5(pass);
+
+      setData({
+        ...data,
+        password: encodePass
+      });
+    }
   };
 
   const updateSecureTextEntry = () => {
@@ -78,6 +85,8 @@ export default function Login({ navigation }) {
         password: '',
         check_textEmailChange: false
       });
+
+      setPass('');
     })
     .catch((err) => console.log(err));
   };
@@ -122,8 +131,9 @@ export default function Login({ navigation }) {
                 placeholder="Password"
                 secureTextEntry={ data.secureTextEntry ? true : false }
                 autoCapitalize="none"
-                value={ data.password }
-                onChangeText={(value) => onChangePassword(value)}
+                value={ pass }
+                onChangeText={(pass) => setPass(pass)}
+                onEndEditing={() => onChangePassword()}
               />
               <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 { data.secureTextEntry ?
