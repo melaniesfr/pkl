@@ -1,44 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
 import { colors, fonts } from '../../../utils';
 import md5 from 'md5';
+import AuthContext from '../Auth';
+import axios from 'axios';
 
 export default function Login({ navigation }) {
+  const { signIn } = React.useContext(AuthContext);
+
   const [ pass, setPass ] = useState('');
+  const [ users, setUsers ] = useState();
 
   const [ data, setData ] = useState({
     email: '',
     password: '',
     check_textEmailChange: false,
-    secureTextEntry: true
+    secureTextEntry: true,
+    isValidEmail: true,
+    isValidPassword: true
   });
 
   const onChangeEmail = (value) => {
-    if (value.length !== 0) {
+    if (value.trim().length >= 4) {
       setData({
         ...data,
         email: value,
-        check_textEmailChange: true
+        check_textEmailChange: true,
+        isValidEmail: true
       });
     } else {
       setData({
         ...data,
         email: value,
-        check_textEmailChange: false
+        check_textEmailChange: false,
+        isValidEmail: false
       });
     }
   };
 
   const onChangePassword = () => {
-    if (pass.length !== 0) {
-      let encodePass = md5(pass);
+    let encodePass = md5(pass);
 
+    if (pass.length >= 8) {
       setData({
         ...data,
-        password: encodePass
+        password: encodePass,
+        isValidPassword: true
+      });
+    } else {
+      setData({
+        ...data,
+        password: encodePass,
+        isValidPassword: false
       });
     }
   };
@@ -50,46 +66,36 @@ export default function Login({ navigation }) {
     });
   };
 
-  const userLogin = () => {
-    // fetch('http://192.168.43.89/pkl/login.php', {
-    fetch('http://pkl-dinkop.000webhostapp.com/pkl/login.php', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: data.email,
-        password: data.password
-      })
-    })
-    .then((res) => res.json())
-    .then((resJson) => {
-      if (resJson === 'Data admin cocok') {
-        navigation.navigate('AdminScreen', {
-          screen: 'ProfilAdmin',
-          params: { email: data.email }
-        });
-      } else if (resJson === 'Data user cocok') {
-        navigation.navigate('UserScreen', {
-          screen: 'ProfilUser',
-          params: { email: data.email }
-        });
-      } else {
-        Alert.alert('Error!', resJson);
-      }
+  const loginHandle = (email, password) => {
+    const foundUser = (users || []).filter(item => {
+      return (email === item.email && password === item.password);
+    });
 
-      setData({
-        ...data,
-        email: '',
-        password: '',
-        check_textEmailChange: false
-      });
+    if (data.email.length === 0 || data.password.length === 0) {
+      Alert.alert('Error!', 'Kolom email atau password tidak boleh kosong.');
+      return;
+    } if (foundUser.length === 0) {
+      Alert.alert('Maaf!', 'Data yang dimasukkan tidak cocok.');
+      return;
+    }
 
-      setPass('');
+    signIn(foundUser);
+
+    setData({
+      ...data,
+      email: '',
+      password: '',
+      check_textEmailChange: false
+    });
+  };
+
+  useEffect(() => {
+    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/test_login.php')
+    .then((res) => {
+      setUsers(res.data);
     })
     .catch((err) => console.log(err));
-  };
+  });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -121,6 +127,12 @@ export default function Login({ navigation }) {
               : null }
             </View>
 
+            { data.isValidEmail ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal email 4 karakter.</Text>
+            </Animatable.View>
+            }
+
             <View style={styles.input}>
               <Icon
                 name={'key-outline'}
@@ -151,7 +163,13 @@ export default function Login({ navigation }) {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.loginButton} onPress={ userLogin }>
+            { data.isValidPassword ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
+            </Animatable.View>
+            }
+
+            <TouchableOpacity style={styles.loginButton} onPress={() => loginHandle(data.email, data.password)}>
               <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
 
@@ -179,7 +197,6 @@ export default function Login({ navigation }) {
 
 const styles = StyleSheet.create({
   page: {
-    position: 'relative',
     flex: 1,
     backgroundColor: colors.grey1
   },
@@ -190,7 +207,6 @@ const styles = StyleSheet.create({
   },
   boxLogin: {
     width: '90%',
-    height: 290,
     backgroundColor: colors.white,
     borderTopStartRadius: 25,
     borderBottomEndRadius: 25,
@@ -214,18 +230,17 @@ const styles = StyleSheet.create({
   loginButton: {
     marginTop: 10,
     width: '100%',
-    height: 10,
+    padding: 12,
     backgroundColor: colors.blue1,
     borderRadius: 50,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     elevation: 5
   },
   loginText: {
     color: colors.white,
     fontSize: 15,
-    fontFamily: fonts.primary[600]
+    fontFamily: fonts.primary[600],
+    alignSelf: 'center',
+    justifyContent: 'center'
   },
   registerButton: {
     marginTop: 20,
@@ -251,5 +266,11 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 15,
     fontFamily: fonts.primary[600]
+  },
+  errorMsg: {
+    color: colors.red1,
+    fontSize: 13,
+    fontFamily: fonts.primary.normal,
+    marginLeft: 5
   }
 });

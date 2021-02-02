@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Login, Register, Splash } from '../components/primary';
@@ -8,6 +10,8 @@ import { BerandaMenuAdmin, KategoriMenuAdmin, TambahMenuAdmin, ProfilMenuAdmin, 
 import { BottomNavigatorVisitor } from '../components/visitor/navigator';
 import { BottomNavigatorUser } from '../components/user/navigator';
 import { BottomNavigatorAdmin } from '../components/admin/navigator';
+import { colors } from '../utils';
+import AuthContext from '../components/primary/Auth';
 
 // ===========================================================================================
 
@@ -53,7 +57,7 @@ function AdminTabScreen() {
 
 // ===========================================================================================
 
-export default function RootStack() {
+function RootScreen() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Splash" component={ Splash }
@@ -80,18 +84,132 @@ export default function RootStack() {
           headerShown: false
         }}
       />
-      <Stack.Screen name="UserScreen" component={ UserTabScreen }
-        options={{
-          title: 'User Screen',
-          headerShown: false
-        }}
-      />
-      <Stack.Screen name="AdminScreen" component={ AdminTabScreen }
-        options={{
-          title: 'Admin Screen',
-          headerShown: false
-        }}
-      />
     </Stack.Navigator>
+  );
+};
+
+// ===========================================================================================
+
+export default function RootStack() {
+  const initialLoginState = {
+    isLoading: true,
+    email: null,
+    userToken: null
+  };
+
+  const loginReducer = (prevState, action) => {
+    switch(action.type) {
+      case 'RETRIEVE_TOKEN':
+        return {
+          ...prevState,
+          userToken: action.token,
+          isLoading: false
+        };
+      case 'LOGIN':
+        return {
+          ...prevState,
+          email: action.id,
+          userToken: action.token,
+          isLoading: false
+        };
+      case 'LOGOUT':
+        return {
+          ...prevState,
+          email: null,
+          userToken: null,
+          isLoading: false
+        };
+      case 'REGISTER':
+        return {
+          ...prevState,
+          email: action.id,
+          userToken: action.token,
+          isLoading: false
+        };
+    }
+  };
+
+  const [ loginState, dispatch ] = React.useReducer(loginReducer, initialLoginState);
+
+  const authContext = useMemo(() => ({
+    signIn: async(foundUser) => {
+      const userToken = String(foundUser[0].userToken);
+      const email = foundUser[0].email;
+
+      try {
+        await AsyncStorage.setItem('userToken', userToken);
+      } catch(e) {
+        console.log(e);
+      }
+
+      dispatch({ type: 'LOGIN', id: email, token: userToken })
+    },
+    signOut: async() => {
+      try {
+        await AsyncStorage.removeItem('userToken');
+      } catch(e) {
+        console.log(e);
+      }
+      dispatch({ type: 'LOGOUT' })
+    },
+    signUp: () => {
+      // setUserToken('signUpToken');
+      // setIsLoading(false);
+    }
+  }), []);
+
+  useEffect(() => {
+    setTimeout(async() => {
+      let userToken;
+      userToken = null;
+      try {
+        userToken = await AsyncStorage.getItem('userToken');
+      } catch(e) {
+        console.log(e);
+      }
+      dispatch({ type: 'REGISTER', token: userToken })
+    }, 1000);
+  }, []);
+
+  if (loginState.isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size={'large'} color={colors.grey} />
+      </View>
+    );
+  }
+
+  const roleLogged = () => {
+    if (loginState.userToken === 'adminToken') {
+      return (
+        <Stack.Navigator>
+          <Stack.Screen name="AdminScreen" component={ AdminTabScreen }
+            options={{
+              title: 'Admin Screen',
+              headerShown: false
+            }}
+          />
+        </Stack.Navigator>
+      );
+    } if (loginState.userToken === 'userToken') {
+      return (
+        <Stack.Navigator>
+          <Stack.Screen name="UserScreen" component={ UserTabScreen }
+            options={{
+              title: 'User Screen',
+              headerShown: false
+            }}
+          />
+        </Stack.Navigator>
+      );
+    } if (loginState.userToken === null) {
+      return <RootScreen />;
+    }
+  }
+
+  return (
+    <AuthContext.Provider value={ authContext }>
+      { roleLogged() }
+    </AuthContext.Provider>
   );
 };
