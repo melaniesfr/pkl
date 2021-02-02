@@ -15,50 +15,69 @@ export default function Register({ navigation }) {
     password: '',
     check_textNamaChange: false,
     check_textEmailChange: false,
-    secureTextEntry: true
+    secureTextEntry: true,
+    isValidNama: true,
+    isValidEmail: true,
+    isValidPassword: true
   });
 
   const onChangeNama = (value) => {
-    if (value.length !== 0) {
+    if (value.trim().length >= 5) {
       setData({
         ...data,
         nama: value,
-        check_textNamaChange: true
+        check_textNamaChange: true,
+        isValidNama: true
       });
     } else {
       setData({
         ...data,
         nama: value,
-        check_textNamaChange: false
+        check_textNamaChange: false,
+        isValidNama: false
       });
     }
   };
 
   const onChangeEmail = (value) => {
-    if (value.length !== 0) {
+    if (value.trim().length >= 10) {
       setData({
         ...data,
         email: value,
-        check_textEmailChange: true
+        check_textEmailChange: true,
+        isValidEmail: true
       });
     } else {
       setData({
         ...data,
         email: value,
-        check_textEmailChange: false
+        check_textEmailChange: false,
+        isValidEmail: false
       });
     }
   };
 
-  const onChangePassword = () => {
-    if (pass.length !== 0) {
-      let encodePass = md5(pass);
-
+  const onChangePassword = (value) => {
+    if (pass.trim().length >= 8) {
       setData({
         ...data,
-        password: encodePass
+        isValidPassword: true
+      });
+    } else {
+      setData({
+        ...data,
+        isValidPassword: false
       });
     }
+  };
+
+  const encryptPw = () => {
+    let encodePass = md5(pass);
+
+    setData({
+      ...data,
+      password: encodePass
+    });
   };
 
   const updateSecureTextEntry = () => {
@@ -68,43 +87,51 @@ export default function Register({ navigation }) {
     });
   };
 
-  const userRegistration = () => {
-    // fetch('http://192.168.43.89/pkl/registration.php', {
-    fetch('http://pkl-dinkop.000webhostapp.com/pkl/registration.php', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        nama: data.nama,
-        email: data.email,
-        password: data.password
+  const registHandle = () => {
+    if (data.nama.length === 0 || data.email.length === 0 || pass.length === 0) {
+      Alert.alert('Error!', 'Kolom nama/email/password tidak boleh kosong.');
+    } else if (data.nama.length < 5 || data.email.length < 10 || pass.length < 8) {
+      Alert.alert('Error!', 'Data isian tidak sesuai ketentuan.');
+    } else if (data.nama.length >= 5 && data.email.length >= 10 && data.password.length >= 8) {
+      fetch('http://pkl-dinkop.000webhostapp.com/pkl/registration.php', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          nama: data.nama,
+          email: data.email,
+          password: data.password
+        })
       })
-    })
-    .then((res) => res.json())
-    .then((resJson) => {
-      if (resJson === 'Registrasi berhasil') {
-        Alert.alert('Success!', resJson);
-        navigation.navigate('Login');
-      } else if (resJson === 'User sudah ada, silakan coba lagi') {
-        Alert.alert('Peringatan!', resJson);
-      } else {
-        Alert.alert('Error!', resJson);
-      }
-
-      setData({
-        ...data,
-        nama: '',
-        email: '',
-        password: '',
-        check_textNamaChange: false,
-        check_textEmailChange: false
-      });
-
-      setPass('');
-    })
-    .catch((err) => console.log(err));
+      .then((res) => res.json())
+      .then((resJson) => {
+        if (resJson === 'Registrasi berhasil.') {
+          Alert.alert('Success!', resJson);
+          navigation.navigate('Login');
+        } else if (resJson === 'User sudah ada, silakan coba lagi.') {
+          Alert.alert('Peringatan!', resJson);
+        } else {
+          Alert.alert('Error!', resJson);
+        }
+  
+        setData({
+          ...data,
+          nama: '',
+          email: '',
+          password: '',
+          check_textNamaChange: false,
+          check_textEmailChange: false,
+          isValidNama: true,
+          isValidEmail: true,
+          isValidPassword: true
+        });
+  
+        setPass('');
+      })
+      .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -135,6 +162,12 @@ export default function Register({ navigation }) {
               : null }
             </View>
 
+            { data.isValidNama ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal nama 5 karakter.</Text>
+            </Animatable.View>
+            }
+
             <View style={styles.input}>
               <Icon
                 name={'mail-outline'}
@@ -159,6 +192,12 @@ export default function Register({ navigation }) {
               : null }
             </View>
 
+            { data.isValidEmail ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal email 10 karakter.</Text>
+            </Animatable.View>
+            }
+
             <View style={styles.input}>
               <Icon
                 name={'key-outline'}
@@ -170,8 +209,8 @@ export default function Register({ navigation }) {
                 secureTextEntry={ data.secureTextEntry }
                 autoCapitalize="none"
                 value={ pass }
-                onChangeText={(value) => setPass(value)}
-                onEndEditing={() => onChangePassword()}
+                onChangeText={(value) => {setPass(value), onChangePassword(value)}}
+                onEndEditing={() => encryptPw()}
               />
               <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 { data.secureTextEntry ?
@@ -189,7 +228,13 @@ export default function Register({ navigation }) {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.registerButton} onPress={ userRegistration }>
+            { data.isValidPassword ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
+            </Animatable.View>
+            }
+
+            <TouchableOpacity style={styles.registerButton} onPress={() => registHandle()}>
               <Text style={styles.registerText}>REGISTER</Text>
             </TouchableOpacity>
 
@@ -210,7 +255,6 @@ export default function Register({ navigation }) {
 
 const styles = StyleSheet.create({
   page: {
-    position: 'relative',
     flex: 1,
     backgroundColor: colors.grey1
   },
@@ -221,7 +265,6 @@ const styles = StyleSheet.create({
   },
   boxRegister: {
     width: '90%',
-    height: 350,
     backgroundColor: colors.white,
     borderTopStartRadius: 25,
     borderBottomEndRadius: 25,
@@ -245,18 +288,16 @@ const styles = StyleSheet.create({
   registerButton: {
     marginTop: 10,
     width: '100%',
-    height: 10,
+    padding: 12,
     backgroundColor: colors.green1,
     borderRadius: 50,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     elevation: 5
   },
   registerText: {
     color: colors.white,
     fontSize: 15,
-    fontFamily: fonts.primary[600]
+    fontFamily: fonts.primary[600],
+    alignSelf: 'center'
   },
   backButton: {
     marginTop: 20,
@@ -269,4 +310,10 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.normal,
     color: colors.dark1
   },
+  errorMsg: {
+    color: colors.red1,
+    fontSize: 13,
+    fontFamily: fonts.primary.normal,
+    marginLeft: 5
+  }
 });

@@ -12,7 +12,15 @@ export default function Login({ navigation }) {
   const { signIn } = React.useContext(AuthContext);
 
   const [ pass, setPass ] = useState('');
-  const [ users, setUsers ] = useState();
+  const [ users, setUsers ] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
+    .then((res) => {
+      setUsers(res.data);
+    })
+    .catch((err) => console.log(err));
+  });
 
   const [ data, setData ] = useState({
     email: '',
@@ -24,7 +32,7 @@ export default function Login({ navigation }) {
   });
 
   const onChangeEmail = (value) => {
-    if (value.trim().length >= 4) {
+    if (value.trim().length >= 10) {
       setData({
         ...data,
         email: value,
@@ -41,22 +49,27 @@ export default function Login({ navigation }) {
     }
   };
 
-  const onChangePassword = () => {
-    let encodePass = md5(pass);
-
-    if (pass.length >= 8) {
+  const onChangePassword = (value) => {
+    if (pass.trim().length >= 8) {
       setData({
         ...data,
-        password: encodePass,
         isValidPassword: true
       });
     } else {
       setData({
         ...data,
-        password: encodePass,
         isValidPassword: false
       });
     }
+  };
+
+  const encryptPw = () => {
+    let encodePass = md5(pass);
+
+    setData({
+      ...data,
+      password: encodePass
+    });
   };
 
   const updateSecureTextEntry = () => {
@@ -67,7 +80,7 @@ export default function Login({ navigation }) {
   };
 
   const loginHandle = (email, password) => {
-    const foundUser = (users || []).filter(item => {
+    const foundUser = users.filter(item => {
       return (email === item.email && password === item.password);
     });
 
@@ -85,17 +98,11 @@ export default function Login({ navigation }) {
       ...data,
       email: '',
       password: '',
-      check_textEmailChange: false
+      check_textEmailChange: false,
+      isValidEmail: true,
+      isValidPassword: true
     });
   };
-
-  useEffect(() => {
-    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/test_login.php')
-    .then((res) => {
-      setUsers(res.data);
-    })
-    .catch((err) => console.log(err));
-  });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -129,7 +136,7 @@ export default function Login({ navigation }) {
 
             { data.isValidEmail ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
-              <Text style={styles.errorMsg}>Panjang minimal email 4 karakter.</Text>
+              <Text style={styles.errorMsg}>Panjang minimal email 10 karakter.</Text>
             </Animatable.View>
             }
 
@@ -144,8 +151,8 @@ export default function Login({ navigation }) {
                 secureTextEntry={ data.secureTextEntry ? true : false }
                 autoCapitalize="none"
                 value={ pass }
-                onChangeText={(pass) => setPass(pass)}
-                onEndEditing={() => onChangePassword()}
+                onChangeText={(value) => {setPass(value), onChangePassword(value)}}
+                onEndEditing={() => encryptPw()}
               />
               <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
                 { data.secureTextEntry ?
@@ -239,8 +246,7 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 15,
     fontFamily: fonts.primary[600],
-    alignSelf: 'center',
-    justifyContent: 'center'
+    alignSelf: 'center'
   },
   registerButton: {
     marginTop: 20,

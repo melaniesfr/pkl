@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Login, Register, Splash } from '../components/primary';
 import { BerandaMenuVisitor, KategoriMenuVisitor, PengaturanMenuVisitor } from '../components/visitor';
 import { BerandaMenuUser, KategoriMenuUser, ProfilMenuUser, PengaturanMenuUser } from '../components/user';
@@ -102,6 +102,7 @@ export default function RootStack() {
       case 'RETRIEVE_TOKEN':
         return {
           ...prevState,
+          email: action.id,
           userToken: action.token,
           isLoading: false
         };
@@ -119,13 +120,6 @@ export default function RootStack() {
           userToken: null,
           isLoading: false
         };
-      case 'REGISTER':
-        return {
-          ...prevState,
-          email: action.id,
-          userToken: action.token,
-          isLoading: false
-        };
     }
   };
 
@@ -137,6 +131,7 @@ export default function RootStack() {
       const email = foundUser[0].email;
 
       try {
+        await AsyncStorage.setItem('email', email);
         await AsyncStorage.setItem('userToken', userToken);
       } catch(e) {
         console.log(e);
@@ -150,11 +145,8 @@ export default function RootStack() {
       } catch(e) {
         console.log(e);
       }
+
       dispatch({ type: 'LOGOUT' })
-    },
-    signUp: () => {
-      // setUserToken('signUpToken');
-      // setIsLoading(false);
     }
   }), []);
 
@@ -162,12 +154,14 @@ export default function RootStack() {
     setTimeout(async() => {
       let userToken;
       userToken = null;
+
       try {
         userToken = await AsyncStorage.getItem('userToken');
       } catch(e) {
         console.log(e);
       }
-      dispatch({ type: 'REGISTER', token: userToken })
+
+      dispatch({ type: 'RETRIEVE_TOKEN', token: userToken })
     }, 1000);
   }, []);
 
