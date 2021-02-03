@@ -6,7 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 import { IMNoImage } from '../../../../assets';
 import { colors, fonts } from '../../../../utils';
 
-export default function TambahUMKMAdmin({ navigation }) {
+export default function TambahUMKMAdmin() {
   const [ loading, setLoading ] = useState(false);
 
   const dataKategori = [
@@ -196,7 +196,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   card: {
-    height: 580,
     width: '93%',
     backgroundColor: colors.white,
     borderRadius: 15,

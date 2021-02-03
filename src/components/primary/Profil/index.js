@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { IMUser } from '../../../assets';
-import { colors, fonts } from '../../../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { IMUser } from '../../../assets';
+import { colors, fonts } from '../../../utils';
 
 export default function Profil({ onPressEdit }) {
   const [ data, setData ] = useState({
@@ -15,16 +15,12 @@ export default function Profil({ onPressEdit }) {
   });
 
   const [ users, setUsers ] = useState();
-  const loadUsers = async() => {
+  const loadUsers = async(func) => {
     await AsyncStorage.getItem('email')
     .then((res) => {
       const email = String(res);
       setUsers(email);
     });
-  };
-
-  useEffect(() => {
-    loadUsers();
 
     axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
     .then((res) => {
@@ -41,7 +37,11 @@ export default function Profil({ onPressEdit }) {
       }
     })
     .catch((err) => console.log(err));
-  });
+  };
+
+  useEffect(() => {
+    loadUsers();
+  }, [loadUsers]);
 
   return (
     <View style={styles.container}>
@@ -50,18 +50,18 @@ export default function Profil({ onPressEdit }) {
 
         <View style={styles.data}>
           <View style={{ flexDirection: 'row' }}>
-            <Text style={[styles.textInfo, { marginRight: 32 }]}>Nama</Text>
+            <Text style={[styles.textInfo, { marginRight: 15 }]}>Nama</Text>
             <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
             <Text style={styles.textData}>{ data.nama }</Text>
           </View>
           <View style={{ flexDirection: 'row' }}>
-            <Text style={[styles.textInfo, { marginRight: 34 }]}>Email</Text>
+            <Text style={[styles.textInfo, { marginRight: 17 }]}>Email</Text>
             <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
             <Text>{ data.email }</Text>
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={ onPressEdit }>
+        <TouchableOpacity style={styles.button} onPress={ onPressEdit}>
           <Icon
             name={'create'}
             size={20}
@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     alignSelf: 'center',
-    marginVertical: 20
+    marginBottom: 20,
+    marginTop: 5
   },
   data: {
     paddingHorizontal: 20,

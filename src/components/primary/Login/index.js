@@ -139,8 +139,7 @@ export default function Login({ navigation }) {
             { data.isValidEmail ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
               <Text style={styles.errorMsg}>Panjang minimal email 10 karakter.</Text>
-            </Animatable.View>
-            }
+            </Animatable.View> }
 
             <View style={styles.input}>
               <Icon
@@ -175,8 +174,7 @@ export default function Login({ navigation }) {
             { data.isValidPassword ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
               <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
-            </Animatable.View>
-            }
+            </Animatable.View> }
 
             <TouchableOpacity style={styles.loginButton} onPress={() => loginHandle(data.email, data.password)}>
               <Text style={styles.loginText}>LOGIN</Text>

@@ -165,8 +165,7 @@ export default function Register({ navigation }) {
             { data.isValidNama ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
               <Text style={styles.errorMsg}>Panjang minimal nama 5 karakter.</Text>
-            </Animatable.View>
-            }
+            </Animatable.View> }
 
             <View style={styles.input}>
               <Icon
@@ -195,8 +194,7 @@ export default function Register({ navigation }) {
             { data.isValidEmail ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
               <Text style={styles.errorMsg}>Panjang minimal email 10 karakter.</Text>
-            </Animatable.View>
-            }
+            </Animatable.View> }
 
             <View style={styles.input}>
               <Icon
@@ -231,8 +229,7 @@ export default function Register({ navigation }) {
             { data.isValidPassword ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
               <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
-            </Animatable.View>
-            }
+            </Animatable.View> }
 
             <TouchableOpacity style={styles.registerButton} onPress={() => registHandle()}>
               <Text style={styles.registerText}>REGISTER</Text>
