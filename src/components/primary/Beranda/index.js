@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { FlatList, StatusBar, StyleSheet, View } from 'react-native';
 import { colors } from '../../../utils';
+import axios from 'axios';
 
 export default function Beranda({ renderItem }) {
   const [ data, setData ] = useState();

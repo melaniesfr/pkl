@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProfilUser } from '../../pages';
+import { ProfilUser, EditProfilUser } from '../../pages';
 import { colors, fonts } from '../../../../utils';
 
 const Stack = createStackNavigator();
@@ -19,6 +19,11 @@ export default function ProfilMenuUser({ navigation }) {
           title: 'Profil',
           headerLeft: null,
           headerTitleAlign: 'center'
+        }}
+      />
+      <Stack.Screen name="EditProfilUser" component={ EditProfilUser }
+        options={{
+          title: 'Edit Profil'
         }}
       />
     </Stack.Navigator>

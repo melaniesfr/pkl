@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProfilAdmin } from '../../pages';
+import { ProfilAdmin, EditProfilAdmin } from '../../pages';
 import { colors, fonts } from '../../../../utils';
 
 const Stack = createStackNavigator();
@@ -19,6 +19,11 @@ export default function ProfilMenuAdmin({ navigation }) {
           title: 'Profil',
           headerLeft: null,
           headerTitleAlign: 'center'
+        }}
+      />
+      <Stack.Screen name="EditProfilAdmin" component={ EditProfilAdmin }
+        options={{
+          title: 'Edit Profil'
         }}
       />
     </Stack.Navigator>

@@ -1,21 +1,47 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Feather from 'react-native-vector-icons/Feather';
 import { IMUser } from '../../../assets';
 import { colors, fonts } from '../../../utils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
-export default function Profil({ data, setData }) {
-  const [ encrypt, setEncrypt ] = useState({
-    secureTextEntry: true
+export default function Profil({ onPressEdit }) {
+  const [ data, setData ] = useState({
+    id: '',
+    nama: '',
+    email: '',
+    password: ''
   });
 
-  const updateSecureTextEntry = () => {
-    setEncrypt({
-      ...encrypt,
-      secureTextEntry: !encrypt.secureTextEntry
+  const [ users, setUsers ] = useState();
+  const loadUsers = async() => {
+    await AsyncStorage.getItem('email')
+    .then((res) => {
+      const email = String(res);
+      setUsers(email);
     });
   };
+
+  useEffect(() => {
+    loadUsers();
+
+    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
+    .then((res) => {
+      for (var i=0; i<res.data.length; i++) {
+        if (users === res.data[i].email) {
+          setData({
+            ...data,
+            id: res.data[i].id,
+            nama: res.data[i].nama,
+            email: res.data[i].email,
+            password: res.data[i].password
+          });
+        }
+      }
+    })
+    .catch((err) => console.log(err));
+  });
 
   return (
     <View style={styles.container}>
@@ -33,34 +59,9 @@ export default function Profil({ data, setData }) {
             <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
             <Text>{ data.email }</Text>
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={[styles.textInfo, { marginRight: 5 }]}>Password</Text>
-            <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
-          </View>
-          <View>
-            <TextInput
-              secureTextEntry={ encrypt.secureTextEntry ? true : false }
-              value={ data.password }
-              editable={ false }
-            />
-            <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 0 }}>
-              { encrypt.secureTextEntry ?
-              <Feather
-                name="eye-off"
-                color={colors.grey}
-                size={20}
-              />
-              :
-              <Feather
-                name="eye"
-                color={colors.grey}
-                size={20}
-              /> }
-            </TouchableOpacity>
-          </View>
         </View>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={ onPressEdit }>
           <Icon
             name={'create'}
             size={20}
@@ -94,7 +95,8 @@ const styles = StyleSheet.create({
     marginVertical: 20
   },
   data: {
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+    alignSelf: 'center'
   },
   textInfo: {
     color: colors.dark1,
