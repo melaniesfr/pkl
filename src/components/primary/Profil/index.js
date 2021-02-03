@@ -1,66 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import { useRoute } from '@react-navigation/native';
-import axios from 'axios';
 import { IMUser } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
-export default function Profil({ route, navigation, data, setData }) {
-  // const routes = useRoute();
-  // const userEmail = JSON.parse(routes.params);
-  // Alert.alert(userEmail);
-
-  // const [ user, setUser ] = useState([]);
-
-  // axios.get('http://192.168.43.89/pkl/users.php')
-  // .then((res) => {
-  //   if (res.data.email === userEmail) {
-  //     setData({
-  //       nama: res.data.nama,
-  //       email: res.data.email,
-  //       password: res.data.password,
-  //     });
-  //   }
-  // })
-  // .catch((err) => console.log(err));
-
-  // const loadData = () => {
-  //   fetch('http://192.168.43.89/pkl/users.php', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       nama: data.nama,
-  //       email: data.email,
-  //       password: data.password
-  //     })
-  //   })
-  //   .then((res) => res.json())
-  //   .then((resJson) => {
-  //     console.log(resJson.data.email);
-  //     if (resJson.email === userEmail) {
-  //       setData({
-  //         nama: resJson.nama,
-  //         email: resJson.email,
-  //         password: resJson.password,
-  //       });
-  //     }
-  //   })
-  //   .catch((err) => console.log(err));
-  // };
-
-  // useEffect(() => {
-  //   loadData();
-  // });
+export default function Profil({ data, setData }) {
+  const [ encrypt, setEncrypt ] = useState({
+    secureTextEntry: true
+  });
 
   const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry
+    setEncrypt({
+      ...encrypt,
+      secureTextEntry: !encrypt.secureTextEntry
     });
   };
 
@@ -70,16 +23,28 @@ export default function Profil({ route, navigation, data, setData }) {
         <Image source={ IMUser } style={styles.image} />
 
         <View style={styles.data}>
-          <Text style={styles.textData}>{ data.nama }</Text>
-          <Text style={styles.textData}>{ data.email }</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={[styles.textInfo, { marginRight: 32 }]}>Nama</Text>
+            <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
+            <Text style={styles.textData}>{ data.nama }</Text>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={[styles.textInfo, { marginRight: 34 }]}>Email</Text>
+            <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
+            <Text>{ data.email }</Text>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={[styles.textInfo, { marginRight: 5 }]}>Password</Text>
+            <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
+          </View>
           <View>
             <TextInput
-              secureTextEntry={ data.secureTextEntry ? true : false }
+              secureTextEntry={ encrypt.secureTextEntry ? true : false }
               value={ data.password }
               editable={ false }
             />
             <TouchableOpacity onPress={ updateSecureTextEntry } style={{ position: 'absolute', marginTop: 13, right: 0 }}>
-              { data.secureTextEntry ?
+              { encrypt.secureTextEntry ?
               <Feather
                 name="eye-off"
                 color={colors.grey}
@@ -116,7 +81,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   card: {
-    height: 385,
     width: '93%',
     backgroundColor: colors.white,
     borderRadius: 15,
@@ -130,7 +94,11 @@ const styles = StyleSheet.create({
     marginVertical: 20
   },
   data: {
-    alignSelf: 'center'
+    paddingHorizontal: 20
+  },
+  textInfo: {
+    color: colors.dark1,
+    fontFamily: fonts.primary[700]
   },
   textData: {
     color: colors.dark1,

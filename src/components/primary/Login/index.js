@@ -15,12 +15,14 @@ export default function Login({ navigation }) {
   const [ users, setUsers ] = useState([]);
 
   useEffect(() => {
-    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
-    .then((res) => {
-      setUsers(res.data);
-    })
-    .catch((err) => console.log(err));
-  });
+    setTimeout(() => {
+      axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((err) => console.log(err));
+    }, 1000);
+  }, []);
 
   const [ data, setData ] = useState({
     email: '',
