@@ -52,7 +52,7 @@ export default function Login({ navigation }) {
   };
 
   const onChangePassword = (value) => {
-    if (pass.trim().length >= 8) {
+    if (pass.length >= 7) {
       setData({
         ...data,
         isValidPassword: true
@@ -86,7 +86,7 @@ export default function Login({ navigation }) {
       return (email === item.email && password === item.password);
     });
 
-    if (data.email.length === 0 || data.password.length === 0) {
+    if (data.email.length === 0 || pass.length === 0) {
       Alert.alert('Error!', 'Kolom email atau password tidak boleh kosong.');
       return;
     } if (foundUser.length === 0) {

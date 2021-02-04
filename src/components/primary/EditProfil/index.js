@@ -5,12 +5,16 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
 import axios from 'axios';
+import md5 from 'md5';
 import { IMUser } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
 export default function EditProfil() {
   const [ modalVisible, setModalVisible ] = useState(false);
   const [ loading, setLoading ] = useState(false);
+  const [ pwLama, setPwLama ] = useState('');
+  const [ pwBaru, setPwBaru ] = useState('');
+  const [ konfPwBaru, setKonfPwBaru ] = useState('');
 
   const [ data, setData ] = useState({
     id: '',
@@ -93,51 +97,72 @@ export default function EditProfil() {
   };
 
   const onChangePwLama = (value) => {
-    if (value.trim().length >= 8) {
+    if (pwLama.length >= 7) {
       setData({
         ...data,
-        pwLama: value,
         isValidPwLama: true
       });
     } else {
       setData({
         ...data,
-        pwLama: value,
         isValidPwLama: false
       });
     }
   };
 
+  const encryptPwLama = () => {
+    let encodePass = md5(pwLama);
+
+    setData({
+      ...data,
+      pwLama: encodePass
+    });
+  };
+
   const onChangePwBaru = (value) => {
-    if (value.trim().length >= 8) {
+    if (pwBaru.length >= 7) {
       setData({
         ...data,
-        pwBaru: value,
         isValidPwBaru: true
       });
     } else {
       setData({
         ...data,
-        pwBaru: value,
         isValidPwBaru: false
       });
     }
   };
 
+  const encryptPwBaru = () => {
+    let encodePass = md5(pwBaru);
+
+    setData({
+      ...data,
+      pwBaru: encodePass
+    });
+  };
+
   const onChangeKonfPwBaru = (value) => {
-    if (value.trim().length >= 8) {
+    if (konfPwBaru.length >= 7) {
       setData({
         ...data,
-        konfPwBaru: value,
         isValidKonfPwBaru: true
       });
     } else {
       setData({
         ...data,
-        konfPwBaru: value,
         isValidKonfPwBaru: false
       });
     }
+  };
+
+  const encryptKonfPwBaru = () => {
+    let encodePass = md5(konfPwBaru);
+
+    setData({
+      ...data,
+      konfPwBaru: encodePass
+    });
   };
 
   const updateSecureTextLama = () => {
@@ -164,7 +189,10 @@ export default function EditProfil() {
   const editProfil = () => {
     setLoading(true);
 
-    if (data.nama.length < 5 || data.email.length < 10) {
+    if (data.nama.length === 0 || data.email.length === 0) {
+      setLoading(false);
+      Alert.alert('Error!', 'Data isian tidak boleh ada yang kosong.');
+    } else if (data.nama.length < 5 || data.email.length < 10) {
       setLoading(false);
       Alert.alert('Error!', 'Data nama atau email tidak memenuhi ketentuan.');
     } else if (data.nama.length >= 5 && data.email.length >= 10) {
@@ -194,8 +222,53 @@ export default function EditProfil() {
     }
   };
 
+  const resetPass = () => {
+    setLoading(true);
+
+    if (pwLama.length === 0 || pwBaru.length === 0 || konfPwBaru.length === 0) {
+      setLoading(false);
+      Alert.alert('Error!', 'Data isian tidak boleh ada yang kosong.');
+    } else if (pwLama.length < 8 || pwBaru.length < 8 || konfPwBaru.length < 8) {
+      setLoading(false);
+      Alert.alert('Error!', 'Data isian tidak memenuhi ketentuan.');
+    } else if (pwLama.length >= 8 && pwBaru.length >= 8 && konfPwBaru.length >= 8) {
+      if (data.pwLama === data.password) {
+        if (data.pwBaru === data.konfPwBaru) {
+          fetch('http://pkl-dinkop.000webhostapp.com/pkl/reset_pass.php', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              id: data.id,
+              password: data.konfPwBaru
+            })
+          })
+          .then((res) => res.json())
+          .then((resJson) => {
+            setLoading(false);
+
+            if (resJson === 'Reset password sukses.') {
+              Alert.alert('Success!', resJson);
+            } else {
+              Alert.alert('Error!', resJson);
+            }
+          })
+          .catch((err) => console.log(err));
+        } else {
+          setLoading(false);
+          Alert.alert('Error!', 'Isian kolom password baru tidak sama dengan kolom konfirmasi.');
+        }
+      } else if (data.pwLama !== data.password) {
+        setLoading(false);
+        Alert.alert('Error!', 'Isian kolom password lama tidak sama dengan password lama.');
+      }
+    }
+  };
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} onPres>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <Modal
           animationType={'slide'}
@@ -205,108 +278,119 @@ export default function EditProfil() {
             Alert.alert('Peringatan!', 'Reset password ditutup.');
           }}
         >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={{ alignSelf: 'center', fontSize: 17, fontFamily: fonts.primary[700], color: colors.dark1 }}>Reset Password</Text>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={{ alignSelf: 'center', fontSize: 17, fontFamily: fonts.primary[700], color: colors.dark1 }}>Reset Password</Text>
 
-              <View>
-                <TextInput
-                  placeholder={'Password lama'}
-                  secureTextEntry={ data.secureTextLama }
-                  autoCapitalize="none"
-                  value={ data.pwLama }
-                  onChangeText={(value) => onChangePwLama(value)}
-                  style={styles.inputReset}
-                />
-                <TouchableOpacity onPress={ updateSecureTextLama } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
-                  { data.secureTextLama ?
-                  <Feather
-                    name="eye-off"
-                    color={colors.grey}
-                    size={20}
+                <View>
+                  <TextInput
+                    placeholder={'Password lama'}
+                    secureTextEntry={ data.secureTextLama }
+                    autoCapitalize="none"
+                    // value={ data.pwLama }
+                    // onChangeText={(value) => onChangePwLama(value)}
+                    value={ pwLama }
+                    onChangeText={(value) => {setPwLama(value), onChangePwLama(value)}}
+                    onEndEditing={() => encryptPwLama()}
+                    style={styles.inputReset}
                   />
-                  :
-                  <Feather
-                    name="eye"
-                    color={colors.grey}
-                    size={20}
-                  /> }
-                </TouchableOpacity>
-              </View>
-              { data.isValidPwLama ? null :
-              <Animatable.View animation={'fadeInLeft'} duration={500}>
-                <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
-              </Animatable.View> }
+                  <TouchableOpacity onPress={ updateSecureTextLama } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
+                    { data.secureTextLama ?
+                    <Feather
+                      name="eye-off"
+                      color={colors.grey}
+                      size={20}
+                    />
+                    :
+                    <Feather
+                      name="eye"
+                      color={colors.grey}
+                      size={20}
+                    /> }
+                  </TouchableOpacity>
+                </View>
+                { data.isValidPwLama ? null :
+                <Animatable.View animation={'fadeInLeft'} duration={500}>
+                  <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
+                </Animatable.View> }
 
-              <View>
-                <TextInput
-                  placeholder={'Password baru'}
-                  secureTextEntry={ data.secureTextBaru }
-                  autoCapitalize="none"
-                  value={ data.pwBaru }
-                  onChangeText={(value) => onChangePwBaru(value)}
-                  style={styles.inputReset}
-                />
-                <TouchableOpacity onPress={ updateSecureTextBaru } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
-                  { data.secureTextBaru ?
-                  <Feather
-                    name="eye-off"
-                    color={colors.grey}
-                    size={20}
+                <View>
+                  <TextInput
+                    placeholder={'Password baru'}
+                    secureTextEntry={ data.secureTextBaru }
+                    autoCapitalize="none"
+                    // value={ data.pwBaru }
+                    // onChangeText={(value) => onChangePwBaru(value)}
+                    value={ pwBaru }
+                    onChangeText={(value) => {setPwBaru(value), onChangePwBaru(value)}}
+                    onEndEditing={() => encryptPwBaru()}
+                    style={styles.inputReset}
                   />
-                  :
-                  <Feather
-                    name="eye"
-                    color={colors.grey}
-                    size={20}
-                  /> }
-                </TouchableOpacity>
-              </View>
-              { data.isValidPwBaru ? null :
-              <Animatable.View animation={'fadeInLeft'} duration={500}>
-                <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
-              </Animatable.View> }
+                  <TouchableOpacity onPress={ updateSecureTextBaru } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
+                    { data.secureTextBaru ?
+                    <Feather
+                      name="eye-off"
+                      color={colors.grey}
+                      size={20}
+                    />
+                    :
+                    <Feather
+                      name="eye"
+                      color={colors.grey}
+                      size={20}
+                    /> }
+                  </TouchableOpacity>
+                </View>
+                { data.isValidPwBaru ? null :
+                <Animatable.View animation={'fadeInLeft'} duration={500}>
+                  <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
+                </Animatable.View> }
 
-              <View>
-                <TextInput
-                  placeholder={'Konfirmasi password baru'}
-                  secureTextEntry={ data.secureTextKonfBaru }
-                  autoCapitalize="none"
-                  value={ data.konfPwBaru }
-                  onChangeText={(value) => onChangeKonfPwBaru(value)}
-                  style={[styles.inputReset, { marginBottom: 15 }]}
-                />
-                <TouchableOpacity onPress={ updateSecureTextKonfBaru } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
-                  { data.secureTextKonfBaru ?
-                  <Feather
-                    name="eye-off"
-                    color={colors.grey}
-                    size={20}
+                <View>
+                  <TextInput
+                    placeholder={'Konfirmasi password baru'}
+                    secureTextEntry={ data.secureTextKonfBaru }
+                    autoCapitalize="none"
+                    // value={ data.konfPwBaru }
+                    // onChangeText={(value) => onChangeKonfPwBaru(value)}
+                    value={ konfPwBaru }
+                    onChangeText={(value) => {setKonfPwBaru(value), onChangeKonfPwBaru(value)}}
+                    onEndEditing={() => encryptKonfPwBaru()}
+                    style={styles.inputReset}
                   />
-                  :
-                  <Feather
-                    name="eye"
-                    color={colors.grey}
-                    size={20}
-                  /> }
-                </TouchableOpacity>
-              </View>
-              { data.isValidKonfPwBaru ? null :
-              <Animatable.View animation={'fadeInLeft'} duration={500}>
-                <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
-              </Animatable.View> }
+                  <TouchableOpacity onPress={ updateSecureTextKonfBaru } style={{ position: 'absolute', marginTop: 13, right: 5 }}>
+                    { data.secureTextKonfBaru ?
+                    <Feather
+                      name="eye-off"
+                      color={colors.grey}
+                      size={20}
+                    />
+                    :
+                    <Feather
+                      name="eye"
+                      color={colors.grey}
+                      size={20}
+                    /> }
+                  </TouchableOpacity>
+                </View>
+                { data.isValidKonfPwBaru ? null :
+                <Animatable.View animation={'fadeInLeft'} duration={500}>
+                  <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
+                </Animatable.View> }
 
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={{ color: colors.dark1, marginLeft: 10 }}>Batal</Text>
-                </TouchableOpacity>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 15 }}>
+                  <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                    <Text style={{ color: colors.dark1, marginLeft: 10 }}>Batal</Text>
+                  </TouchableOpacity>
 
-                <TouchableOpacity style={{ backgroundColor: colors.green1, paddingVertical: 8, paddingHorizontal: 12, borderRadius: 5, elevation: 3, marginRight: 10 }}>
-                  <Text style={{ color: colors.white }}>Simpan</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity style={{ backgroundColor: colors.green1, paddingVertical: 8, paddingHorizontal: 12, borderRadius: 5, elevation: 3, marginRight: 10 }} onPress={ resetPass }>
+                    <Text style={{ color: colors.white }}>{ loading ? 'Menyimpan...' : 'Simpan' }</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
+          </TouchableWithoutFeedback>
         </Modal>
 
         {/* =============================================================================================== */}

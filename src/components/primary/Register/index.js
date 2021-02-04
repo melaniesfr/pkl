@@ -58,7 +58,7 @@ export default function Register({ navigation }) {
   };
 
   const onChangePassword = (value) => {
-    if (pass.trim().length >= 8) {
+    if (pass.length >= 7) {
       setData({
         ...data,
         isValidPassword: true
@@ -92,7 +92,7 @@ export default function Register({ navigation }) {
       Alert.alert('Error!', 'Kolom nama/email/password tidak boleh kosong.');
     } else if (data.nama.length < 5 || data.email.length < 10 || pass.length < 8) {
       Alert.alert('Error!', 'Data isian tidak sesuai ketentuan.');
-    } else if (data.nama.length >= 5 && data.email.length >= 10 && data.password.length >= 8) {
+    } else if (data.nama.length >= 5 && data.email.length >= 10 && pass.length >= 8) {
       fetch('http://pkl-dinkop.000webhostapp.com/pkl/registration.php', {
         method: 'POST',
         headers: {
