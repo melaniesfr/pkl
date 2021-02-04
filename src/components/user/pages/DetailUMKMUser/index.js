@@ -52,7 +52,7 @@ export default function DetailUMKMUser({ route, navigation }) {
                   <Text style={{ marginRight: 20, color: colors.red }}>Hapus</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{ backgroundColor: colors.green1, paddingVertical: 8, paddingHorizontal: 12, borderRadius: 5, elevation: 3 }}>
+                <TouchableOpacity style={{ backgroundColor: colors.green1, paddingVertical: 8, paddingHorizontal: 12, borderRadius: 5, elevation: 3, marginRight: 10 }}>
                   <Text style={{ color: colors.white }}>Simpan</Text>
                 </TouchableOpacity>
               </View>

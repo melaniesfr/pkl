@@ -5,6 +5,7 @@ import * as Animatable from 'react-native-animatable';
 import { colors, fonts } from '../../../utils';
 import { ICStar } from '../../../assets';
 import Gap from '../Gap';
+import Review from '../Review';
 
 export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
   return (
@@ -104,7 +105,10 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
               <Gap width={20} />
               <Text style={styles.review}>Reviews</Text>
             </View>
-            <Text style={{ textAlign: 'center', fontFamily: fonts.primary.normal, color: colors.dark1 }}>Belum ada review</Text>
+            {/* <Text style={{ textAlign: 'center', fontFamily: fonts.primary.normal, color: colors.dark1 }}>Belum ada review</Text> */}
+            <Review />
+            <Review />
+            <Review />
             <Gap height={20} />
           </View>
         </Animatable.View>

@@ -10,5 +10,6 @@ import Kategori from './Kategori';
 import DetailPerKategori from './DetailPerKategori';
 import Kosong from './Kosong';
 import EditProfil from './EditProfil';
+import Review from './Review';
 
-export { Login, Register, Splash, Gap, DetailUMKM, Beranda, Pengaturan, Profil, Kategori, DetailPerKategori, Kosong, EditProfil };
+export { Login, Register, Splash, Gap, DetailUMKM, Beranda, Pengaturan, Profil, Kategori, DetailPerKategori, Kosong, EditProfil, Review };
