@@ -8,21 +8,41 @@ import Gap from '../Gap';
 import Review from '../Review';
 
 export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
+  const GambarProduk = () => {
+    if (data.gambar !== '') {
+      return (
+        <Image
+          source={{uri: `http://192.168.43.89/pkl/images/${data.gambar}`}}
+          style={{ flex: 1, width: '100%' }}
+        />
+      );
+    } else {
+      return (
+        <Image
+          source={{uri: `https://picsum.photos/900/600?random=${data.id}`}}
+          style={{ flex: 1, width: '100%' }}
+        />
+      );
+    }
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <Animatable.View style={styles.top} animation={'bounceInDown'}>
-          <Image
+          <GambarProduk />
+
+          {/* <Image
             source={{uri: `https://picsum.photos/900/600?random=${data.id}`}}
             style={{ flex: 1, width: '100%' }}
-          />
+          /> */}
 
           <TouchableOpacity style={styles.backButton} onPress={ onPressNavigation }>
             <Icon
               name={'chevron-back-circle'}
               size={45}
               color={colors.white}
-              style={{ opacity: 0.5 }}
+              style={{ opacity: 0.8 }}
             />
           </TouchableOpacity>
         </Animatable.View>
@@ -59,7 +79,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
 
             <View style={{ marginTop: 8 }}>
               <Text style={styles.informationTitle}>Alamat</Text>
-              <Text style={styles.informationData}>Desa { data.desa }, Kecamatan { data.kecamatan }</Text>
+              <Text style={styles.informationData}>{ data.alamat }</Text>
             </View>
 
             <View style={{ marginTop: 8 }}>
@@ -83,7 +103,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
                   style={{ marginRight: 5 }}
                 />
                 <Text style={styles.informationData}>Facebook</Text>
-                <Text style={{ color: colors.dark2, marginLeft: 8, fontFamily: fonts.primary.normal }}>: Nama Facebook</Text>
+                <Text style={{ color: colors.dark2, marginLeft: 8, fontFamily: fonts.primary.normal }}>: { data.facebook }</Text>
               </View>
 
               <View style={{ flexDirection: 'row', marginTop: 3 }}>
@@ -94,7 +114,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
                   style={{ marginRight: 5 }}
                 />
                 <Text style={styles.informationData}>Instagram</Text>
-                <Text style={{ color: colors.dark2, marginLeft: 5, fontFamily: fonts.primary.normal }}>: Nama Instagram</Text>
+                <Text style={{ color: colors.dark2, marginLeft: 5, fontFamily: fonts.primary.normal }}>: { data.instagram }</Text>
               </View>
             </View>
           </View>

@@ -22,7 +22,7 @@ export default function Profil({ onPressEdit }) {
       setUsers(email);
     });
 
-    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
+    axios.get('http://192.168.43.89/pkl/users.php')
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
         if (users === res.data[i].email) {

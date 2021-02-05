@@ -10,8 +10,8 @@ export default function Beranda({ renderItem }) {
   const getData = () => {
     setIsLoading(true);
 
-    // axios.get('http://192.168.43.89/pkl/view.php')
-    axios.get('http://pkl-dinkop.000webhostapp.com/pkl/view.php')
+    // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/view.php')
+    axios.get('http://192.168.43.89/pkl/view.php')
     .then((res) => {
       setData(res.data);
     })

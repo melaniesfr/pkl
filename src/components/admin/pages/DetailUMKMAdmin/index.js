@@ -14,13 +14,16 @@ export default function DetailUMKMAdmin({ route, navigation }) {
     pemilik: item.pemilik,
     deskripsi: item.deskripsi,
     kategori: item.kategori,
-    desa: item.desa,
-    kecamatan: item.kecamatan,
-    telp: item.telp
+    alamat: item.alamat,
+    facebook: item.facebook,
+    instagram: item.instagram,
+    telp: item.telp,
+    gambar: item.gambar
   });
 
   const deleteData = () => {
-    fetch('http://pkl-dinkop.000webhostapp.com/pkl/delete_umkm.php', {
+    // fetch('http://pkl-dinkop.000webhostapp.com/pkl/delete_umkm.php', {
+    fetch('http://192.168.43.89/pkl/delete_umkm.php', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -32,6 +35,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
     })
     .then((res) => res.json())
     .then((resJson) => {
+      Alert.alert('Success!', 'Hapus UMKM berhasil.')
       navigation.navigate('BerandaAdmin');
     })
     .catch((err) => console.log(err));

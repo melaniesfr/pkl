@@ -16,7 +16,8 @@ export default function Login({ navigation }) {
 
   useEffect(() => {
     setTimeout(() => {
-      axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
+      // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
+      axios.get('http://192.168.43.89/pkl/users.php')
       .then((res) => {
         setUsers(res.data);
       })

@@ -7,10 +7,30 @@ export default function DetailPerKategoriVisitor({ route, navigation }) {
   const { item } = route.params;
 
   const renderItem = ({ item }) => {
+    const GambarProduk = () => {
+      if (item.gambar !== '') {
+        return (
+          <Image
+            source={{uri: `http://192.168.43.89/pkl/images/${item.gambar}`}}
+            style={styles.image}
+          />
+        );
+      } else {
+        return (
+          <Image
+            source={{uri: `https://picsum.photos/900/600?random=${item.id}`}}
+            style={styles.image}
+          />
+        );
+      }
+    };
+
     return (
       <TouchableOpacity onPress={() => navigation.navigate('DetailKategoriVisitor', { item: item })}>
         <View style={{ margin: 5, position: 'relative' }}>
-          <Image source={{uri: `https://picsum.photos/900/600?random=${item.id}`}} style={styles.image} />
+          <GambarProduk />
+          
+          {/* <Image source={{uri: `https://picsum.photos/900/600?random=${item.id}`}} style={styles.image} /> */}
 
           <View style={styles.garisHitam}>
             <View style={styles.wadahText}>

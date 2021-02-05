@@ -11,9 +11,11 @@ export default function DetailUMKMVisitor({ route, navigation }) {
     pemilik: item.pemilik,
     deskripsi: item.deskripsi,
     kategori: item.kategori,
-    desa: item.desa,
-    kecamatan: item.kecamatan,
-    telp: item.telp
+    alamat: item.alamat,
+    facebook: item.facebook,
+    instagram: item.instagram,
+    telp: item.telp,
+    gambar: item.gambar
   });
 
   return (
