@@ -67,9 +67,7 @@ export default function DetailUMKMUser({ route, navigation }) {
         item={ item }
         data={ data }
         onPressNavigation={() => navigation.goBack()}
-        onPressRate={() => {
-          setModalVisible(true);
-        }}
+        onPressRate={() => setModalVisible(true)}
       />
     </View>
   );

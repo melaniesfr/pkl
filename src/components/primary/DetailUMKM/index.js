@@ -26,6 +26,14 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
     }
   };
 
+  const ReviewKosong = () => {
+    return (
+      <Text style={{ textAlign: 'center', fontFamily: fonts.primary.normal, color: colors.dark1 }}>
+        Belum ada review
+      </Text>
+    );
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
@@ -125,10 +133,11 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
               <Gap width={20} />
               <Text style={styles.review}>Reviews</Text>
             </View>
-            {/* <Text style={{ textAlign: 'center', fontFamily: fonts.primary.normal, color: colors.dark1 }}>Belum ada review</Text> */}
-            <Review />
-            <Review />
-            <Review />
+
+            <Review
+              data={ data }
+            />
+            
             <Gap height={20} />
           </View>
         </Animatable.View>
