@@ -26,24 +26,11 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
     }
   };
 
-  const ReviewKosong = () => {
-    return (
-      <Text style={{ textAlign: 'center', fontFamily: fonts.primary.normal, color: colors.dark1 }}>
-        Belum ada review
-      </Text>
-    );
-  };
-
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <Animatable.View style={styles.top} animation={'bounceInDown'}>
           <GambarProduk />
-
-          {/* <Image
-            source={{uri: `https://picsum.photos/900/600?random=${data.id}`}}
-            style={{ flex: 1, width: '100%' }}
-          /> */}
 
           <TouchableOpacity style={styles.backButton} onPress={ onPressNavigation }>
             <Icon

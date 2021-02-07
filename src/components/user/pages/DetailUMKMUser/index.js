@@ -61,6 +61,7 @@ export default function DetailUMKMUser({ route, navigation }) {
   }, [users]);
 
   const [ review, setReview ] = useState({
+    id: '',
     id_umkm: '',
     id_users: '',
     review: '',
@@ -85,6 +86,7 @@ export default function DetailUMKMUser({ route, navigation }) {
 
   const saveReview = () => {
     setLoading(true);
+    console.log(review);
 
     if (review.review.length === 0) {
       setLoading(false);
@@ -109,7 +111,9 @@ export default function DetailUMKMUser({ route, navigation }) {
       .then((resJson) => {
         setLoading(false);
 
-        if (resJson === 'Tambah review berhasil.') {
+        if (resJson === 'Anda sudah pernah memberikan review, silakan hapus terlebih dahulu dan tambah review lagi.') {
+          Alert.alert('Error!', resJson);
+        } else if (resJson === 'Tambah review berhasil.') {
           Alert.alert('Success!', resJson);
         } else {
           Alert.alert('Error!', resJson);
@@ -136,6 +140,7 @@ export default function DetailUMKMUser({ route, navigation }) {
             <Text style={{ alignSelf: 'center', fontSize: 17, fontFamily: fonts.primary[700], color: colors.dark1 }}>{ data.produk }</Text>
             <TextInput
               placeholder={'Review Anda...'}
+              value={ review.review }
               multiline
               onChangeText={(value) => onChangeReview(value)}
               style={{ borderBottomWidth: 1, borderBottomColor: colors.green1, marginTop: 10, padding: 5 }}
@@ -147,11 +152,7 @@ export default function DetailUMKMUser({ route, navigation }) {
             </Animatable.View> }
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 15 }}>
-              <TouchableOpacity
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={{ color: colors.dark1, marginLeft: 10 }}>Batal</Text>
               </TouchableOpacity>
 
