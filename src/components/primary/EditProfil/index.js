@@ -290,8 +290,6 @@ export default function EditProfil() {
                     placeholder={'Password lama'}
                     secureTextEntry={ data.secureTextLama }
                     autoCapitalize="none"
-                    // value={ data.pwLama }
-                    // onChangeText={(value) => onChangePwLama(value)}
                     value={ pwLama }
                     onChangeText={(value) => {setPwLama(value), onChangePwLama(value)}}
                     onEndEditing={() => encryptPwLama()}
@@ -322,8 +320,6 @@ export default function EditProfil() {
                     placeholder={'Password baru'}
                     secureTextEntry={ data.secureTextBaru }
                     autoCapitalize="none"
-                    // value={ data.pwBaru }
-                    // onChangeText={(value) => onChangePwBaru(value)}
                     value={ pwBaru }
                     onChangeText={(value) => {setPwBaru(value), onChangePwBaru(value)}}
                     onEndEditing={() => encryptPwBaru()}
@@ -354,8 +350,6 @@ export default function EditProfil() {
                     placeholder={'Konfirmasi password baru'}
                     secureTextEntry={ data.secureTextKonfBaru }
                     autoCapitalize="none"
-                    // value={ data.konfPwBaru }
-                    // onChangeText={(value) => onChangeKonfPwBaru(value)}
                     value={ konfPwBaru }
                     onChangeText={(value) => {setKonfPwBaru(value), onChangeKonfPwBaru(value)}}
                     onEndEditing={() => encryptKonfPwBaru()}
