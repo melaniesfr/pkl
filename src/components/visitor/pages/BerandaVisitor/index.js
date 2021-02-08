@@ -15,11 +15,6 @@ export default function BerandaVisitor({ navigation }) {
         );
       } else {
         return (
-          // <Image
-          //   source={{uri: `https://picsum.photos/900/600?random=${item.id}`}}
-          //   style={styles.image}
-          // />
-
           <Image
             source={{uri: 'https://via.placeholder.com/900x600?text=UMKM+Blitar+-+DINKOP'}}
             style={styles.image}
