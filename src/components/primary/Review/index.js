@@ -38,6 +38,7 @@ export default function Review({ data, navigation }) {
   });
 
   const [ users, setUsers ] = useState();
+  const [ token, setToken ] = useState();
   const loadUsers = async() => {
     await AsyncStorage.getItem('email')
     .then((res) => {
@@ -45,7 +46,12 @@ export default function Review({ data, navigation }) {
       setUsers(email);
     });
 
-    // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
+    await AsyncStorage.getItem('userToken')
+    .then((res) => {
+      const tokens = String(res);
+      setToken(tokens);
+    });
+
     axios.get('http://192.168.43.89/pkl/users.php')
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
@@ -108,10 +114,9 @@ export default function Review({ data, navigation }) {
                 <View style={{ marginTop: 5, marginRight: 5, justifyContent: 'center' }}>
                   <Text style={[styles.textTanggal, { marginBottom: 5 }]}>{ item.tanggal }</Text>
 
-                  { user.nama === item.nama_users
+                  { (user.nama === item.nama_users && token === 'userToken')
                     ? (
-                      <TouchableOpacity style={{ paddingVertical: 3, paddingHorizontal: 10, backgroundColor: colors.red, borderRadius: 5 }} onPress={ deleteReview }>
-                        { setSelected(item.id) }
+                      <TouchableOpacity style={{ paddingVertical: 3, paddingHorizontal: 10, backgroundColor: colors.red, borderRadius: 5 }} onPress={ setSelected(item.id), deleteReview }>
                         <Text style={{ fontFamily: fonts.primary.normal, color: colors.white }}>Hapus</Text>
                       </TouchableOpacity>
                     )

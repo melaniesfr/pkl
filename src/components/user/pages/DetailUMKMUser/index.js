@@ -38,7 +38,6 @@ export default function DetailUMKMUser({ route, navigation }) {
       setUsers(email);
     });
 
-    // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
     axios.get('http://192.168.43.89/pkl/users.php')
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
@@ -86,7 +85,6 @@ export default function DetailUMKMUser({ route, navigation }) {
 
   const saveReview = () => {
     setLoading(true);
-    console.log(review);
 
     if (review.review.length === 0) {
       setLoading(false);
@@ -111,7 +109,7 @@ export default function DetailUMKMUser({ route, navigation }) {
       .then((resJson) => {
         setLoading(false);
 
-        if (resJson === 'Anda sudah pernah memberikan review, silakan hapus terlebih dahulu dan tambah review lagi.') {
+        if (resJson === 'Anda sudah pernah memberikan review, silakan hapus terlebih dahulu dan tambah review baru.') {
           Alert.alert('Error!', resJson);
         } else if (resJson === 'Tambah review berhasil.') {
           Alert.alert('Success!', resJson);
