@@ -18,7 +18,8 @@ export default function BerandaMenuAdmin({ navigation }) {
         options={{
           title: 'Beranda',
           headerLeft: null,
-          headerTitleAlign: 'center'
+          headerTitleAlign: 'center',
+          headerShown: false
         }}
       />
       <Stack.Screen name="DetailUMKMAdmin" component={ DetailUMKMAdmin }
