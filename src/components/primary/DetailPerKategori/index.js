@@ -6,7 +6,6 @@ export default function DetailPerKategori({ item, renderItem }) {
   const [ data, setData ] = useState([]);
 
   const getData = () => {
-    // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/view_kategori.php')
     axios.get('http://192.168.43.89/pkl/view.php')
     .then((res) => {
       for (var i=0; i < res.data.length; i++) {

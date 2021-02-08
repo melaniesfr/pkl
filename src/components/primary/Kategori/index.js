@@ -10,7 +10,6 @@ export default function Kategori({ renderItem }) {
   const getData = () => {
     setIsLoading(true);
 
-    // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/kategori.php')
     axios.get('http://192.168.43.89/pkl/kategori.php')
     .then((res) => {
       setData(res.data);

@@ -22,7 +22,6 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   });
 
   const deleteData = () => {
-    // fetch('http://pkl-dinkop.000webhostapp.com/pkl/delete_umkm.php', {
     fetch('http://192.168.43.89/pkl/delete_umkm.php', {
       method: 'POST',
       headers: {

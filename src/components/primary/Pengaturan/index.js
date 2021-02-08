@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors, fonts } from '../../../utils';
 
-export default function Pengaturan({ navigation, onPressBahasa, onPressTentang, onPressTitle, title }) {
+export default function Pengaturan({ onPressBahasa, onPressTentang, onPressTitle, title }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>

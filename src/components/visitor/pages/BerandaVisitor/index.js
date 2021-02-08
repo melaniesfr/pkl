@@ -15,8 +15,13 @@ export default function BerandaVisitor({ navigation }) {
         );
       } else {
         return (
+          // <Image
+          //   source={{uri: `https://picsum.photos/900/600?random=${item.id}`}}
+          //   style={styles.image}
+          // />
+
           <Image
-            source={{uri: `https://picsum.photos/900/600?random=${item.id}`}}
+            source={{uri: 'https://via.placeholder.com/900x600?text=UMKM+Blitar+-+DINKOP'}}
             style={styles.image}
           />
         );
@@ -27,8 +32,6 @@ export default function BerandaVisitor({ navigation }) {
       <TouchableOpacity onPress={() => navigation.navigate('DetailUMKMVisitor', { item: item })}>
         <View style={{ margin: 5, position: 'relative' }}>
           <GambarProduk />
-          
-          {/* <Image source={{uri: `https://picsum.photos/900/600?random=${item.id}`}} style={styles.image} /> */}
 
           <View style={styles.garisHitam}>
             <View style={styles.wadahText}>

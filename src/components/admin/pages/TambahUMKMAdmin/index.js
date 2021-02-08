@@ -77,7 +77,6 @@ export default function TambahUMKMAdmin() {
 
   uploadImage = async(image_uri) => {
     setIsUploading(true);
-    // let base_url = 'http://pkl-dinkop.000webhostapp.com/pkl/images/';
     let base_url = 'http://192.168.43.89/pkl/images/';
     let uploadData = new FormData();
     uploadData.append('submit', 'ok');
@@ -107,7 +106,6 @@ export default function TambahUMKMAdmin() {
   const saveData = () => {
     setLoading(true);
 
-    // fetch('http://pkl-dinkop.000webhostapp.com/pkl/insert_umkm.php', {
     fetch('http://192.168.43.89/pkl/insert_umkm.php', {
       method: 'POST',
       headers: {

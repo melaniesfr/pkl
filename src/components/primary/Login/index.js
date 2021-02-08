@@ -16,7 +16,6 @@ export default function Login({ navigation }) {
 
   useEffect(() => {
     setTimeout(() => {
-      // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
       axios.get('http://192.168.43.89/pkl/users.php')
       .then((res) => {
         setUsers(res.data);
@@ -35,7 +34,7 @@ export default function Login({ navigation }) {
   });
 
   const onChangeEmail = (value) => {
-    if (value.trim().length >= 10) {
+    if (value.trim().length > 0) {
       setData({
         ...data,
         email: value,
@@ -53,7 +52,7 @@ export default function Login({ navigation }) {
   };
 
   const onChangePassword = (value) => {
-    if (pass.length >= 7) {
+    if (pass.length > 0) {
       setData({
         ...data,
         isValidPassword: true
@@ -137,11 +136,6 @@ export default function Login({ navigation }) {
               : null }
             </View>
 
-            { data.isValidEmail ? null :
-            <Animatable.View animation={'fadeInLeft'} duration={500}>
-              <Text style={styles.errorMsg}>Panjang minimal email 10 karakter.</Text>
-            </Animatable.View> }
-
             <View style={styles.input}>
               <Icon
                 name={'key-outline'}
@@ -171,11 +165,6 @@ export default function Login({ navigation }) {
                 /> }
               </TouchableOpacity>
             </View>
-
-            { data.isValidPassword ? null :
-            <Animatable.View animation={'fadeInLeft'} duration={500}>
-              <Text style={styles.errorMsg}>Panjang minimal password 8 karakter.</Text>
-            </Animatable.View> }
 
             <TouchableOpacity style={styles.loginButton} onPress={() => loginHandle(data.email, data.password)}>
               <Text style={styles.loginText}>LOGIN</Text>
@@ -273,11 +262,5 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 15,
     fontFamily: fonts.primary[600]
-  },
-  errorMsg: {
-    color: colors.red1,
-    fontSize: 13,
-    fontFamily: fonts.primary.normal,
-    marginLeft: 5
   }
 });

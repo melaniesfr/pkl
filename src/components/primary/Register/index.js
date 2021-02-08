@@ -93,7 +93,6 @@ export default function Register({ navigation }) {
     } else if (data.nama.length < 5 || data.email.length < 10 || pass.length < 8) {
       Alert.alert('Error!', 'Data isian tidak sesuai ketentuan.');
     } else if (data.nama.length >= 5 && data.email.length >= 10 && pass.length >= 8) {
-      // fetch('http://pkl-dinkop.000webhostapp.com/pkl/registration.php', {
       fetch('http://192.168.43.89/pkl/registration.php', {
         method: 'POST',
         headers: {

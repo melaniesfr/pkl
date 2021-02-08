@@ -43,7 +43,6 @@ export default function EditProfil() {
       setUsers(email);
     });
 
-    // axios.get('http://pkl-dinkop.000webhostapp.com/pkl/users.php')
     axios.get('http://192.168.43.89/pkl/users.php')
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
@@ -197,7 +196,6 @@ export default function EditProfil() {
       setLoading(false);
       Alert.alert('Error!', 'Data nama atau email tidak memenuhi ketentuan.');
     } else if (data.nama.length >= 5 && data.email.length >= 10) {
-      // fetch('http://pkl-dinkop.000webhostapp.com/pkl/edit_profil.php', {
       fetch('http://192.168.43.89/pkl/edit_profil.php', {
         method: 'POST',
         headers: {

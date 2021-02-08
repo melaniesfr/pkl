@@ -13,15 +13,20 @@ export default function Splash({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Animatable.View animation="fadeInUpBig" style={{ alignItems: 'center' }}>
+        <Text style={styles.logoTextTop}>USAHA MIKRO UNGGULAN</Text>
+        <Text style={styles.logoTextBottom}>KABUPATEN BLITAR</Text>
+      </Animatable.View>
+
       <Animatable.Image
         source={ IMLogo } style={styles.logo}
         animation="bounceIn"
         duration={1500}
       />
 
-      <Animatable.View animation="fadeInUpBig" style={{ alignItems: 'center' }}>
-        <Text style={styles.logoTextTop}>USAHA MIKRO UNGGULAN</Text>
-        <Text style={styles.logoTextBottom}>KABUPATEN BLITAR</Text>
+      <Animatable.View animation="fadeInDownBig" style={{ alignItems: 'center' }}>
+        <Text style={styles.logoTextBottom}>AYO BELA BELI</Text>
+        <Text style={styles.logoTextTop}>PRODUK BLITAR</Text>
       </Animatable.View>
     </View>
   );

@@ -19,7 +19,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
     } else {
       return (
         <Image
-          source={{uri: `https://picsum.photos/900/600?random=${data.id}`}}
+          source={{uri: 'https://via.placeholder.com/900x600?text=UMKM+Blitar+-+DINKOP'}}
           style={{ flex: 1, width: '100%' }}
         />
       );
