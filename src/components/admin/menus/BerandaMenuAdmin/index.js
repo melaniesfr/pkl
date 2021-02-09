@@ -9,8 +9,8 @@ export default function BerandaMenuAdmin({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: colors.white },
-        headerTintColor: colors.green1,
+        headerStyle: { backgroundColor: colors.green1 },
+        headerTintColor: colors.white,
         headerTitleStyle: { fontFamily: fonts.primary[700] }
       }}
     >

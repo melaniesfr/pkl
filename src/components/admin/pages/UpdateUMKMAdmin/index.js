@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, TextInput, ActivityIndicator, Image, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
+import * as Animatable from 'react-native-animatable';
 import { Picker } from '@react-native-picker/picker';
-import IMNoImage from '../../../../assets/images';
+import { IMNoImage } from '../../../../assets';
+import { colors, fonts } from '../../../../utils';
 
 export default function UpdateUMKMAdmin({ route, navigation }) {
-  const { item } = route.params;
   const [ loading, setLoading ] = useState(false);
 
   const dataKategori = [
@@ -14,52 +15,156 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
   ];
 
   const [ data, setData ] = useState({
-    id: item.id,
-    produk: item.produk,
-    pemilik: item.pemilik,
-    deskripsi: item.deskripsi,
-    kategori: item.kategori,
-    alamat: item.alamat,
-    facebook: item.facebook,
-    instagram: item.instagram,
-    telp: item.telp,
-    gambar: item.gambar
+    id: route.params.id,
+    produk: route.params.produk,
+    pemilik: route.params.pemilik,
+    deskripsi: route.params.deskripsi,
+    kategori: route.params.kategori,
+    alamat: route.params.alamat,
+    facebook: route.params.facebook,
+    instagram: route.params.instagram,
+    telp: route.params.telp,
+    gambar: route.params.gambar,
+    isValidProduk: true,
+    isValidPemilik: true,
+    isValidDeskripsi: true,
+    isValidKategori: true,
+    isValidAlamat: true,
+    isValidFacebook: true,
+    isValidInstagram: true,
+    isValidTelp: true
   });
 
   const onChangeProduk = (value) => {
-    setData({...data, produk: value});
+    if (value.length >= 5) {
+      setData({
+        ...data,
+        produk: value,
+        isValidProduk: true
+      });
+    } else {
+      setData({
+        ...data,
+        produk: value,
+        isValidProduk: false
+      });
+    }
   };
 
   const onChangePemilik = (value) => {
-    setData({...data, pemilik: value});
+    if (value.length >= 5) {
+      setData({
+        ...data,
+        pemilik: value,
+        isValidPemilik: true
+      });
+    } else {
+      setData({
+        ...data,
+        pemilik: value,
+        isValidPemilik: false
+      });
+    }
   };
 
   const onChangeDeskripsi = (value) => {
-    setData({...data, deskripsi: value});
+    if (value.length >= 10) {
+      setData({
+        ...data,
+        deskripsi: value,
+        isValidDeskripsi: true
+      });
+    } else {
+      setData({
+        ...data,
+        deskripsi: value,
+        isValidDeskripsi: false
+      });
+    }
   };
 
   const onChangeKategori = (value) => {
-    setData({...data, kategori: value});
+    if (value !== 0) {
+      setData({
+        ...data,
+        kategori: value,
+        isValidKategori: true
+      });
+    } else {
+      setData({
+        ...data,
+        kategori: value,
+        isValidKategori: false
+      });
+    }
   };
 
   const onChangeAlamat = (value) => {
-    setData({...data, alamat: value});
+    if (value.length >= 10) {
+      setData({
+        ...data,
+        alamat: value,
+        isValidAlamat: true
+      });
+    } else {
+      setData({
+        ...data,
+        alamat: value,
+        isValidAlamat: false
+      });
+    }
   };
 
   const onChangeFacebook = (value) => {
-    setData({...data, facebook: value});
+    if (value.length > 0) {
+      setData({
+        ...data,
+        facebook: value,
+        isValidFacebook: true
+      });
+    } else {
+      setData({
+        ...data,
+        facebook: value,
+        isValidFacebook: false
+      });
+    }
   };
 
   const onChangeInstagram = (value) => {
-    setData({...data, instagram: value});
+    if (value.length > 0) {
+      setData({
+        ...data,
+        instagram: value,
+        isValidInstagram: true
+      });
+    } else {
+      setData({
+        ...data,
+        instagram: value,
+        isValidInstagram: false
+      });
+    }
   };
 
   const onChangeTelp = (value) => {
-    setData({...data, telp: value});
+    if (value.length >= 11) {
+      setData({
+        ...data,
+        telp: value,
+        isValidTelp: true
+      });
+    } else {
+      setData({
+        ...data,
+        telp: value,
+        isValidTelp: false
+      });
+    }
   };
-  
-  const [ avatarSource, setAvatarSource ] = useState(null);
-  const [ imgSource, setImgSource ] = useState(null);
+
+  const [ avatarSource, setAvatarSource ] = useState(data.gambar);
+  const [ imgSource, setImgSource ] = useState(data.gambar);
   const [ isUploading, setIsUploading ] = useState(false);
 
   const selectImage = async () => {
@@ -76,7 +181,7 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
     });
   };
 
-  uploadImage = async (image_uri) => {
+  const uploadImage = async (image_uri) => {
     setIsUploading(true);
     let base_url = 'http://192.168.43.89/pkl/images/';
     let uploadData = new FormData();
@@ -105,35 +210,47 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
   };
 
   const updateData = () => {
-    fetch('http://192.168.43.89/pkl/update_umkm.php', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: data.id,
-        produk: data.produk,
-        pemilik: data.pemilik,
-        deskripsi: data.deskripsi,
-        kategori: data.kategori,
-        alamat: data.alamat,
-        facebook: data.facebook,
-        instagram: data.instagram,
-        telp: data.telp,
-        gambar: imgSource
+    setLoading(true);
+
+    if (data.produk.length === 0 || data.pemilik.length === 0 || data.deskripsi.length === 0 || data.alamat.length === 0 || data.facebook.length === 0 || data.instagram.length === 0 || data.telp.length === 0) {
+      setLoading(false);
+      Alert.alert('Error!', 'Data isian tidak boleh ada yang kosong.');
+    } else if (data.produk.length < 5 || data.pemilik.length < 5 || data.deskripsi.length < 10 || data.kategori === 0 || data.alamat.length < 10 || data.telp.length < 11) {
+      setLoading(false);
+      Alert.alert('Error!', 'Data isian tidak memenuhi ketentuan.');
+    } else if (data.produk.length >= 5 || data.pemilik.length >= 5 || data.deskripsi.length >= 10 || data.kategori !== 0 || data.alamat.length >= 10 || data.facebook.length > 0 || data.instagram.length > 0 || data.telp.length >= 11 || data.gambar.length > 0) {
+      fetch('http://192.168.43.89/pkl/update_umkm.php', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: data.id,
+          produk: data.produk,
+          pemilik: data.pemilik,
+          deskripsi: data.deskripsi,
+          kategori: data.kategori,
+          alamat: data.alamat,
+          facebook: data.facebook,
+          instagram: data.instagram,
+          telp: data.telp,
+          gambar: imgSource
+        })
       })
-    })
-    .then((res) => res.json())
-    .then((resJson) => {
-      if (resJson === 'Ubah UMKM berhasil') {
-        Alert.alert('Success!', resJson);
-        navigation.navigate('DetailUMKMAdmin');
-      } else {
-        Alert.alert('Error!', resJson);
-      }
-    })
-    .catch((err) => console.log(err));
+      .then((res) => res.json())
+      .then((resJson) => {
+        setLoading(false);
+
+        if (resJson === 'Ubah UMKM berhasil.') {
+          Alert.alert('Success!', resJson);
+          navigation.navigate('DetailUMKMAdmin');
+        } else {
+          Alert.alert('Error!', resJson);
+        }
+      })
+      .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -142,34 +259,71 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
         <View style={styles.container}>
           <View style={styles.card}>
             <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 20 }} onPress={selectImage}>
-              { !avatarSource && <Image source={ IMNoImage } style={{ width: 150, height: 100, resizeMode: 'contain' }} /> }
+              { avatarSource === '' ? <Image source={ IMNoImage } style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
 
-              { avatarSource && <Image source={{uri: avatarSource}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> }
+              { avatarSource !== '' ? <Image source={{uri: `http://192.168.43.89/pkl/images/${imgSource}`}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
 
               { isUploading && <ActivityIndicator /> }
             </TouchableOpacity>
 
             <TextInput placeholder={'Nama Produk'} style={styles.input} onChangeText={(value) => onChangeProduk(value)} value={ data.produk } />
+            { data.isValidProduk ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal nama produk 5 karakter.</Text>
+            </Animatable.View> }
+
             <TextInput placeholder={'Nama Pemilik'} style={styles.input} onChangeText={(value) => onChangePemilik(value)} value={ data.pemilik } />
+            { data.isValidPemilik ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal nama pemilik 5 karakter.</Text>
+            </Animatable.View> }
+
             <TextInput placeholder={'Deskripsi Produk'} style={styles.input} onChangeText={(value) => onChangeDeskripsi(value)} value={ data.deskripsi } />
+            { data.isValidDeskripsi ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal deskripsi 10 karakter.</Text>
+            </Animatable.View> }
 
             <View>
-              <Text style={{ marginTop: 5, fontSize: 15, color: '#bbb' }}>Kategori</Text>
+              <Text style={{ marginTop: 5, fontSize: 15, color: colors.grey3, fontFamily: fonts.primary.normal }}>Kategori</Text>
               <Picker
                 selectedValue={ data.kategori }
-                style={{ height: 40, color: '#ccc' }}
-                onValueChange={ (value) => onChangeKategori(value) }
+                style={{ height: 40, color: colors.grey2 }}
+                onValueChange={(value) => onChangeKategori(value)}
               >
                 { dataKategori.map((item, index) => (
-                  <Picker.Item key={index} label={item} value={item} />
+                  <Picker.Item key={index} label={item} value={ index } />
                 ))}
               </Picker>
             </View>
+            { data.isValidKategori ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Kategori tidak boleh kosong.</Text>
+            </Animatable.View> }
 
             <TextInput placeholder={'Alamat'} style={styles.input} onChangeText={(value) => onChangeAlamat(value)} value={ data.alamat } />
+            { data.isValidAlamat ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal alamat 10 karakter.</Text>
+            </Animatable.View> }
+
             <TextInput placeholder={'Facebook'} style={styles.input} onChangeText={(value) => onChangeFacebook(value)} value={ data.facebook } />
+            { data.isValidFacebook ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Facebook harus diisi, jika tidak ada isi dengan -</Text>
+            </Animatable.View> }
+
             <TextInput placeholder={'Instagram'} style={styles.input} onChangeText={(value) => onChangeInstagram(value)} value={ data.instagram } />
+            { data.isValidInstagram ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Instagram harus diisi, jika tidak ada isi dengan -</Text>
+            </Animatable.View> }
+
             <TextInput placeholder={'No. HP/WA'} keyboardType={'number-pad'} style={styles.input} onChangeText={(value) => onChangeTelp(value)} value={ data.telp } />
+            { data.isValidTelp ? null :
+            <Animatable.View animation={'fadeInLeft'} duration={500}>
+              <Text style={styles.errorMsg}>Panjang minimal no. telp 11 karakter.</Text>
+            </Animatable.View> }
 
             <TouchableOpacity onPress={ updateData }>
               <View style={styles.button}>
@@ -195,7 +349,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   card: {
-    height: 515,
     width: '93%',
     backgroundColor: 'white',
     borderRadius: 15,
@@ -220,5 +373,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  errorMsg: {
+    color: colors.red1,
+    fontSize: 13,
+    fontFamily: fonts.primary.normal,
+    marginLeft: 5
   }
 });

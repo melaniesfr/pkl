@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -7,6 +7,7 @@ import { DetailUMKM } from '../../../primary';
 
 export default function DetailUMKMAdmin({ route, navigation }) {
   const { item } = route.params;
+  const [ kate, setKate ] = useState('');
 
   const [ data, setData ] = useState({
     id: item.id,
@@ -20,6 +21,24 @@ export default function DetailUMKMAdmin({ route, navigation }) {
     telp: item.telp,
     gambar: item.gambar
   });
+
+  const ubahKategori = () => {
+    if (data.kategori === 'Fashion') {
+      setKate(1);
+    } else if (data.kategori === 'Kerajinan') {
+      setKate(2);
+    } else if (data.kategori === 'Kuliner') {
+      setKate(3);
+    } else if (data.kategori === 'Makanan Olahan') {
+      setKate(4);
+    } else if (data.kategori === 'Minuman Olahan') {
+      setKate(5);
+    }
+  };
+
+  useEffect(() => {
+    ubahKategori();
+  }, []);
 
   const deleteData = () => {
     fetch('http://192.168.43.89/pkl/delete_umkm.php', {
@@ -53,7 +72,10 @@ export default function DetailUMKMAdmin({ route, navigation }) {
         style={styles.footer}
         animation={'fadeInUpBig'}
       >
-        <TouchableOpacity style={[styles.editButton, { elevation: 3 }]}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('UpdateUMKMAdmin', { id: data.id, produk: data.produk, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar: data.gambar, })}
+          style={styles.editButton}
+        >
           <Icon
             name={'create'}
             size={15}
@@ -72,7 +94,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
               {text: 'Ya', onPress: () => deleteData()}
             ]
           )}
-          style={[styles.deleteButton, { elevation: 3 }]}
+          style={styles.deleteButton}
         >
           <Icon
             name={'trash'}
@@ -104,7 +126,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     alignSelf: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    elevation: 3
   },
   deleteButton: {
     backgroundColor: colors.red,
@@ -114,6 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: 'row',
     alignSelf: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    elevation: 3
   }
 });
