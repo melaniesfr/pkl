@@ -11,7 +11,7 @@ export default function TambahUMKMAdmin() {
   const [ loading, setLoading ] = useState(false);
 
   const dataKategori = [
-    '- Pilih Kategori -', 'Fashion', 'Kerajinan', 'Kuliner', 'Makanan Olahan', 'Minuman Olahan'
+    '- Pilih Kategori -', 'Batik', 'Fashion', 'Kerajinan', 'Kuliner', 'Makanan Olahan', 'Minuman Olahan'
   ];
 
   const [ data, setData ] = useState({

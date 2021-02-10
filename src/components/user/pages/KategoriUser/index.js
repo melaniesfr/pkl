@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { ICDrink, ICFashion, ICFood, ICFoods, ICHandmade } from '../../../../assets';
+import { ICDrink, ICFashion, ICFood, ICFoods, ICHandmade, ICBatik } from '../../../../assets';
 import { colors, fonts } from '../../../../utils';
 import { Kategori } from '../../../primary';
 
@@ -8,6 +8,7 @@ export default function KategoriUser({ navigation }) {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => navigation.navigate('DetailPerKategoriUser', { item: item })} style={styles.card}>
+        { (item.kategori === 'Batik') && <Image source={ ICBatik } style={styles.icon} /> }
         { (item.kategori === 'Fashion') && <Image source={ ICFashion } style={styles.icon} /> }
         { (item.kategori === 'Kerajinan') && <Image source={ ICHandmade } style={styles.icon} /> }
         { (item.kategori === 'Kuliner') && <Image source={ ICFood } style={styles.icon} /> }
