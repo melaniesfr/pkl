@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
 import { colors, fonts } from '../../../utils';
+import { IMKabBlitar } from '../../../assets';
 import md5 from 'md5';
 
 export default function Register({ navigation }) {
@@ -139,7 +140,11 @@ export default function Register({ navigation }) {
       <View style={styles.page}>
         <View style={styles.container}>
           <View style={styles.boxRegister}>
-            <Text style={styles.title}>REGISTER</Text>
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+              <Image source={ IMKabBlitar } style={{ height: 30, width: 32, marginRight: 10 }} />
+              <Text style={styles.title}>REGISTER</Text>
+            </View>
+
             <View style={styles.input}>
               <Icon
                 name={'person-outline'}
@@ -270,7 +275,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    textAlign: 'center',
     paddingBottom: 10,
     fontFamily: fonts.primary[800],
     color: colors.dark1

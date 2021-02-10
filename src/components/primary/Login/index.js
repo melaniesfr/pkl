@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
 import { colors, fonts } from '../../../utils';
+import { IMKabBlitar } from '../../../assets';
 import md5 from 'md5';
 import AuthContext from '../Auth';
 import axios from 'axios';
@@ -111,7 +112,11 @@ export default function Login({ navigation }) {
       <View style={styles.page}>
         <View style={styles.container}>
           <View style={styles.boxLogin}>
-            <Text style={styles.title}>LOGIN</Text>
+            <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+              <Image source={ IMKabBlitar } style={{ height: 30, width: 32, marginRight: 10 }} />
+              <Text style={styles.title}>LOGIN</Text>
+            </View>
+
             <View style={styles.input}>
               <Icon
                 name={'mail-outline'}
@@ -176,7 +181,9 @@ export default function Login({ navigation }) {
           </View>
         </View>
 
-        <View style={{ position: 'absolute', right: 20, bottom: 20 }}>
+        <View style={{ position: 'absolute', right: 20, bottom: 20, flexDirection: 'row', alignItems: 'flex-end' }}>
+          <Text style={styles.copyright}>{'\u00A9'} 2021 Dinkop dan UM Kab. Blitar</Text>
+
           <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('VisitorScreen')}>
             <Text style={styles.nextText}>Lewati</Text>
             <Icon
@@ -212,7 +219,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    textAlign: 'center',
     paddingBottom: 10,
     fontFamily: fonts.primary[800],
     color: colors.dark1
@@ -262,5 +268,12 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 15,
     fontFamily: fonts.primary[600]
+  },
+  copyright: {
+    position: 'absolute',
+    left: -250,
+    fontFamily: fonts.primary[600],
+    color: colors.dark1,
+    fontSize: 13
   }
 });
