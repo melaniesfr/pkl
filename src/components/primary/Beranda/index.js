@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StatusBar, StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import { FlatList, StatusBar, StyleSheet, View, SafeAreaView, Text, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { colors, fonts } from '../../../utils';
+import Carousel from '../Carousel';
+import { CarouselData } from '../Carousel/Data';
 import axios from 'axios';
 
 export default function Beranda({ renderItem }) {
@@ -71,6 +73,8 @@ export default function Beranda({ renderItem }) {
             autoCorrect={false}
           />
         </View>
+
+        <Carousel data={ CarouselData } />
 
         <FlatList
           data={ filteredDataSource }
