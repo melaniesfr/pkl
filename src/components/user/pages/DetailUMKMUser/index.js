@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Modal, StyleSheet, View, Text, TextInput, TouchableOpacity, Linking, Platform, ScrollView } from 'react-native';
+import { Alert, Modal, StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Animatable from 'react-native-animatable';
-import { DetailUMKM, Gap } from '../../../primary';
+import { DetailUMKM } from '../../../primary';
 import { colors, fonts } from '../../../../utils';
 import axios from 'axios';
 
@@ -123,17 +123,6 @@ export default function DetailUMKMUser({ route, navigation }) {
 
   const [ modalVisible, setModalVisible ] = useState(false);
 
-  const dialCall = (telp) => {
-    let phoneNumber = '';
-    if (Platform.OS === 'android') {
-      phoneNumber = `tel:${telp}`;
-    } else {
-      phoneNumber = `telprompt:${telp}`;
-    }
-
-    Linking.openURL(phoneNumber);
-  };
-
   return (
     <View>
       <Modal
@@ -182,25 +171,12 @@ export default function DetailUMKMUser({ route, navigation }) {
         </View>
       </Modal>
 
-      <ScrollView>
-        <DetailUMKM
-          item={ item }
-          data={ data }
-          onPressNavigation={() => navigation.goBack()}
-          onPressRate={() => setModalVisible(true)}
-        />
-
-        <Gap height={35} />
-      </ScrollView>
-
-      <View style={{ flex: 1, alignSelf: 'center', justifyContent: 'center', width: '100%', position: 'absolute', bottom: 0 }}>
-        <TouchableOpacity
-          onPress={() => dialCall(data.telp)}
-          style={{ backgroundColor: colors.blue2, paddingVertical: 10, borderTopLeftRadius: 5, borderTopRightRadius: 5 }}
-        >
-          <Text style={{ fontFamily: fonts.primary[600], color: colors.white, textAlign: 'center' }}>Hubungi Sekarang</Text>
-        </TouchableOpacity>
-      </View>
+      <DetailUMKM
+        item={ item }
+        data={ data }
+        onPressNavigation={() => navigation.goBack()}
+        onPressRate={() => setModalVisible(true)}
+      />
     </View>
   );
 };
@@ -216,7 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 5,
     padding: 20,
-    shadowColor: "#000",
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2

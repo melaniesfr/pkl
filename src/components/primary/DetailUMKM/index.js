@@ -26,6 +26,17 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
     }
   };
 
+  const dialCall = (telp) => {
+    let phoneNumber = '';
+    if (Platform.OS === 'android') {
+      phoneNumber = `tel:${telp}`;
+    } else {
+      phoneNumber = `telprompt:${telp}`;
+    }
+
+    Linking.openURL(phoneNumber);
+  };
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
@@ -73,43 +84,72 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
             </View>
 
             <View style={{ marginTop: 8 }}>
+              <Text style={styles.informationTitle}>Produk</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={[styles.informationData, { width: '50%'}]}>1. Nama Produk</Text>
+                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={[styles.informationData, { width: '50%'}]}>2. Nama Nama Siapa</Text>
+                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text style={[styles.informationData, { width: '50%'}]}>3. Nama Apa</Text>
+                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
+              </View>
+            </View>
+
+            <View style={{ marginTop: 8 }}>
               <Text style={styles.informationTitle}>Alamat</Text>
-              <Text style={styles.informationData}>{ data.alamat }</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Text style={styles.informationData}>{ data.alamat }</Text>
+                <TouchableOpacity style={{ backgroundColor: colors.grey4, paddingHorizontal: 6, paddingVertical: 5, borderRadius: 50 }}>
+                  <Icon
+                    name={'location-sharp'}
+                    size={20}
+                    color={colors.grey5}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
 
             <View style={{ marginTop: 8 }}>
               <Text style={styles.informationTitle}>No. Telp / WA</Text>
-              <Text style={styles.informationData}>{ data.telp }</Text>
-            </View>
-
-            <View style={{ marginTop: 8 }}>
-              <Text style={styles.informationTitle}>Harga</Text>
-              <Text style={styles.informationData}>Rp harga</Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Text style={styles.informationData}>{ data.telp }</Text>
+                <TouchableOpacity onPress={() => dialCall(data.telp)}>
+                  <Text style={{ fontSize: 12, fontFamily: fonts.primary.normal, color: colors.dark2 }}>Hubungi Sekarang?</Text>
+                </TouchableOpacity>
+              </View>
             </View>
             
             <View style={{ marginTop: 8 }}>
               <Text style={styles.informationTitle}>Sosial Media</Text>
 
               <View style={{ flexDirection: 'row', marginTop: 3 }}>
-                <Icon
-                  name={'logo-facebook'}
-                  size={18}
-                  color={colors.white}
-                  style={{ marginRight: 5 }}
-                />
-                <Text style={styles.informationData}>Facebook</Text>
-                <Text style={{ color: colors.dark2, marginLeft: 8, fontFamily: fonts.primary.normal }}>: { data.facebook }</Text>
+                <View style={{ flexDirection: 'row', width: '28%' }}>
+                  <Icon
+                    name={'logo-facebook'}
+                    size={18}
+                    color={colors.white}
+                    style={{ marginRight: 5 }}
+                  />
+                  <Text style={styles.informationData}>Facebook</Text>
+                </View>
+                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: { data.facebook }</Text>
               </View>
 
               <View style={{ flexDirection: 'row', marginTop: 3 }}>
-                <Icon
-                  name={'logo-instagram'}
-                  size={18}
-                  color={colors.white}
-                  style={{ marginRight: 5 }}
-                />
-                <Text style={styles.informationData}>Instagram</Text>
-                <Text style={{ color: colors.dark2, marginLeft: 5, fontFamily: fonts.primary.normal }}>: { data.instagram }</Text>
+                <View style={{ flexDirection: 'row', width: '28%' }}>
+                  <Icon
+                    name={'logo-instagram'}
+                    size={18}
+                    color={colors.white}
+                    style={{ marginRight: 5 }}
+                  />
+                  <Text style={styles.informationData}>Instagram</Text>
+                </View>
+                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: { data.instagram }</Text>
               </View>
             </View>
           </View>
@@ -121,9 +161,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
               <Text style={styles.review}>Reviews</Text>
             </View>
 
-            <Review
-              data={ data }
-            />
+            <Review data={ data } />
             
             <Gap height={20} />
           </View>
@@ -189,7 +227,8 @@ const styles = StyleSheet.create({
   },
   informationData: {
     color: colors.white,
-    fontFamily: fonts.primary.normal
+    fontFamily: fonts.primary.normal,
+    maxWidth: '90%'
   },
   review: {
     fontSize: 17,
