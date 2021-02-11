@@ -90,11 +90,11 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
                 <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
               </View>
               <View style={{ flexDirection: 'row' }}>
-                <Text style={[styles.informationData, { width: '50%'}]}>2. Nama Nama Siapa</Text>
+                <Text style={[styles.informationData, { width: '50%'}]}>2. Nama Produk</Text>
                 <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
               </View>
               <View style={{ flexDirection: 'row' }}>
-                <Text style={[styles.informationData, { width: '50%'}]}>3. Nama Apa</Text>
+                <Text style={[styles.informationData, { width: '50%'}]}>3. Nama Produk</Text>
                 <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
               </View>
             </View>
@@ -152,6 +152,26 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
                 <Text style={[styles.informationTitle, { fontSize: 14 }]}>: { data.instagram }</Text>
               </View>
             </View>
+          </View>
+
+          <View style={{ backgroundColor: colors.grey6 }}>
+            <Gap height={20} />
+            
+            <View style={{ flexDirection: 'row', borderBottomWidth: 2, borderBottomColor: colors.green1, marginBottom: 20 }}>
+              <Gap width={20} />
+              <Text style={styles.review}>Gambar Produk</Text>
+            </View>
+
+            <ScrollView horizontal>
+              <Gap width={20} />
+
+              <View style={{ width: 150, height: 100, backgroundColor: 'red', marginRight: 10, borderRadius: 5 }}></View>
+              <View style={{ width: 150, height: 100, backgroundColor: 'green', marginRight: 10, borderRadius: 5 }}></View>
+              <View style={{ width: 150, height: 100, backgroundColor: 'blue', marginRight: 10, borderRadius: 5 }}></View>
+              <Gap width={10} />
+            </ScrollView>
+
+            <Gap height={20} />
           </View>
 
           <View>
