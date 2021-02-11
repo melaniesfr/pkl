@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   textView: {
     position: 'absolute',
-    bottom: 10,
+    bottom: 0,
     margin: 10,
     left: 5
   },
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     color: colors.white,
-    fontSize: 20,
-    fontFamily: fonts.primary[600],
+    fontSize: 15,
+    fontFamily: fonts.primary[800],
     shadowColor: colors.black,
     shadowOffset: { width: 0.8, height: 0.8 },
     shadowOpacity: 1,

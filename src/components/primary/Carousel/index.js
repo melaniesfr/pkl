@@ -1,27 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions, FlatList, Animated } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, View, Dimensions, FlatList, Animated } from 'react-native';
 import CarouselItem from './CarouselItem';
 
 const { width, height } = Dimensions.get('window');
-let flatList;
-
-function infiniteScroll(dataList) {
-  const numberOfData = dataList.length;
-  let scrollValue = 0, scrolled = 0;
-
-  setInterval(function() {
-    scrolled++;
-
-    if (scrolled < numberOfData) {
-      scrollValue = scrollValue + width;
-    } else {
-      scrollValue = 0;
-      scrolled = 0;
-    }
-
-    this.flatList.scrollToOffset({ animated: true, offset: scrollValue });
-  }, 3000);
-};
 
 export default function index({ data }) {
   const scrollX = new Animated.Value(0);
@@ -31,13 +12,38 @@ export default function index({ data }) {
   useEffect(() => {
     setDataList(data);
     infiniteScroll(dataList);
-  });
+  }, []);
+
+  let flatList = useRef(null);
+
+  function infiniteScroll(dataList) {
+    const numberOfData = dataList.length;
+    let scrollValue = 0, scrolled = 0;
+
+    setInterval(function() {
+      scrolled++;
+
+      if (scrolled < numberOfData) {
+        scrollValue = scrollValue + width;
+      } else {
+        scrollValue = 0;
+        scrolled = 0;
+      }
+
+      if (flatList.current) {
+        flatList.current.scrollToOffset({
+          animated: true,
+          offset: scrollValue
+        });
+      }
+    }, 3000);
+  };
 
   if (data && data.length) {
     return (
       <View>
         <FlatList
-          ref={(flatList) => {this.flatList = flatList}}
+          ref={flatList}
           data={ data }
           keyExtractor={(item, index) => 'key' + index}
           horizontal
@@ -50,8 +56,14 @@ export default function index({ data }) {
           renderItem={({ item }) => {
             return <CarouselItem item={ item } />
           }}
-          onScroll={ Animated.event(
-            [{ nativeEvent: { contentOffset: { x: scrollX }}}]
+          onScroll={Animated.event(
+            [{ nativeEvent: {
+                 contentOffset: {
+                   x: scrollX
+                 }
+               }
+            }],
+            { useNativeDriver: false }
           )}
         />
 
@@ -65,7 +77,7 @@ export default function index({ data }) {
             return (
               <Animated.View
                 key={ i }
-                style={{ opacity, height: 10, width: 10, backgroundColor: '#595959', margin: 8, borderRadius: 5 }}
+                style={{ opacity, height: 5, width: 5, backgroundColor: '#595959', margin: 3, borderRadius: 5 }}
               />
             )
           })}
@@ -73,9 +85,6 @@ export default function index({ data }) {
       </View>
     );
   }
-
-  console.log('Gambar tidak ada.');
-  return null;
 };
 
 const styles = StyleSheet.create({

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Linking, Platform } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { colors } from '../../../../utils';
+import { colors, fonts } from '../../../../utils';
 import { DetailUMKM } from '../../../primary';
 
 export default function DetailUMKMAdmin({ route, navigation }) {
@@ -38,6 +38,17 @@ export default function DetailUMKMAdmin({ route, navigation }) {
     }
   };
 
+  const dialCall = (telp) => {
+    let phoneNumber = '';
+    if (Platform.OS === 'android') {
+      phoneNumber = `tel:${telp}`;
+    } else {
+      phoneNumber = `telprompt:${telp}`;
+    }
+
+    Linking.openURL(phoneNumber);
+  };
+
   useEffect(() => {
     ubahKategori();
   }, []);
@@ -62,52 +73,63 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   };
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <DetailUMKM
-        item={ item }
-        data={ data }
-        onPressNavigation={() => navigation.goBack()}
-        onPressRate={() => Alert.alert('Maaf!', 'Admin tidak dapat memberikan review.')}
-      />
+    <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <DetailUMKM
+          item={ item }
+          data={ data }
+          onPressNavigation={() => navigation.goBack()}
+          onPressRate={() => Alert.alert('Maaf!', 'Admin tidak dapat memberikan review.')}
+        />
 
-      <Animatable.View
-        style={styles.footer}
-        animation={'fadeInUpBig'}
-      >
-        <TouchableOpacity
-          onPress={() => navigation.navigate('UpdateUMKMAdmin', { id: data.id, produk: data.produk, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar: data.gambar, })}
-          style={styles.editButton}
+        <Animatable.View
+          style={styles.footer}
+          animation={'fadeInUpBig'}
         >
-          <Icon
-            name={'create'}
-            size={15}
-            color={colors.white}
-            style={{ marginRight: 5, marginTop: 3 }}
-          />
-          <Text style={{ color: colors.white, fontSize: 15 }}>Ubah</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('UpdateUMKMAdmin', { id: data.id, produk: data.produk, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar: data.gambar, })}
+            style={styles.editButton}
+          >
+            <Icon
+              name={'create'}
+              size={15}
+              color={colors.white}
+              style={{ marginRight: 5, marginTop: 3 }}
+            />
+            <Text style={{ color: colors.white, fontSize: 15 }}>Ubah</Text>
+          </TouchableOpacity>
 
+          <TouchableOpacity
+            onPress={() => Alert.alert(
+              'Peringatan!',
+              'Anda yakin akan menghapus UMKM ini?',
+              [
+                {text: 'Tidak', onPress: () => console.log('Button tidak clicked')},
+                {text: 'Ya', onPress: () => deleteData()}
+              ]
+            )}
+            style={styles.deleteButton}
+          >
+            <Icon
+              name={'trash'}
+              size={15}
+              color={colors.white}
+              style={{ marginRight: 5, marginTop: 3 }}
+            />
+            <Text style={{ color: colors.white, fontSize: 15 }}>Hapus</Text>
+          </TouchableOpacity>
+        </Animatable.View>
+      </ScrollView>
+
+      <View style={{ flex: 1, alignSelf: 'center', justifyContent: 'center', width: '100%', position: 'absolute', bottom: 0 }}>
         <TouchableOpacity
-          onPress={() => Alert.alert(
-            'Peringatan!',
-            'Anda yakin akan menghapus UMKM ini?',
-            [
-              {text: 'Tidak', onPress: () => console.log('Button tidak clicked')},
-              {text: 'Ya', onPress: () => deleteData()}
-            ]
-          )}
-          style={styles.deleteButton}
+          onPress={() => dialCall(data.telp)}
+          style={{ backgroundColor: colors.blue2, paddingVertical: 10, borderTopLeftRadius: 5, borderTopRightRadius: 5 }}
         >
-          <Icon
-            name={'trash'}
-            size={15}
-            color={colors.white}
-            style={{ marginRight: 5, marginTop: 3 }}
-          />
-          <Text style={{ color: colors.white, fontSize: 15 }}>Hapus</Text>
+          <Text style={{ fontFamily: fonts.primary[600], color: colors.white, textAlign: 'center' }}>Hubungi Sekarang</Text>
         </TouchableOpacity>
-      </Animatable.View>
-    </ScrollView>
+      </View>
+    </View>
   );
 };
 
@@ -117,7 +139,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
-    marginBottom: 20
+    marginBottom: 55
   },
   editButton: {
     backgroundColor: colors.blue1,
