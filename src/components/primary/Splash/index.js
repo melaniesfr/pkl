@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { IMLogo, IMKabBlitar } from '../../../assets';
+import { IMLogo, IMKabBlitar, IMBupati, IMBupatii } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 import Gap from '../Gap';
 
@@ -8,7 +8,7 @@ export default function Splash({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('Login');
-    }, 5000);
+    }, 10000);
   }, [navigation]);
 
   return (
@@ -28,11 +28,7 @@ export default function Splash({ navigation }) {
           <Text style={styles.logoTextGreen}>KABUPATEN BLITAR</Text>
         </View>
 
-        <Image
-          source={ IMLogo } style={styles.logoBupati}
-          animation="bounceIn"
-          duration={1500}
-        />
+        <Image source={ IMBupatii } style={styles.logoBupati} />
 
         <View animation="fadeInDownBig" style={{ alignItems: 'center' }}>
           <Text style={styles.logoTextDark}>AYO BELA BELI</Text>
@@ -70,8 +66,10 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[800]
   },
   logoBupati: {
-    width: 300,
-    height: 300
+    width: 250,
+    height: 250,
+    alignSelf: 'center',
+    marginVertical: 50
   },
   logoKab: {
     width: 83,

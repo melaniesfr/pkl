@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Linking, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
@@ -6,6 +6,7 @@ import { colors, fonts } from '../../../utils';
 import { ICStar } from '../../../assets';
 import Gap from '../Gap';
 import Review from '../Review';
+import axios from 'axios';
 
 export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
   const GambarProduk = () => {
@@ -36,6 +37,23 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
 
     Linking.openURL(phoneNumber);
   };
+
+  const [ produk, setProduk ] = useState([]);
+  const getProduk = () => {
+    axios.get('http://192.168.43.89/pkl/produk.php')
+    .then((res) => {
+      for (var i=0; i<res.data.length; i++) {
+        if (data.id === res.data[i].id_umkm) {
+          setProduk(produk => [...produk, res.data[i]]);
+        }
+      }
+    })
+    .catch((err) => console.log(err))
+  };
+
+  useEffect(() => {
+    getProduk();
+  }, []);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -85,18 +103,15 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
 
             <View style={{ marginTop: 8 }}>
               <Text style={styles.informationTitle}>Produk</Text>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={[styles.informationData, { width: '50%'}]}>1. Nama Produk</Text>
-                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
-              </View>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={[styles.informationData, { width: '50%'}]}>2. Nama Produk</Text>
-                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
-              </View>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={[styles.informationData, { width: '50%'}]}>3. Nama Produk</Text>
-                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp Harga</Text>
-              </View>
+              
+              { produk.map((item, index) => {
+                return (
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={[styles.informationData, { width: '50%'}]}>{index + 1}. { item.nama }</Text>
+                    <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { item.harga }</Text>
+                  </View>
+                );
+              })}
             </View>
 
             <View style={{ marginTop: 8 }}>
@@ -165,9 +180,15 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
             <ScrollView horizontal>
               <Gap width={20} />
 
-              <View style={{ width: 150, height: 100, backgroundColor: 'red', marginRight: 10, borderRadius: 5 }}></View>
-              <View style={{ width: 150, height: 100, backgroundColor: 'green', marginRight: 10, borderRadius: 5 }}></View>
-              <View style={{ width: 150, height: 100, backgroundColor: 'blue', marginRight: 10, borderRadius: 5 }}></View>
+              { produk.map((item, index) => {
+                return (
+                  <Image
+                    key={index}
+                    source={{uri: `http://192.168.43.89/pkl/produk/${item.gambar}`}}
+                    style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
+                  />
+                );
+              })}
               <Gap width={10} />
             </ScrollView>
 
