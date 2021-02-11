@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { PengaturanAdmin, BahasaAdmin, TentangAdmin } from '../../pages';
+import { PengaturanAdmin, BahasaAdmin } from '../../pages';
 import { colors, fonts } from '../../../../utils';
 
 const Stack = createStackNavigator();
@@ -24,11 +24,6 @@ export default function PengaturanMenuAdmin({ navigation }) {
       <Stack.Screen name="BahasaAdmin" component={ BahasaAdmin }
         options={{
           title: 'Pilih Bahasa'
-        }}
-      />
-      <Stack.Screen name="TentangAdmin" component={ TentangAdmin }
-        options={{
-          title: 'Tentang Aplikasi'
         }}
       />
     </Stack.Navigator>

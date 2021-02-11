@@ -8,9 +8,8 @@ export default function PengaturanUser({ navigation }) {
   return (
     <Pengaturan
       onPressBahasa={() => navigation.navigate('BahasaUser')}
-      onPressTentang={() => navigation.navigate('TentangUser')}
       onPressTitle={() => signOut()}
-      title={'Keluar'}
+      title={'Log Out'}
     />
   );
 };
