@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { IMLogo, IMKabBlitar, IMBupati, IMBupatii } from '../../../assets';
-import { colors, fonts } from '../../../utils';
+import { colors, fonts, assets } from '../../../utils';
 import Gap from '../Gap';
 
 export default function Splash({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('Login');
-    }, 10000);
+    }, 5000);
   }, [navigation]);
 
   return (
@@ -17,7 +16,7 @@ export default function Splash({ navigation }) {
         <Gap height={30} />
 
         <Image
-          source={ IMKabBlitar }
+          source={{uri: assets.images.IMKabBlitar}}
           style={styles.logoKab}
         />
       </View>
@@ -28,7 +27,10 @@ export default function Splash({ navigation }) {
           <Text style={styles.logoTextGreen}>KABUPATEN BLITAR</Text>
         </View>
 
-        <Image source={ IMBupatii } style={styles.logoBupati} />
+        <Image
+          source={{uri: assets.images.IMBupati}}
+          style={styles.logoBupati}
+        />
 
         <View animation="fadeInDownBig" style={{ alignItems: 'center' }}>
           <Text style={styles.logoTextDark}>AYO BELA BELI</Text>

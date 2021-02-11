@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Linking, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
-import { colors, fonts } from '../../../utils';
-import { ICStar } from '../../../assets';
+import { colors, fonts, assets } from '../../../utils';
 import Gap from '../Gap';
 import Review from '../Review';
 import axios from 'axios';
@@ -13,7 +12,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
     if (data.gambar !== '') {
       return (
         <Image
-          source={{uri: `http://192.168.43.89/pkl/images/${data.gambar}`}}
+          source={{uri: assets.baseURL + `images/${data.gambar}`}}
           style={{ flex: 1, width: '100%' }}
         />
       );
@@ -40,7 +39,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
 
   const [ produk, setProduk ] = useState([]);
   const getProduk = () => {
-    axios.get('http://192.168.43.89/pkl/produk.php')
+    axios.get(assets.api.produk)
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
         if (data.id === res.data[i].id_umkm) {
@@ -84,7 +83,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
             </View>
 
             <TouchableOpacity style={styles.rate} onPress={ onPressRate }>
-              <Image source={ ICStar } style={{ width: 25, height: 25 }} />
+              <Image source={{uri: assets.icons.ICStar}} style={{ width: 25, height: 25 }} />
             </TouchableOpacity>
           </View>
 
@@ -184,7 +183,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
                 return (
                   <Image
                     key={index}
-                    source={{uri: `http://192.168.43.89/pkl/produk/${item.gambar}`}}
+                    source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
                     style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
                   />
                 );

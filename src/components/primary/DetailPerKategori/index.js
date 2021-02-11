@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
+import { assets } from '../../../utils';
 import axios from 'axios';
 
 export default function DetailPerKategori({ item, renderItem }) {
   const [ data, setData ] = useState([]);
 
   const getData = () => {
-    axios.get('http://192.168.43.89/pkl/view.php')
+    axios.get(assets.api.view)
     .then((res) => {
       for (var i=0; i < res.data.length; i++) {
         if (item.kategori === res.data[i].kategori) {

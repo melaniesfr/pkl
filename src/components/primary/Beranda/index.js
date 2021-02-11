@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, StatusBar, StyleSheet, View, SafeAreaView, Text, ScrollView } from 'react-native';
+import { FlatList, StatusBar, StyleSheet, View, SafeAreaView, Text } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import { colors, fonts } from '../../../utils';
+import { colors, fonts, assets } from '../../../utils';
 import Carousel from '../Carousel';
 import { CarouselData } from '../Carousel/Data';
 import axios from 'axios';
@@ -9,14 +9,13 @@ import axios from 'axios';
 export default function Beranda({ renderItem }) {
   const [ data, setData ] = useState();
   const [ isLoading, setIsLoading ] = useState(false);
-
   const [ search, setSearch ] = useState('');
   const [ filteredDataSource, setFilteredDataSource ] = useState();
 
   const getData = () => {
     setIsLoading(true);
 
-    axios.get('http://192.168.43.89/pkl/view.php')
+    axios.get(assets.api.view)
     .then((res) => {
       setData(res.data);
       setFilteredDataSource(res.data);
