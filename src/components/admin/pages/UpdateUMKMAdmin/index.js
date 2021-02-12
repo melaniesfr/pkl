@@ -4,8 +4,7 @@ import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 import { Picker } from '@react-native-picker/picker';
-import { IMNoImage } from '../../../../assets';
-import { colors, fonts } from '../../../../utils';
+import { colors, fonts, assets } from '../../../../utils';
 
 export default function UpdateUMKMAdmin({ route, navigation }) {
   const [ loading, setLoading ] = useState(false);
@@ -183,7 +182,7 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
 
   const uploadImage = async (image_uri) => {
     setIsUploading(true);
-    let base_url = 'http://192.168.43.89/pkl/images/';
+    let base_url = assets.baseURL + 'images/';
     let uploadData = new FormData();
     uploadData.append('submit', 'ok');
     uploadData.append('file', {type: 'image/jpg', uri: image_uri, name: 'uploadimagetmp.jpg'});
@@ -219,7 +218,7 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak memenuhi ketentuan.');
     } else if (data.produk.length >= 5 || data.pemilik.length >= 5 || data.deskripsi.length >= 10 || data.kategori !== 0 || data.alamat.length >= 10 || data.facebook.length > 0 || data.instagram.length > 0 || data.telp.length >= 11 || data.gambar.length > 0) {
-      fetch('http://192.168.43.89/pkl/update_umkm.php', {
+      fetch(assets.api.updateUMKM, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -259,9 +258,9 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
         <View style={styles.container}>
           <View style={styles.card}>
             <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 20 }} onPress={selectImage}>
-              { avatarSource === '' ? <Image source={ IMNoImage } style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
+              { avatarSource === '' ? <Image source={{uri: assets.images.IMNoImage}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
 
-              { avatarSource !== '' ? <Image source={{uri: `http://192.168.43.89/pkl/images/${imgSource}`}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
+              { avatarSource !== '' ? <Image source={{uri: assets.baseURL + `images/${imgSource}`}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
 
               { isUploading && <ActivityIndicator /> }
             </TouchableOpacity>

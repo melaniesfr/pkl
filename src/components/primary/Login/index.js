@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Touchabl
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
-import { colors, fonts } from '../../../utils';
-import { IMKabBlitar } from '../../../assets';
+import { colors, fonts, assets } from '../../../utils';
 import md5 from 'md5';
 import AuthContext from '../Auth';
 import axios from 'axios';
@@ -17,7 +16,7 @@ export default function Login({ navigation }) {
 
   useEffect(() => {
     setTimeout(() => {
-      axios.get('http://192.168.43.89/pkl/users.php')
+      axios.get(assets.api.users)
       .then((res) => {
         setUsers(res.data);
       })
@@ -113,7 +112,7 @@ export default function Login({ navigation }) {
         <View style={styles.container}>
           <View style={styles.boxLogin}>
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-              <Image source={ IMKabBlitar } style={{ height: 30, width: 32, marginRight: 10 }} />
+              <Image source={{uri: assets.images.IMKabBlitar}} style={{ height: 30, width: 32, marginRight: 10 }} />
               <Text style={styles.title}>LOGIN</Text>
             </View>
 

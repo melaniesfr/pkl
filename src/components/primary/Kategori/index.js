@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
+import { assets } from '../../../utils';
 import axios from 'axios';
 
 
@@ -10,7 +11,7 @@ export default function Kategori({ renderItem }) {
   const getData = () => {
     setIsLoading(true);
 
-    axios.get('http://192.168.43.89/pkl/kategori.php')
+    axios.get(assets.api.kategori)
     .then((res) => {
       setData(res.data);
     })

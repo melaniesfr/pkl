@@ -1,47 +1,49 @@
+const url = 'http://192.168.43.89/pkl/';
+
 export const assets = {
   baseURL: 'http://192.168.43.89/pkl/',
 
   api: {
-    connection: 'http://192.168.43.89/pkl/connection.php',
-    addReview: 'http://192.168.43.89/pkl/add_review.php',
-    deleteReview: 'http://192.168.43.89/pkl/delete_review.php',
-    deleteUMKM: 'http://192.168.43.89/pkl/delete_umkm.php',
-    editProfil: 'http://192.168.43.89/pkl/edit_profil.php',
-    insertUMKM: 'http://192.168.43.89/pkl/insert_umkm.php',
-    kategori: 'http://192.168.43.89/pkl/kategori.php',
-    produk: 'http://192.168.43.89/pkl/produk.php',
-    registration: 'http://192.168.43.89/pkl/registration.php',
-    resetPass: 'http://192.168.43.89/pkl/reset_pass.php',
-    reviews: 'http://192.168.43.89/pkl/reviews.php',
-    updateUMKM: 'http://192.168.43.89/pkl/update_umkm.php',
-    users: 'http://192.168.43.89/pkl/users.php',
-    view: 'http://192.168.43.89/pkl/view.php'
+    connection: url + 'connection.php',
+    addReview: url + 'add_review.php',
+    deleteReview: url + 'delete_review.php',
+    deleteUMKM: url + 'delete_umkm.php',
+    editProfil: url + 'edit_profil.php',
+    insertUMKM: url + 'insert_umkm.php',
+    kategori: url + 'kategori.php',
+    produk: url + 'produk.php',
+    registration: url + 'registration.php',
+    resetPass:  url + 'reset_pass.php',
+    reviews:  url + 'reviews.php',
+    updateUMKM:  url + 'update_umkm.php',
+    users:  url + 'users.php',
+    view:  url + 'view.php'
   },
 
   icons: {
-    ICCategory: 'http://192.168.43.89/pkl/assets/icons/ICCategory.png',
-    ICCheckList: 'http://192.168.43.89/pkl/assets/icons/ICCheckList.png',
-    ICEdit: 'http://192.168.43.89/pkl/assets/icons/ICEdit.png',
-    ICList: 'http://192.168.43.89/pkl/assets/icons/ICList.png',
-    ICOther: 'http://192.168.43.89/pkl/assets/icons/ICOther.png',
-    ICProfile: 'http://192.168.43.89/pkl/assets/icons/ICProfile.png',
-    ICSettings: 'http://192.168.43.89/pkl/assets/icons/ICSettings.png',
-    ICToDoList: 'http://192.168.43.89/pkl/assets/icons/ICToDoList.png',
-    ICFashion: 'http://192.168.43.89/pkl/assets/icons/ICFashion.png',
-    ICDrink: 'http://192.168.43.89/pkl/assets/icons/ICDrink.png',
-    ICHandmade: 'http://192.168.43.89/pkl/assets/icons/ICHandmade.png',
-    ICFood: 'http://192.168.43.89/pkl/assets/icons/ICFood.png',
-    ICFoods: 'http://192.168.43.89/pkl/assets/icons/ICFoods.png',
-    ICStar: 'http://192.168.43.89/pkl/assets/icons/ICStar.png',
-    ICBatik: 'http://192.168.43.89/pkl/assets/icons/ICBatik.png'
+    ICCategory: url + 'assets/icons/ICCategory.png',
+    ICCheckList: url + 'assets/icons/ICCheckList.png',
+    ICEdit: url + 'assets/icons/ICEdit.png',
+    ICList: url + 'assets/icons/ICList.png',
+    ICOther: url + 'assets/icons/ICOther.png',
+    ICProfile: url + 'assets/icons/ICProfile.png',
+    ICSettings: url + 'assets/icons/ICSettings.png',
+    ICToDoList: url + 'assets/icons/ICToDoList.png',
+    ICFashion: url + 'assets/icons/ICFashion.png',
+    ICDrink: url + 'assets/icons/ICDrink.png',
+    ICHandmade: url + 'assets/icons/ICHandmade.png',
+    ICFood: url + 'assets/icons/ICFood.png',
+    ICFoods: url + 'assets/icons/ICFoods.png',
+    ICStar: url + 'assets/icons/ICStar.png',
+    ICBatik: url + 'assets/icons/ICBatik.png'
   },
 
   images: {
-    IMLogo: 'http://192.168.43.89/pkl/assets/images/IMLogo.png',
-    IMNoImage: 'http://192.168.43.89/pkl/assets/images/IMNoImage.png',
-    IMUser: 'http://192.168.43.89/pkl/assets/images/IMUser.png',
-    IMKabBlitar: 'http://192.168.43.89/pkl/assets/images/IMKabBlitar.png',
-    IMBupati: 'http://192.168.43.89/pkl/assets/images/IMBupati.png',
-    IMBupatii: 'http://192.168.43.89/pkl/assets/images/IMBupatii.png'
+    IMLogo: url + 'assets/images/IMLogo.png',
+    IMNoImage: url + 'assets/images/IMNoImage.png',
+    IMUser: url + 'assets/images/IMUser.png',
+    IMKabBlitar: url + 'assets/images/IMKabBlitar.png',
+    IMBupati: url + 'assets/images/IMBupati.png',
+    IMBupatii: url + 'assets/images/IMBupatii.png'
   }
 };

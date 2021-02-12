@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { colors, fonts, assets } from '../../../utils';
 import axios from 'axios';
-import { IMUser } from '../../../assets';
-import { colors, fonts } from '../../../utils';
 
 export default function Profil({ onPressEdit }) {
   const [ data, setData ] = useState({
@@ -22,7 +21,7 @@ export default function Profil({ onPressEdit }) {
       setUsers(email);
     });
 
-    axios.get('http://192.168.43.89/pkl/users.php')
+    axios.get(assets.api.users)
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
         if (users === res.data[i].email) {
@@ -46,7 +45,7 @@ export default function Profil({ onPressEdit }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Image source={ IMUser } style={styles.image} />
+        <Image source={{uri: assets.images.IMUser}} style={styles.image} />
 
         <View style={styles.data}>
           <View style={{ flexDirection: 'row' }}>

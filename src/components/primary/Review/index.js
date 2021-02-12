@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ICProfile } from '../../../assets';
-import { colors, fonts } from '../../../utils';
+import { colors, fonts, assets } from '../../../utils';
 import axios from 'axios';
 
 export default function Review({ data, navigation }) {
@@ -11,7 +10,7 @@ export default function Review({ data, navigation }) {
   const [ selected, setSelected ] = useState();
   
   const getData = () => {
-    axios.get('http://192.168.43.89/pkl/reviews.php')
+    axios.get(assets.api.reviews)
     .then((res) => {
       for (var i = 0; i < res.data.length; i++) {
         if (res.data[i].id_umkm === data.id) {
@@ -23,7 +22,7 @@ export default function Review({ data, navigation }) {
   };
 
   const getReviews = () => {
-    axios.get('http://192.168.43.89/pkl/reviews.php')
+    axios.get(assets.api.reviews)
     .then((res) => {
       setReviews(res.data);
     })
@@ -52,7 +51,7 @@ export default function Review({ data, navigation }) {
       setToken(tokens);
     });
 
-    axios.get('http://192.168.43.89/pkl/users.php')
+    axios.get(assets.api.users)
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
         if (users === res.data[i].email) {
@@ -76,7 +75,7 @@ export default function Review({ data, navigation }) {
   }, [users]);
 
   const deleteReview = () => {
-    fetch('http://192.168.43.89/pkl/delete_review.php', {
+    fetch(assets.api.deleteReview, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -103,7 +102,7 @@ export default function Review({ data, navigation }) {
             <View key={ index }>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={ ICProfile } style={styles.avatar} />
+                  <Image source={{uri: assets.icons.ICProfile}} style={styles.avatar} />
 
                   <View style={{ marginVertical: 5 }}>
                     <Text style={styles.textNama}>{ item.nama_users }</Text>

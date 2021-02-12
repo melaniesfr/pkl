@@ -3,8 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, Touchabl
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
-import { colors, fonts } from '../../../utils';
-import { IMKabBlitar } from '../../../assets';
+import { colors, fonts, assets } from '../../../utils';
 import md5 from 'md5';
 
 export default function Register({ navigation }) {
@@ -94,7 +93,7 @@ export default function Register({ navigation }) {
     } else if (data.nama.length < 5 || data.email.length < 10 || pass.length < 8) {
       Alert.alert('Error!', 'Data isian tidak sesuai ketentuan.');
     } else if (data.nama.length >= 5 && data.email.length >= 10 && pass.length >= 8) {
-      fetch('http://192.168.43.89/pkl/registration.php', {
+      fetch(assets.api.registration, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -141,7 +140,7 @@ export default function Register({ navigation }) {
         <View style={styles.container}>
           <View style={styles.boxRegister}>
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-              <Image source={ IMKabBlitar } style={{ height: 30, width: 32, marginRight: 10 }} />
+              <Image source={{uri: assets.images.IMKabBlitar}} style={{ height: 30, width: 32, marginRight: 10 }} />
               <Text style={styles.title}>REGISTER</Text>
             </View>
 

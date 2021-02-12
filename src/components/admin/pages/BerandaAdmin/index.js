@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors, fonts } from '../../../../utils';
+import { colors, fonts, assets } from '../../../../utils';
 import { Beranda } from '../../../primary';
 
 export default function BerandaAdmin({ navigation }) {
@@ -9,7 +9,7 @@ export default function BerandaAdmin({ navigation }) {
       if (item.gambar !== '') {
         return (
           <Image
-            source={{uri: `http://192.168.43.89/pkl/images/${item.gambar}`}}
+            source={{uri: assets.baseURL + `images/${item.gambar}`}}
             style={styles.image}
           />
         );

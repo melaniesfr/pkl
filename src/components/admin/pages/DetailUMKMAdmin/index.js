@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { colors } from '../../../../utils';
+import { colors, assets } from '../../../../utils';
 import { DetailUMKM } from '../../../primary';
 
 export default function DetailUMKMAdmin({ route, navigation }) {
@@ -43,7 +43,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   }, []);
 
   const deleteData = () => {
-    fetch('http://192.168.43.89/pkl/delete_umkm.php', {
+    fetch(assets.api.deleteUMKM, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
