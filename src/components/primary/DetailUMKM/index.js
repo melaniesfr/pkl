@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Linking, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors, fonts, assets } from '../../../utils';
 import Gap from '../Gap';
 import Review from '../Review';
 import axios from 'axios';
 
-export default function DetailUMKM({ data, onPressNavigation, onPressRate, onPressProduk }) {
+export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
   const GambarProduk = () => {
     if (data.gambar !== '') {
       return (
@@ -60,56 +59,28 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate, onPre
     .catch((err) => console.log(err))
   };
 
-  const [ token, setToken ] = useState();
-  const loadUsers = async() => {
-    await AsyncStorage.getItem('userToken')
-    .then((res) => {
-      const tokens = String(res);
-      setToken(tokens);
-    });
-  };
-
   useEffect(() => {
     getProduk();
     getProduks();
-    loadUsers();
   }, []);
 
   const ProdukA = () => {
     return (
       produks.map((item, index) => {
         if (data.id === item.id_umkm) {
-          if (token === 'adminToken') {
-            return (
-              <TouchableOpacity key={ index } onPress={ onPressProduk }>
-                <View style={{ flexDirection: 'row' }}>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Icon
-                      name={'caret-forward'}
-                      size={20}
-                      color={colors.dark2}
-                    />
-                    <Text style={[styles.informationData, { width: '50%'}]}>{ item.nama }</Text>
-                  </View>
-                  <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { item.harga }</Text>
-                </View>
-              </TouchableOpacity>
-            );
-          } else {
-            return (
-              <View key={ index } style={{ flexDirection: 'row' }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Icon
-                    name={'caret-forward'}
-                    size={20}
-                    color={colors.dark2}
-                  />
-                  <Text style={[styles.informationData, { width: '50%'}]}>{ item.nama }</Text>
-                </View>
-                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { item.harga }</Text>
+          return (
+            <View key={ index } style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', width: '60%' }}>
+                <Icon
+                  name={'caret-forward'}
+                  size={20}
+                  color={colors.dark2}
+                />
+                <Text style={styles.informationData}>{ item.nama }</Text>
               </View>
-            );
-          }
+              <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { item.harga }</Text>
+            </View>
+          );
         }
       })
     );

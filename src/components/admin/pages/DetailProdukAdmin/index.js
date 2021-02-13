@@ -9,10 +9,11 @@ export default function DetailProdukAdmin({ route, navigation }) {
   const [ loading, setLoading ] = useState(false);
 
   const [ data, setData ] = useState({
-    id_umkm: '',
-    nama: '',
-    harga: '',
-    gambar: '',
+    id: route.params.id,
+    id_umkm: route.params.id_umkm,
+    nama: route.params.nama,
+    harga: route.params.harga,
+    gambar: route.params.gambar,
     isValidNama: true,
     isValidHarga: true
   });
@@ -49,8 +50,8 @@ export default function DetailProdukAdmin({ route, navigation }) {
     }
   };
 
-  const [ avatarSource, setAvatarSource ] = useState(null);
-  const [ imgSource, setImgSource ] = useState(null);
+  const [ avatarSource, setAvatarSource ] = useState(data.gambar);
+  const [ imgSource, setImgSource ] = useState(data.gambar);
   const [ isUploading, setIsUploading ] = useState(false);
 
   const selectImage = async () => {
@@ -95,7 +96,7 @@ export default function DetailProdukAdmin({ route, navigation }) {
     })
   };
 
-  const saveData = () => {
+  const updateData = () => {
     setLoading(true);
 
     if (data.nama.length === 0 || data.harga.length === 0) {
@@ -105,13 +106,14 @@ export default function DetailProdukAdmin({ route, navigation }) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak memenuhi ketentuan.');
     } else if (data.nama.length >= 5 || data.harga.length > 0) {
-      fetch(assets.api.insertProduk, {
+      fetch(assets.api.updateProduk, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          id: data.id,
           id_umkm: data.id_umkm,
           nama: data.nama,
           harga: data.harga,
@@ -122,17 +124,8 @@ export default function DetailProdukAdmin({ route, navigation }) {
       .then((resJson) => {
         setLoading(false);
 
-        if (resJson === 'Tambah produk berhasil.') {
+        if (resJson === 'Ubah produk berhasil.') {
           Alert.alert('Success!', resJson);
-    
-          setData({
-            ...data,
-            nama: '',
-            harga: '',
-            gambar: ''
-          });
-    
-          setAvatarSource(null);
           navigation.goBack();
         } else {
           Alert.alert('Error!', resJson);
@@ -142,6 +135,29 @@ export default function DetailProdukAdmin({ route, navigation }) {
     }
   };
 
+  const deleteData = () => {
+    fetch(assets.api.deleteProduk, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: data.id
+      })
+    })
+    .then((res) => res.json())
+    .then((resJson) => {
+      if (resJson === 'Hapus produk berhasil.') {
+        Alert.alert('Success!', resJson);
+        navigation.goBack();
+      } else {
+        Alert.alert('Error!', resJson);
+      }
+    })
+    .catch((err) => console.log(err));
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -149,7 +165,7 @@ export default function DetailProdukAdmin({ route, navigation }) {
           <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 20 }} onPress={selectImage}>
             { !avatarSource && <Image source={{uri: assets.images.IMNoImage}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> }
 
-            { avatarSource && <Image source={{uri: avatarSource}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> }
+            { avatarSource && <Image source={{uri: assets.baseURL + `produk/${imgSource}`}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> }
 
             { isUploading && <ActivityIndicator /> }
           </TouchableOpacity>
@@ -167,7 +183,7 @@ export default function DetailProdukAdmin({ route, navigation }) {
           </Animatable.View> }
           
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <TouchableOpacity style={[styles.button, { marginRight: 10 }]}>
+            <TouchableOpacity onPress={ updateData } style={[styles.button, { marginRight: 10 }]}>
               <Icon
                 name={'save-sharp'}
                 size={15}
@@ -177,7 +193,17 @@ export default function DetailProdukAdmin({ route, navigation }) {
               <Text style={styles.textButton}>{ loading ? 'Menyimpan...' : 'Simpan' }</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.button, { backgroundColor: colors.red }]}>
+            <TouchableOpacity
+              onPress={() => Alert.alert(
+                'Peringatan!',
+                'Anda yakin akan menghapus produk ini?',
+                [
+                  {text: 'Tidak', onPress: () => console.log('Button tidak clicked')},
+                  {text: 'Ya', onPress: () => deleteData()}
+                ]
+              )}
+              style={[styles.button, { backgroundColor: colors.red }]}
+            >
               <Icon
                 name={'trash'}
                 size={15}

@@ -6,6 +6,7 @@ export const assets = {
   api: {
     connection: url + 'connection.php',
     addReview: url + 'add_review.php',
+    deleteProduk: url + 'delete_produk.php',
     deleteReview: url + 'delete_review.php',
     deleteUMKM: url + 'delete_umkm.php',
     editProfil: url + 'edit_profil.php',
@@ -16,6 +17,7 @@ export const assets = {
     registration: url + 'registration.php',
     resetPass:  url + 'reset_pass.php',
     reviews:  url + 'reviews.php',
+    updateProduk: url + 'update_produk.php',
     updateUMKM:  url + 'update_umkm.php',
     users:  url + 'users.php',
     view:  url + 'view.php'
