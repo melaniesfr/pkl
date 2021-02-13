@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { colors, assets } from '../../../../utils';
+import { colors, fonts, assets } from '../../../../utils';
 import { DetailUMKM } from '../../../primary';
 
 export default function DetailUMKMAdmin({ route, navigation }) {
@@ -70,41 +70,61 @@ export default function DetailUMKMAdmin({ route, navigation }) {
         onPressRate={() => Alert.alert('Maaf!', 'Admin tidak dapat memberikan review.')}
       />
 
-      <Animatable.View
-        style={styles.footer}
-        animation={'fadeInUpBig'}
-      >
-        <TouchableOpacity
-          onPress={() => navigation.navigate('UpdateUMKMAdmin', { id: data.id, produk: data.produk, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar: data.gambar, })}
-          style={styles.editButton}
-        >
-          <Icon
-            name={'create'}
-            size={15}
-            color={colors.white}
-            style={{ marginRight: 5, marginTop: 3 }}
-          />
-          <Text style={{ color: colors.white, fontSize: 15 }}>Ubah</Text>
-        </TouchableOpacity>
+      <Animatable.View animation={'fadeInUpBig'}>
+        <Text style={styles.titleButton}>UMKM</Text>
+
+        <View style={styles.footer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('UpdateUMKMAdmin', { id: data.id, produk: data.produk, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar: data.gambar, })}
+            style={styles.editButton}
+          >
+            <Icon
+              name={'create'}
+              size={15}
+              color={colors.white}
+              style={{ marginRight: 5, marginTop: 2 }}
+            />
+            <Text style={{ color: colors.white, fontSize: 15 }}>Ubah</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => Alert.alert(
+              'Peringatan!',
+              'Anda yakin akan menghapus UMKM ini?',
+              [
+                {text: 'Tidak', onPress: () => console.log('Button tidak clicked')},
+                {text: 'Ya', onPress: () => deleteData()}
+              ]
+            )}
+            style={styles.deleteButton}
+          >
+            <Icon
+              name={'trash'}
+              size={15}
+              color={colors.white}
+              style={{ marginRight: 5, marginTop: 2 }}
+            />
+            <Text style={{ color: colors.white, fontSize: 15 }}>Hapus</Text>
+          </TouchableOpacity>
+        </View>
+      </Animatable.View>
+
+      <Animatable.View style={styles.line}></Animatable.View>
+
+      <Animatable.View animation={'fadeInUpBig'}>
+        <Text style={styles.titleButton}>Produk UMKM</Text>
 
         <TouchableOpacity
-          onPress={() => Alert.alert(
-            'Peringatan!',
-            'Anda yakin akan menghapus UMKM ini?',
-            [
-              {text: 'Tidak', onPress: () => console.log('Button tidak clicked')},
-              {text: 'Ya', onPress: () => deleteData()}
-            ]
-          )}
-          style={styles.deleteButton}
+          onPress={() => navigation.navigate('TambahProdukAdmin', { id_umkm: data.id, })}
+          style={styles.addButton}
         >
           <Icon
-            name={'trash'}
+            name={'add-circle'}
             size={15}
             color={colors.white}
             style={{ marginRight: 5, marginTop: 3 }}
           />
-          <Text style={{ color: colors.white, fontSize: 15 }}>Hapus</Text>
+          <Text style={{ color: colors.white, fontSize: 15 }}>Tambah</Text>
         </TouchableOpacity>
       </Animatable.View>
     </ScrollView>
@@ -116,14 +136,13 @@ const styles = StyleSheet.create({
     width: '95%',
     alignSelf: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
-    marginBottom: 20
+    flexDirection: 'row'
   },
   editButton: {
     backgroundColor: colors.blue1,
     width: '48%',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 7,
     marginRight: 10,
     borderRadius: 10,
     flexDirection: 'row',
@@ -135,11 +154,38 @@ const styles = StyleSheet.create({
     backgroundColor: colors.red,
     width: '48%',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 7,
     borderRadius: 10,
     flexDirection: 'row',
     alignSelf: 'center',
     justifyContent: 'center',
     elevation: 3
+  },
+  addButton: {
+    backgroundColor: colors.green1,
+    width: '94%',
+    paddingHorizontal: 20,
+    paddingVertical: 7,
+    marginBottom: 20,
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+  },
+  titleButton: {
+    fontSize: 12,
+    fontFamily: fonts.primary.normal,
+    color: colors.dark1,
+    marginHorizontal: 10,
+    marginBottom: 5,
+    textAlign: 'center'
+  },
+  line: {
+    width: '93%',
+    height: 0.5,
+    backgroundColor: colors.grey2,
+    marginVertical: 15,
+    alignSelf: 'center'
   }
 });

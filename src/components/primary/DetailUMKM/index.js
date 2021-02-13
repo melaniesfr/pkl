@@ -70,7 +70,14 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
         if (data.id === item.id_umkm) {
           return (
             <View key={ index } style={{ flexDirection: 'row' }}>
-              <Text style={[styles.informationData, { width: '50%'}]}>{index + 1}. { item.nama }</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon
+                  name={'caret-forward'}
+                  size={20}
+                  color={colors.dark2}
+                />
+                <Text style={[styles.informationData, { width: '50%'}]}>{ item.nama }</Text>
+              </View>
               <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { item.harga }</Text>
             </View>
           );

@@ -9,6 +9,7 @@ export const assets = {
     deleteReview: url + 'delete_review.php',
     deleteUMKM: url + 'delete_umkm.php',
     editProfil: url + 'edit_profil.php',
+    insertProduk: url + 'insert_produk.php',
     insertUMKM: url + 'insert_umkm.php',
     kategori: url + 'kategori.php',
     produk: url + 'produk.php',

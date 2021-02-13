@@ -277,10 +277,10 @@ export default function TambahUMKMAdmin() {
               { isUploading && <ActivityIndicator /> }
             </TouchableOpacity>
 
-            <TextInput placeholder={'Nama Produk'} style={styles.input} onChangeText={(value) => onChangeProduk(value)} value={ data.produk } />
+            <TextInput placeholder={'Nama UMKM'} style={styles.input} onChangeText={(value) => onChangeProduk(value)} value={ data.produk } />
             { data.isValidProduk ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
-              <Text style={styles.errorMsg}>Panjang minimal nama produk 5 karakter.</Text>
+              <Text style={styles.errorMsg}>Panjang minimal nama UMKM 5 karakter.</Text>
             </Animatable.View> }
 
             <TextInput placeholder={'Nama Pemilik'} style={styles.input} onChangeText={(value) => onChangePemilik(value)} value={ data.pemilik } />

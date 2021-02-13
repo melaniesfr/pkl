@@ -243,7 +243,7 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
 
         if (resJson === 'Ubah UMKM berhasil.') {
           Alert.alert('Success!', resJson);
-          navigation.navigate('DetailUMKMAdmin');
+          navigation.goBack();
         } else {
           Alert.alert('Error!', resJson);
         }
@@ -265,10 +265,10 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
               { isUploading && <ActivityIndicator /> }
             </TouchableOpacity>
 
-            <TextInput placeholder={'Nama Produk'} style={styles.input} onChangeText={(value) => onChangeProduk(value)} value={ data.produk } />
+            <TextInput placeholder={'Nama UMKM'} style={styles.input} onChangeText={(value) => onChangeProduk(value)} value={ data.produk } />
             { data.isValidProduk ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
-              <Text style={styles.errorMsg}>Panjang minimal nama produk 5 karakter.</Text>
+              <Text style={styles.errorMsg}>Panjang minimal nama UMKM 5 karakter.</Text>
             </Animatable.View> }
 
             <TextInput placeholder={'Nama Pemilik'} style={styles.input} onChangeText={(value) => onChangePemilik(value)} value={ data.pemilik } />
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '93%',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     borderRadius: 15,
     elevation: 10,
     padding: 20,
@@ -358,13 +358,13 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: colors.grey2,
     padding: 10,
     marginVertical: 5,
     borderRadius: 5
   },
   button: {
-    backgroundColor: '#2eb877',
+    backgroundColor: colors.blue1,
     padding: 10,
     borderRadius: 10,
     marginTop: 15,

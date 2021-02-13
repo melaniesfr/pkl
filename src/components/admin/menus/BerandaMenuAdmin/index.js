@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { BerandaAdmin, DetailUMKMAdmin, UpdateUMKMAdmin } from '../../pages';
+import { BerandaAdmin, DetailUMKMAdmin, UpdateUMKMAdmin, TambahProdukAdmin } from '../../pages';
 import { colors, fonts } from '../../../../utils';
 
 const Stack = createStackNavigator();
@@ -31,6 +31,11 @@ export default function BerandaMenuAdmin({ navigation }) {
       <Stack.Screen name="UpdateUMKMAdmin" component={ UpdateUMKMAdmin }
         options={{
           title: 'Update'
+        }}
+      />
+      <Stack.Screen name="TambahProdukAdmin" component={ TambahProdukAdmin }
+        options={{
+          title: 'Tambah Produk'
         }}
       />
     </Stack.Navigator>
