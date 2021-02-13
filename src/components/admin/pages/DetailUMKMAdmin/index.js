@@ -68,6 +68,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
         data={ data }
         onPressNavigation={() => navigation.goBack()}
         onPressRate={() => Alert.alert('Maaf!', 'Admin tidak dapat memberikan review.')}
+        onPressProduk={() => navigation.navigate('DetailProdukAdmin')}
       />
 
       <Animatable.View animation={'fadeInUpBig'}>

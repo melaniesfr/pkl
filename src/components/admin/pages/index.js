@@ -9,5 +9,6 @@ import EditProfilAdmin from './EditProfilAdmin';
 import TambahUMKMAdmin from './TambahUMKMAdmin';
 import UpdateUMKMAdmin from './UpdateUMKMAdmin';
 import TambahProdukAdmin from './TambahProdukAdmin';
+import DetailProdukAdmin from './DetailProdukAdmin';
 
-export { BahasaAdmin, BerandaAdmin, DetailUMKMAdmin, KategoriAdmin, DetailPerKategoriAdmin, PengaturanAdmin, ProfilAdmin, EditProfilAdmin, TambahUMKMAdmin, UpdateUMKMAdmin, TambahProdukAdmin };
+export { BahasaAdmin, BerandaAdmin, DetailUMKMAdmin, KategoriAdmin, DetailPerKategoriAdmin, PengaturanAdmin, ProfilAdmin, EditProfilAdmin, TambahUMKMAdmin, UpdateUMKMAdmin, TambahProdukAdmin, DetailProdukAdmin };
