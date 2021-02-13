@@ -3,7 +3,7 @@ import { Alert, Modal, StyleSheet, View, Text, TextInput, TouchableOpacity } fro
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Animatable from 'react-native-animatable';
 import { DetailUMKM } from '../../../primary';
-import { colors, fonts } from '../../../../utils';
+import { colors, fonts, assets } from '../../../../utils';
 import axios from 'axios';
 
 export default function DetailUMKMUser({ route, navigation }) {
@@ -38,7 +38,7 @@ export default function DetailUMKMUser({ route, navigation }) {
       setUsers(email);
     });
 
-    axios.get('http://192.168.43.89/pkl/users.php')
+    axios.get(assets.api.users)
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
         if (users === res.data[i].email) {
@@ -93,7 +93,7 @@ export default function DetailUMKMUser({ route, navigation }) {
       setLoading(false);
       Alert.alert('Error!', 'Data review tidak memenuhi ketentuan.');
     } else if (review.review.length >= 10) {
-      fetch('http://192.168.43.89/pkl/add_review.php', {
+      fetch(assets.api.addReview, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

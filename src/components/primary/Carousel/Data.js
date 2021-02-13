@@ -2,17 +2,17 @@ export const CarouselData = [
   {
     id: 1,
     title: 'Pameran Produk UMKM',
-    url: 'http://192.168.43.89/pkl/carousel/carousel1.JPG'
+    url: 'http://192.168.43.89/pkl/carousel/carousel1.jpg'
   },
   {
     id: 2,
     title: 'Pameran Produk UMKM',
-    url: 'http://192.168.43.89/pkl/carousel/carousel2.JPG'
+    url: 'http://192.168.43.89/pkl/carousel/carousel2.jpg'
   },
   {
     id: 3,
     title: 'Pameran Produk UMKM',
-    url: 'http://192.168.43.89/pkl/carousel/carousel3.JPG'
+    url: 'http://192.168.43.89/pkl/carousel/carousel3.jpg'
   },
   {
     id: 4,

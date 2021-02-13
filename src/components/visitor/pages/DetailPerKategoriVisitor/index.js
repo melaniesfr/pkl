@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors, fonts } from '../../../../utils';
+import { colors, fonts, assets } from '../../../../utils';
 import { DetailPerKategori } from '../../../primary';
 
 export default function DetailPerKategoriVisitor({ route, navigation }) {
@@ -11,7 +11,7 @@ export default function DetailPerKategoriVisitor({ route, navigation }) {
       if (item.gambar !== '') {
         return (
           <Image
-            source={{uri: `http://192.168.43.89/pkl/images/${item.gambar}`}}
+            source={{uri: assets.baseURL + `images/${item.gambar}`}}
             style={styles.image}
           />
         );

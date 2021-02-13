@@ -43,16 +43,75 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
         if (data.id === res.data[i].id_umkm) {
-          setProduk(produk => [...produk, res.data[i]]);
+          setProduk(res.data[i]);
         }
       }
     })
     .catch((err) => console.log(err))
   };
 
+  const [ produks, setProduks ] = useState([]);
+  const getProduks = () => {
+    axios.get(assets.api.produk)
+    .then((res) => {
+      setProduks(res.data);
+    })
+    .catch((err) => console.log(err))
+  };
+
   useEffect(() => {
     getProduk();
+    getProduks();
   }, []);
+
+  const ProdukA = () => {
+    return (
+      produks.map((item, index) => {
+        if (data.id === item.id_umkm) {
+          return (
+            <View key={ index } style={{ flexDirection: 'row' }}>
+              <Text style={[styles.informationData, { width: '50%'}]}>{index + 1}. { item.nama }</Text>
+              <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { item.harga }</Text>
+            </View>
+          );
+        }
+      })
+    );
+  };
+
+  const ProdukTA = () => {
+    return (
+      <Text style={styles.informationData}>Belum ada produk</Text>
+    );
+  };
+  
+  const GambarProdukA = () => {
+    return (
+      <ScrollView horizontal>
+        <Gap width={20} />
+          { produks.map((item, index) => {
+            if (data.id === item.id_umkm) {
+              return (
+                <Image
+                  key={ index }
+                  source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
+                  style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
+                /> 
+              );
+            }
+          })}
+        <Gap width={10} />
+      </ScrollView>
+    );
+  };
+
+  const GambarProdukTA = () => {
+    return (
+      <Text style={{ textAlign: 'center', fontFamily: fonts.primary.normal, color: colors.dark1 }}>
+        Belum ada gambar produk
+      </Text>
+    );
+  };
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -103,14 +162,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
             <View style={{ marginTop: 8 }}>
               <Text style={styles.informationTitle}>Produk</Text>
               
-              { produk.map((item, index) => {
-                return (
-                  <View style={{ flexDirection: 'row' }}>
-                    <Text style={[styles.informationData, { width: '50%'}]}>{index + 1}. { item.nama }</Text>
-                    <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { item.harga }</Text>
-                  </View>
-                );
-              })}
+              { produk.length !== 0 ? <ProdukA /> : <ProdukTA /> }
             </View>
 
             <View style={{ marginTop: 8 }}>
@@ -176,20 +228,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
               <Text style={styles.review}>Gambar Produk</Text>
             </View>
 
-            <ScrollView horizontal>
-              <Gap width={20} />
-
-              { produk.map((item, index) => {
-                return (
-                  <Image
-                    key={index}
-                    source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
-                    style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
-                  />
-                );
-              })}
-              <Gap width={10} />
-            </ScrollView>
+            { produk.length !== 0 ? <GambarProdukA /> : <GambarProdukTA /> }
 
             <Gap height={20} />
           </View>
