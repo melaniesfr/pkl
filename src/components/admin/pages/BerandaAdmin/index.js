@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../../utils';
 import { Beranda } from '../../../primary';
 
@@ -8,15 +9,15 @@ export default function BerandaAdmin({ navigation }) {
     const GambarProduk = () => {
       if (item.gambar !== '') {
         return (
-          <Image
+          <FastImage
             source={{uri: assets.baseURL + `images/${item.gambar}`}}
             style={styles.image}
           />
         );
       } else {
         return (
-          <Image
-            source={{uri: 'https://via.placeholder.com/900x600?text=UMKM+Blitar+-+DINKOP'}}
+          <FastImage
+            source={{uri: assets.images.IMBlank}}
             style={styles.image}
           />
         );
@@ -46,11 +47,6 @@ export default function BerandaAdmin({ navigation }) {
 };
 
 const styles = StyleSheet.create({
-  image: {
-    width: (Dimensions.get('window').width / 2) - 15,
-    height: (Dimensions.get('window').height / 6),
-    borderRadius: 5
-  },
   image: {
     width: (Dimensions.get('window').width / 2) - 15,
     height: (Dimensions.get('window').height / 6),

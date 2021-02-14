@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Linking, Platform, Image, Modal, Dimensions } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Linking, Platform, Modal, Dimensions } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ImageViewer from 'react-native-image-zoom-viewer';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../../utils';
 import { Gap, Review } from '../../../primary';
 import axios from 'axios';
@@ -46,15 +47,15 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   const GambarProduk = () => {
     if (data.gambar !== '') {
       return (
-        <Image
+        <FastImage
           source={{uri: assets.baseURL + `images/${data.gambar}`}}
           style={{ flex: 1, width: '100%' }}
         />
       );
     } else {
       return (
-        <Image
-          source={{uri: 'https://via.placeholder.com/900x600?text=UMKM+Blitar+-+DINKOP'}}
+        <FastImage
+          source={{uri: assets.images.IMBlank}}
           style={{ flex: 1, width: '100%' }}
         />
       );
@@ -139,13 +140,17 @@ export default function DetailUMKMAdmin({ route, navigation }) {
               return (
                 <View key={ index }>
                   <TouchableOpacity onPress={() => setDialog(index)}>
-                    <Image
+                    <FastImage
                       source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
                       style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
                     /> 
                   </TouchableOpacity>
 
-                  <Modal visible={dialog !== null} animationType={'fade'}>
+                  <Modal
+                    visible={dialog !== null}
+                    animationType={'fade'}
+                    onRequestClose={() => setDialog(null)}
+                  >
                     <View style={{ backgroundColor: colors.black, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ImageViewer
                         imageUrls={dialog !== null ? [{url: assets.baseURL + `/produk/` + produks[dialog].gambar}] : null}
@@ -233,7 +238,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
             </View>
 
             <TouchableOpacity style={styles.rate} onPress={() => Alert.alert('Maaf!', 'Admin tidak dapat memberikan review.')}>
-              <Image source={{uri: assets.icons.ICStar}} style={{ width: 25, height: 25 }} />
+              <FastImage source={{uri: assets.icons.ICStar}} style={{ width: 25, height: 25 }} />
             </TouchableOpacity>
           </View>
 

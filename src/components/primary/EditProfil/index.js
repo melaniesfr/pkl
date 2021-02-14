@@ -274,6 +274,7 @@ export default function EditProfil() {
           animationType={'slide'}
           transparent={ true }
           visible={ modalVisible }
+          onRequestClose={() => setModalVisible(!modalVisible)}
         >
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.centeredView}>

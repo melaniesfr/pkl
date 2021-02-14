@@ -113,7 +113,11 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
                     />
                   </TouchableOpacity>
 
-                  <Modal visible={dialog !== null} animationType={'fade'}>
+                  <Modal
+                    visible={dialog !== null}
+                    animationType={'fade'}
+                    onRequestClose={() => setDialog(null)}
+                  >
                     <View style={{ backgroundColor: colors.black, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ImageViewer
                         imageUrls={dialog !== null ? [{url: assets.baseURL + `/produk/` + produks[dialog].gambar}] : null}

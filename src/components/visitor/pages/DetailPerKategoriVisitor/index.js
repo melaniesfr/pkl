@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../../utils';
 import { DetailPerKategori } from '../../../primary';
 
@@ -10,15 +11,15 @@ export default function DetailPerKategoriVisitor({ route, navigation }) {
     const GambarProduk = () => {
       if (item.gambar !== '') {
         return (
-          <Image
+          <FastImage
             source={{uri: assets.baseURL + `images/${item.gambar}`}}
             style={styles.image}
           />
         );
       } else {
         return (
-          <Image
-            source={{uri: 'https://via.placeholder.com/900x600?text=UMKM+Blitar+-+DINKOP'}}
+          <FastImage
+            source={{uri: assets.images.IMBlank}}
             style={styles.image}
           />
         );

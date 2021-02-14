@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, TextInput, ActivityIndicator, Image, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard, TextInput, ActivityIndicator, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 import { Picker } from '@react-native-picker/picker';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../../utils';
 
 export default function UpdateUMKMAdmin({ route, navigation }) {
@@ -258,9 +259,9 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
         <View style={styles.container}>
           <View style={styles.card}>
             <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 20 }} onPress={selectImage}>
-              { avatarSource === '' ? <Image source={{uri: assets.images.IMNoImage}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
+              { avatarSource === '' ? <FastImage source={{uri: assets.images.IMNoImage}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
 
-              { avatarSource !== '' ? <Image source={{uri: assets.baseURL + `images/${imgSource}`}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
+              { avatarSource !== '' ? <FastImage source={{uri: assets.baseURL + `images/${imgSource}`}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
 
               { isUploading && <ActivityIndicator /> }
             </TouchableOpacity>

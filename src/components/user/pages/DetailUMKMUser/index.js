@@ -129,6 +129,7 @@ export default function DetailUMKMUser({ route, navigation }) {
         animationType={'slide'}
         transparent={ true }
         visible={ modalVisible }
+        onRequestClose={() => setModalVisible(!modalVisible)}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -151,18 +152,12 @@ export default function DetailUMKMUser({ route, navigation }) {
                 <Text style={{ color: colors.dark1, marginLeft: 10 }}>Batal</Text>
               </TouchableOpacity>
 
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <TouchableOpacity>
-                  <Text style={{ marginRight: 20, color: colors.red }}>Hapus</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={ saveReview }
-                  style={{ backgroundColor: colors.green1, paddingVertical: 8, paddingHorizontal: 12, borderRadius: 5, elevation: 3, marginRight: 10 }}
-                >
-                  <Text style={{ color: colors.white }}>{ loading ? 'Menyimpan...' : 'Simpan' }</Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity
+                onPress={ saveReview }
+                style={{ backgroundColor: colors.green1, paddingVertical: 8, paddingHorizontal: 12, borderRadius: 5, elevation: 3, marginRight: 10 }}
+              >
+                <Text style={{ color: colors.white }}>{ loading ? 'Menyimpan...' : 'Simpan' }</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

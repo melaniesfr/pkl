@@ -1,5 +1,6 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../../utils';
 import { Kategori } from '../../../primary';
 
@@ -7,12 +8,12 @@ export default function KategoriUser({ navigation }) {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity onPress={() => navigation.navigate('DetailPerKategoriUser', { item: item })} style={styles.card}>
-        { (item.kategori === 'Batik') && <Image source={{uri: assets.icons.ICBatik}} style={styles.icon} /> }
-        { (item.kategori === 'Fashion') && <Image source={{uri: assets.icons.ICFashion}} style={styles.icon} /> }
-        { (item.kategori === 'Kerajinan') && <Image source={{uri: assets.icons.ICHandmade}} style={styles.icon} /> }
-        { (item.kategori === 'Kuliner') && <Image source={{uri: assets.icons.ICFood}} style={styles.icon} /> }
-        { (item.kategori === 'Makanan Olahan') && <Image source={{uri: assets.icons.ICFoods}} style={styles.icon} /> }
-        { (item.kategori === 'Minuman Olahan') && <Image source={{uri: assets.icons.ICDrink}} style={styles.icon} /> }
+        { (item.kategori === 'Batik') && <FastImage source={{uri: assets.icons.ICBatik}} style={styles.icon} /> }
+        { (item.kategori === 'Fashion') && <FastImage source={{uri: assets.icons.ICFashion}} style={styles.icon} /> }
+        { (item.kategori === 'Kerajinan') && <FastImage source={{uri: assets.icons.ICHandmade}} style={styles.icon} /> }
+        { (item.kategori === 'Kuliner') && <FastImage source={{uri: assets.icons.ICFood}} style={styles.icon} /> }
+        { (item.kategori === 'Makanan Olahan') && <FastImage source={{uri: assets.icons.ICFoods}} style={styles.icon} /> }
+        { (item.kategori === 'Minuman Olahan') && <FastImage source={{uri: assets.icons.ICDrink}} style={styles.icon} /> }
 
         <Text style={styles.text}>{ item.kategori }</Text>
       </TouchableOpacity>
