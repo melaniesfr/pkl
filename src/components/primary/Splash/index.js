@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../utils';
 import Gap from '../Gap';
 
@@ -15,7 +16,7 @@ export default function Splash({ navigation }) {
       <View>
         <Gap height={30} />
 
-        <Image
+        <FastImage
           source={{uri: assets.images.IMKabBlitar}}
           style={styles.logoKab}
         />
@@ -27,7 +28,7 @@ export default function Splash({ navigation }) {
           <Text style={styles.logoTextGreen}>KABUPATEN BLITAR</Text>
         </View>
 
-        <Image
+        <FastImage
           source={{uri: assets.images.IMBupati}}
           style={styles.logoBupati}
         />

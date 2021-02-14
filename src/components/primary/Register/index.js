@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard, TouchableWithoutFeedback, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../utils';
 import md5 from 'md5';
 
@@ -140,7 +141,7 @@ export default function Register({ navigation }) {
         <View style={styles.container}>
           <View style={styles.boxRegister}>
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-              <Image source={{uri: assets.images.IMKabBlitar}} style={{ height: 30, width: 32, marginRight: 10 }} />
+              <FastImage source={{uri: assets.images.IMKabBlitar}} style={{ height: 30, width: 32, marginRight: 10 }} />
               <Text style={styles.title}>REGISTER</Text>
             </View>
 

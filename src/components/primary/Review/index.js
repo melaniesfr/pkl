@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../utils';
 import axios from 'axios';
 
@@ -102,7 +103,7 @@ export default function Review({ data, navigation }) {
             <View key={ index }>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image source={{uri: assets.icons.ICProfile}} style={styles.avatar} />
+                  <FastImage source={{uri: assets.icons.ICProfile}} style={styles.avatar} />
 
                   <View style={{ marginVertical: 5 }}>
                     <Text style={styles.textNama}>{ item.nama_users }</Text>

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import * as Animatable from 'react-native-animatable';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../utils';
 import axios from 'axios';
 import md5 from 'md5';
@@ -386,7 +387,7 @@ export default function EditProfil() {
         {/* =============================================================================================== */}
 
         <View style={styles.card}>
-          <Image source={{uri: assets.images.IMUser}} style={styles.image} />
+          <FastImage source={{uri: assets.images.IMUser}} style={styles.image} />
 
           <TextInput
             placeholder={'Nama'}

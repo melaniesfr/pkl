@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts } from '../../../utils';
 
 const { width, height } = Dimensions.get('window');
@@ -7,7 +8,7 @@ const { width, height } = Dimensions.get('window');
 export default function CarouselItem({ item }) {
   return (
     <View style={styles.cardView}>
-      <Image source={{uri: item.url}} style={styles.image} />
+      <FastImage source={{uri: item.url}} style={styles.image} />
       <View style={styles.textView}>
         <Text style={styles.itemTitle}>{ item.title }</Text>
       </View>

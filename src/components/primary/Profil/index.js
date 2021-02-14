@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../utils';
 import axios from 'axios';
 
@@ -45,7 +46,7 @@ export default function Profil({ onPressEdit }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Image source={{uri: assets.images.IMUser}} style={styles.image} />
+        <FastImage source={{uri: assets.images.IMUser}} style={styles.image} />
 
         <View style={styles.data}>
           <View style={{ flexDirection: 'row' }}>

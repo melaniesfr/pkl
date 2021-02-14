@@ -46,6 +46,7 @@ export const assets = {
     IMNoImage: url + 'assets/images/IMNoImage.png',
     IMUser: url + 'assets/images/IMUser.png',
     IMKabBlitar: url + 'assets/images/IMKabBlitar.png',
-    IMBupati: url + 'assets/images/IMBupati.png'
+    IMBupati: url + 'assets/images/IMBupati.png',
+    IMBlank: url + 'assets/images/IMBlank.png'
   }
 };

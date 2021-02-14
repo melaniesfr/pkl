@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Linking, Platform, Dimensions, Modal } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Linking, Platform, Dimensions, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 import ImageViewer from 'react-native-image-zoom-viewer';
+import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../utils';
 import Gap from '../Gap';
 import Review from '../Review';
@@ -16,15 +17,15 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
   const GambarProduk = () => {
     if (data.gambar !== '') {
       return (
-        <Image
+        <FastImage
           source={{uri: assets.baseURL + `images/${data.gambar}`}}
           style={{ flex: 1, width: '100%' }}
         />
       );
     } else {
       return (
-        <Image
-          source={{uri: 'https://via.placeholder.com/900x600?text=UMKM+Blitar+-+DINKOP'}}
+        <FastImage
+          source={{uri: assets.images.IMBlank}}
           style={{ flex: 1, width: '100%' }}
         />
       );
@@ -106,10 +107,10 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
               return (
                 <View key={ index }>
                   <TouchableOpacity onPress={() => setDialog(index)}>
-                    <Image
+                    <FastImage
                       source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
                       style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
-                    /> 
+                    />
                   </TouchableOpacity>
 
                   <Modal visible={dialog !== null} animationType={'fade'}>
@@ -177,7 +178,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
             </View>
 
             <TouchableOpacity style={styles.rate} onPress={ onPressRate }>
-              <Image source={{uri: assets.icons.ICStar}} style={{ width: 25, height: 25 }} />
+              <FastImage source={{uri: assets.icons.ICStar}} style={{ width: 25, height: 25 }} />
             </TouchableOpacity>
           </View>
 
