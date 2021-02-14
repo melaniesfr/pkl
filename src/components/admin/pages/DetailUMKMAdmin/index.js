@@ -8,7 +8,7 @@ import { colors, fonts, assets } from '../../../../utils';
 import { Gap, Review } from '../../../primary';
 import axios from 'axios';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function DetailUMKMAdmin({ route, navigation }) {
   const { item } = route.params;
@@ -157,7 +157,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
                         renderIndicator={() => null}
                         onSwipeDown={() => setDialog(null)}
                         enableSwipeDown={true}
-                        style={{ width: width, height: height/3.6 }}
+                        style={{ width: width }}
                       />
                     </View>
                     

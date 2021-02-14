@@ -9,7 +9,7 @@ import Gap from '../Gap';
 import Review from '../Review';
 import axios from 'axios';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
   const [ dialog, setDialog ] = useState(null);
@@ -124,7 +124,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
                         renderIndicator={() => null}
                         onSwipeDown={() => setDialog(null)}
                         enableSwipeDown={true}
-                        style={{ width: width, height: height/3.6 }}
+                        style={{ width: width }}
                       />
                     </View>
                     

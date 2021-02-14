@@ -259,9 +259,9 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
         <View style={styles.container}>
           <View style={styles.card}>
             <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 20 }} onPress={selectImage}>
-              { avatarSource === '' ? <FastImage source={{uri: assets.images.IMNoImage}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
+              { avatarSource === '' ? <FastImage source={{uri: assets.images.IMNoImage}} style={{ width: 150, height: 150, resizeMode: 'contain' }} /> : null }
 
-              { avatarSource !== '' ? <FastImage source={{uri: assets.baseURL + `images/${imgSource}`}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> : null }
+              { avatarSource !== '' ? <FastImage source={{uri: assets.baseURL + `images/${imgSource}`}} style={{ width: 150, height: 150, resizeMode: 'contain' }} /> : null }
 
               { isUploading && <ActivityIndicator /> }
             </TouchableOpacity>

@@ -164,9 +164,9 @@ export default function DetailProdukAdmin({ route, navigation }) {
       <View style={styles.container}>
         <View style={styles.card}>
           <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 20 }} onPress={selectImage}>
-            { !avatarSource && <FastImage source={{uri: assets.images.IMNoImage}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> }
+            { !avatarSource && <FastImage source={{uri: assets.images.IMNoImage}} style={{ width: 150, height: 150, resizeMode: 'contain' }} /> }
 
-            { avatarSource && <FastImage source={{uri: assets.baseURL + `produk/${imgSource}`}} style={{ width: 150, height: 100, resizeMode: 'contain' }} /> }
+            { avatarSource && <FastImage source={{uri: assets.baseURL + `produk/${imgSource}`}} style={{ width: 150, height: 150, resizeMode: 'contain' }} /> }
 
             { isUploading && <ActivityIndicator /> }
           </TouchableOpacity>
