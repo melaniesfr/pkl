@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Linking, Platform, Image, Modal, Dimensions } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import { colors, fonts, assets } from '../../../../utils';
 import { Gap, Review } from '../../../primary';
 import axios from 'axios';
@@ -146,8 +147,11 @@ export default function DetailUMKMAdmin({ route, navigation }) {
 
                   <Modal visible={dialog !== null} animationType={'fade'}>
                     <View style={{ backgroundColor: colors.black, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                      <Image
-                        source={dialog !== null ? {uri: assets.baseURL + `/produk/` + produks[dialog].gambar} : null}
+                      <ImageViewer
+                        imageUrls={dialog !== null ? [{url: assets.baseURL + `/produk/` + produks[dialog].gambar}] : null}
+                        renderIndicator={() => null}
+                        onSwipeDown={() => setDialog(null)}
+                        enableSwipeDown={true}
                         style={{ width: width, height: height/3.6 }}
                       />
                     </View>

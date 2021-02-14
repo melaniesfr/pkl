@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, Linking, Platform, Dimensions, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import { colors, fonts, assets } from '../../../utils';
 import Gap from '../Gap';
 import Review from '../Review';
@@ -48,6 +49,7 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
       for (var i=0; i<res.data.length; i++) {
         if (data.id === res.data[i].id_umkm) {
           setProduk(res.data[i]);
+          setImages(res.data[i].gambar);
         }
       }
     })
@@ -113,8 +115,11 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
 
                   <Modal visible={dialog !== null} animationType={'fade'}>
                     <View style={{ backgroundColor: colors.black, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                      <Image
-                        source={dialog !== null ? {uri: assets.baseURL + `/produk/` + produks[dialog].gambar} : null}
+                      <ImageViewer
+                        imageUrls={dialog !== null ? [{url: assets.baseURL + `/produk/` + produks[dialog].gambar}] : null}
+                        renderIndicator={() => null}
+                        onSwipeDown={() => setDialog(null)}
+                        enableSwipeDown={true}
                         style={{ width: width, height: height/3.6 }}
                       />
                     </View>

@@ -129,9 +129,6 @@ export default function DetailUMKMUser({ route, navigation }) {
         animationType={'slide'}
         transparent={ true }
         visible={ modalVisible }
-        onRequestClose={() => {
-          Alert.alert('Peringatan!', 'Review ditutup.');
-        }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>

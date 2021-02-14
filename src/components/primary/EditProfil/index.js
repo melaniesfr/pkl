@@ -273,9 +273,6 @@ export default function EditProfil() {
           animationType={'slide'}
           transparent={ true }
           visible={ modalVisible }
-          onRequestClose={() => {
-            Alert.alert('Peringatan!', 'Reset password ditutup.');
-          }}
         >
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.centeredView}>
