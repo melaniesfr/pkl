@@ -49,7 +49,6 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
       for (var i=0; i<res.data.length; i++) {
         if (data.id === res.data[i].id_umkm) {
           setProduk(res.data[i]);
-          setImages(res.data[i].gambar);
         }
       }
     })
