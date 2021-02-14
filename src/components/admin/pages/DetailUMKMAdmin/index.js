@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Linking, Platform, Image } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Linking, Platform, Image, Modal, Dimensions } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors, fonts, assets } from '../../../../utils';
 import { Gap, Review } from '../../../primary';
 import axios from 'axios';
 
+const { width, height } = Dimensions.get('window');
+
 export default function DetailUMKMAdmin({ route, navigation }) {
   const { item } = route.params;
   const [ kate, setKate ] = useState('');
+  const [ dialog, setDialog ] = useState(null);
 
   const [ data, setData ] = useState({
     id: item.id,
@@ -133,11 +136,31 @@ export default function DetailUMKMAdmin({ route, navigation }) {
           { produks.map((item, index) => {
             if (data.id === item.id_umkm) {
               return (
-                <Image
-                  key={ index }
-                  source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
-                  style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
-                /> 
+                <View key={ index }>
+                  <TouchableOpacity onPress={() => setDialog(index)}>
+                    <Image
+                      source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
+                      style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
+                    /> 
+                  </TouchableOpacity>
+
+                  <Modal visible={dialog !== null} animationType={'fade'}>
+                    <View style={{ backgroundColor: colors.black, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                      <Image
+                        source={dialog !== null ? {uri: assets.baseURL + `/produk/` + produks[dialog].gambar} : null}
+                        style={{ width: width, height: height/3.6 }}
+                      />
+                    </View>
+                    
+                    <Icon
+                      name={'close-circle'}
+                      size={40}
+                      color={colors.white}
+                      style={{ opacity: 0.8, position: 'absolute', top: 10, right: 10 }}
+                      onPress={() => setDialog(null)}
+                    />
+                  </Modal>
+                </View>
               );
             }
           })}
