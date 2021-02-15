@@ -5,10 +5,9 @@ import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../utils';
 import axios from 'axios';
 
-export default function Review({ data, navigation }) {
+export default function Review({ data }) {
   const [ review, setReview ] = useState([]);
   const [ reviews, setReviews ] = useState([]);
-  const [ selected, setSelected ] = useState();
   
   const getData = () => {
     axios.get(assets.api.reviews)
@@ -39,14 +38,14 @@ export default function Review({ data, navigation }) {
 
   const [ users, setUsers ] = useState();
   const [ token, setToken ] = useState();
-  const loadUsers = async() => {
-    await AsyncStorage.getItem('email')
+  const loadUsers = () => {
+    AsyncStorage.getItem('email')
     .then((res) => {
       const email = String(res);
       setUsers(email);
     });
 
-    await AsyncStorage.getItem('userToken')
+    AsyncStorage.getItem('userToken')
     .then((res) => {
       const tokens = String(res);
       setToken(tokens);
@@ -75,7 +74,7 @@ export default function Review({ data, navigation }) {
     loadUsers();
   }, [users]);
 
-  const deleteReview = () => {
+  const deleteReview = (value) => {
     fetch(assets.api.deleteReview, {
       method: 'POST',
       headers: {
@@ -83,7 +82,7 @@ export default function Review({ data, navigation }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: selected
+        id: value
       })
     })
     .then((res) => res.json())
@@ -114,13 +113,14 @@ export default function Review({ data, navigation }) {
                 <View style={{ marginTop: 5, marginRight: 5, justifyContent: 'center' }}>
                   <Text style={[styles.textTanggal, { marginBottom: 5 }]}>{ item.tanggal }</Text>
 
-                  { (user.nama === item.nama_users && token === 'userToken')
-                    ? (
-                      <TouchableOpacity style={{ paddingVertical: 3, paddingHorizontal: 10, backgroundColor: colors.red, borderRadius: 5 }} onPress={ setSelected(item.id), deleteReview }>
-                        <Text style={{ fontFamily: fonts.primary.normal, color: colors.white }}>Hapus</Text>
-                      </TouchableOpacity>
-                    )
-                    : null }
+                  { user.nama === item.nama_users && token === 'userToken' ? (
+                  <TouchableOpacity
+                    onPress={() => deleteReview(item.id)}
+                    style={{ paddingVertical: 3, paddingHorizontal: 10, backgroundColor: colors.red, borderRadius: 5 }}
+                  >
+                    <Text style={{ fontFamily: fonts.primary.normal, color: colors.white }}>Hapus</Text>
+                  </TouchableOpacity> )
+                  : null }
                 </View>
               </View>
   

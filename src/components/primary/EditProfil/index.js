@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TouchableWithoutFeedback, TouchableOpacity, View, Image, TextInput, Text, StyleSheet, Keyboard, Modal, Alert } from 'react-native';
+import { TouchableWithoutFeedback, TouchableOpacity, View, TextInput, Text, StyleSheet, Keyboard, Modal, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
