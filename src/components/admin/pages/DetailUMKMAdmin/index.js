@@ -82,6 +82,16 @@ export default function DetailUMKMAdmin({ route, navigation }) {
     openGmaps(adr);
   };
 
+  const changeRupiah = (value) => {
+    var harga = value;
+      
+    var	reverse = harga.toString().split('').reverse().join(''),
+        ribuan 	= reverse.match(/\d{1,3}/g);
+        ribuan	= ribuan.join('.').split('').reverse().join('');
+    
+    return ribuan;
+  };
+
   const [ produk, setProduk ] = useState([]);
   const getProduk = () => {
     axios.get(assets.api.produk)
@@ -125,7 +135,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
                   />
                   <Text style={styles.informationData}>{ item.nama }</Text>
                 </View>
-                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { item.harga }</Text>
+                <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { changeRupiah(item.harga) }</Text>
               </View>
             </TouchableOpacity>
           );
@@ -157,7 +167,6 @@ export default function DetailUMKMAdmin({ route, navigation }) {
 
                   <Modal
                     visible={dialog !== null}
-                    animationType={'fade'}
                     onRequestClose={() => setDialog(null)}
                   >
                     <View style={{ backgroundColor: colors.black, flex: 1, alignItems: 'center', justifyContent: 'center' }}>

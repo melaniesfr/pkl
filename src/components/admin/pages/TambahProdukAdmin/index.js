@@ -50,7 +50,7 @@ export default function TambahProdukAdmin({ route, navigation }) {
   };
 
   const [ avatarSource, setAvatarSource ] = useState(null);
-  const [ imgSource, setImgSource ] = useState(null);
+  const [ imgSource, setImgSource ] = useState('IMProdukKosong.png');
   const [ isUploading, setIsUploading ] = useState(false);
 
   const selectImage = async () => {
