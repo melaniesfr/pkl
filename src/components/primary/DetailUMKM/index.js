@@ -43,6 +43,15 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
     Linking.openURL(phoneNumber);
   };
 
+  const openGmaps = (address) => {
+    Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${address}`);
+  };
+
+  const applyLetterSpacing = (address) => {
+    var adr = encodeURIComponent(address.trim());
+    openGmaps(adr);
+  };
+
   const [ produk, setProduk ] = useState([]);
   const getProduk = () => {
     axios.get(assets.api.produk)
@@ -209,7 +218,10 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
               <Text style={styles.informationTitle}>Alamat</Text>
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Text style={styles.informationData}>{ data.alamat }</Text>
-                <TouchableOpacity style={{ backgroundColor: colors.grey4, paddingHorizontal: 6, paddingVertical: 5, borderRadius: 50 }}>
+                <TouchableOpacity
+                  onPress={() => applyLetterSpacing(data.alamat)}
+                  style={{ backgroundColor: colors.grey4, paddingHorizontal: 6, paddingVertical: 5, borderRadius: 50 }}
+                >
                   <Icon
                     name={'location-sharp'}
                     size={20}
