@@ -1,11 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { PengaturanVisitor, BahasaVisitor } from '../../pages';
+import { PengaturanVisitor } from '../../pages';
 import { colors, fonts } from '../../../../utils';
 
 const Stack = createStackNavigator();
 
-export default function PengaturanMenuVisitor({ navigation }) {
+export default function PengaturanMenuVisitor() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -19,11 +19,6 @@ export default function PengaturanMenuVisitor({ navigation }) {
           title: 'Pengaturan',
           headerLeft: null,
           headerTitleAlign: 'center'
-        }}
-      />
-      <Stack.Screen name="BahasaVisitor" component={ BahasaVisitor }
-        options={{
-          title: 'Pilih Bahasa'
         }}
       />
     </Stack.Navigator>

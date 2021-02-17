@@ -7,7 +7,6 @@ export default function PengaturanAdmin({ navigation }) {
 
   return (
     <Pengaturan
-      onPressBahasa={() => navigation.navigate('BahasaAdmin')}
       onPressTitle={() => signOut()}
       title={'Log Out'}
     />

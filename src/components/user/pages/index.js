@@ -1,4 +1,3 @@
-import BahasaUser from './BahasaUser';
 import BerandaUser from './BerandaUser';
 import DetailUMKMUser from './DetailUMKMUser';
 import KategoriUser from './KategoriUser';
@@ -7,4 +6,4 @@ import PengaturanUser from './PengaturanUser';
 import ProfilUser from './ProfilUser';
 import EditProfilUser from './EditProfilUser';
 
-export { BahasaUser, BerandaUser, DetailUMKMUser, KategoriUser, DetailPerKategoriUser, PengaturanUser, ProfilUser, EditProfilUser };
+export { BerandaUser, DetailUMKMUser, KategoriUser, DetailPerKategoriUser, PengaturanUser, ProfilUser, EditProfilUser };

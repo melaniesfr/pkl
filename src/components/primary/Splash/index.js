@@ -8,7 +8,7 @@ export default function Splash({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('Login');
-    }, 5000);
+    }, 3000);
   }, [navigation]);
 
   return (
