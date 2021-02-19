@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Dimensions, FlatList, Animated } from 'react-native';
 import CarouselItem from './CarouselItem';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function index({ data }) {
   const scrollX = new Animated.Value(0);

@@ -8,9 +8,8 @@ import Pengaturan from './Pengaturan';
 import Profil from './Profil';
 import Kategori from './Kategori';
 import DetailPerKategori from './DetailPerKategori';
-import Kosong from './Kosong';
 import EditProfil from './EditProfil';
 import Review from './Review';
 import Carousel from './Carousel';
 
-export { Login, Register, Splash, Gap, DetailUMKM, Beranda, Pengaturan, Profil, Kategori, DetailPerKategori, Kosong, EditProfil, Review, Carousel };
+export { Login, Register, Splash, Gap, DetailUMKM, Beranda, Pengaturan, Profil, Kategori, DetailPerKategori, EditProfil, Review, Carousel };
