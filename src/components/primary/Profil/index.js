@@ -15,8 +15,8 @@ export default function Profil({ onPressEdit }) {
   });
 
   const [ users, setUsers ] = useState();
-  const loadUsers = async(func) => {
-    await AsyncStorage.getItem('email')
+  const loadUsers = () => {
+    AsyncStorage.getItem('email')
     .then((res) => {
       const email = String(res);
       setUsers(email);
