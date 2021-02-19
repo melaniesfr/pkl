@@ -24,8 +24,8 @@ export default function Splash({ navigation }) {
 
       <View>
         <View animation="fadeInUpBig" style={{ alignItems: 'center' }}>
-          <Text style={styles.logoTextDark}>USAHA MIKRO UNGGULAN</Text>
-          <Text style={styles.logoTextGreen}>KABUPATEN BLITAR</Text>
+          <Text style={styles.logoTextDark}>SIUMI</Text>
+          <Text style={[styles.logoTextGreen, { fontSize: 14 }]}>(SISTEM INFORMASI USAHA MIKRO POTENSIAL)</Text>
         </View>
 
         <FastImage

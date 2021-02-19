@@ -113,7 +113,7 @@ export default function Login({ navigation }) {
         <View style={styles.container}>
           <View style={styles.boxLogin}>
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
-              <FastImage source={{uri: assets.images.IMKabBlitar}} style={{ height: 30, width: 32, marginRight: 10 }} />
+              <FastImage source={{uri: assets.images.IMKabBlitar}} style={{ height: 31, width: 32, marginRight: 10 }} />
               <Text style={styles.title}>LOGIN</Text>
             </View>
 
