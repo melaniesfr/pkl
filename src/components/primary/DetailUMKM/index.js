@@ -84,9 +84,14 @@ const changeRupiah = (value) => {
     .catch((err) => console.log(err))
   };
 
+  let mounted = true;
   useEffect(() => {
-    getProduk();
-    getProduks();
+    if (mounted) {
+      getProduk();
+      getProduks();
+    }
+
+    return () => mounted = false;
   }, []);
 
   const ProdukA = () => {

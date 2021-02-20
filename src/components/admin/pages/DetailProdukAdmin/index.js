@@ -54,7 +54,7 @@ export default function DetailProdukAdmin({ route, navigation }) {
   const [ imgSource, setImgSource ] = useState(data.gambar);
   const [ isUploading, setIsUploading ] = useState(false);
 
-  const selectImage = async () => {
+  const selectImage = async() => {
     ImagePicker.showImagePicker({noData: true, mediaType: 'photo', allowsEditing: true, quality: 0.7}, (response) => {
       if (response.didCancel) {
         Alert.alert('Error!', 'User batal memilih gambar');

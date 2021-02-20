@@ -31,8 +31,8 @@ export default function DetailUMKMUser({ route, navigation }) {
   });
 
   const [ users, setUsers ] = useState();
-  const loadUsers = async() => {
-    await AsyncStorage.getItem('email')
+  const loadUsers = () => {
+    AsyncStorage.getItem('email')
     .then((res) => {
       const email = String(res);
       setUsers(email);

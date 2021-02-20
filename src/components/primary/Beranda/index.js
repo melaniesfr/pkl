@@ -84,6 +84,11 @@ export default function Beranda({ renderItem }) {
           horizontal={ false }
           numColumns={ 2 }
           showsVerticalScrollIndicator={ false }
+          onEndReachedThreshold={ 50 }
+          getItemLayout={(data, index) => (
+            {length: 40, offset: 40 * index, index}
+          )}
+          initialNumToRender={ 10 }
           style={{ marginVertical: 8, alignSelf: 'center' }}
         />
         

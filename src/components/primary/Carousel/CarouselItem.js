@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { colors, fonts } from '../../../utils';
 
 const { width, height } = Dimensions.get('window');
 
-export default function CarouselItem({ item }) {
-  return (
-    <View style={styles.cardView}>
-      <FastImage source={{uri: item.url}} style={styles.image} />
-      <View style={styles.textView}>
-        <Text style={styles.itemTitle}>{ item.title }</Text>
+export default class CarouselItem extends PureComponent {
+  render() {
+    return (
+      <View style={styles.cardView}>
+        <FastImage source={{uri: this.props.item.url}} style={styles.image} />
+        <View style={styles.textView}>
+          <Text style={styles.itemTitle}>{ this.props.item.title }</Text>
+        </View>
       </View>
-    </View>
-  );
+    );
+  };
 };
 
 const styles = StyleSheet.create({

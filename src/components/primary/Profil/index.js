@@ -40,7 +40,13 @@ export default function Profil({ onPressEdit }) {
   };
 
   useEffect(() => {
-    loadUsers();
+    let mounted = true;
+
+    if (mounted) {
+      loadUsers();
+    }
+
+    return () => mounted = false;
   }, [loadUsers]);
 
   return (
