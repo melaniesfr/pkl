@@ -1,41 +1,51 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../../utils';
 import { Beranda } from '../../../primary';
 
 export default function BerandaAdmin({ navigation }) {
-  const renderItem = ({ item }) => {
-    const GambarProduk = () => {
-      if (item.gambar !== '') {
-        return (
-          <FastImage
-            source={{uri: assets.baseURL + `images/${item.gambar}`}}
-            style={styles.image}
-          />
-        );
-      } else {
-        return (
-          <FastImage
-            source={{uri: assets.images.IMBlank}}
-            style={styles.image}
-          />
-        );
-      }
-    };
-    
-    return (
-      <TouchableOpacity onPress={() => navigation.navigate('DetailUMKMAdmin', { item: item })}>
-        <View style={{ margin: 5, position: 'relative' }}>
-          <GambarProduk />
+  class MyListItem extends PureComponent {
+    render() {
+      const GambarProduk = () => {
+        if (this.props.item.gambar !== '') {
+          return (
+            <FastImage
+              source={{uri: assets.baseURL + `images/${this.props.item.gambar}`}}
+              style={styles.image}
+            />
+          );
+        } else {
+          return (
+            <FastImage
+              source={{uri: assets.images.IMBlank}}
+              style={styles.image}
+            />
+          );
+        }
+      };
 
-          <View style={styles.garisHitam}>
-            <View style={styles.wadahText}>
-              <Text style={styles.text}>{ item.produk }</Text>
+      return (
+        <TouchableOpacity onPress={() => navigation.navigate('DetailUMKMAdmin', { item: this.props.item })}>
+          <View style={{ margin: 5, position: 'relative' }}>
+            <GambarProduk />
+
+            <View style={styles.garisHitam}>
+              <View style={styles.wadahText}>
+                <Text style={styles.text}>{ this.props.item.produk }</Text>
+              </View>
             </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      );
+    };
+  };
+
+  const renderItem = ({ item }) => {
+    return (
+      <MyListItem
+        item={ item }
+      />
     );
   };
 

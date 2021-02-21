@@ -4,16 +4,18 @@ import { assets } from '../../../utils';
 import axios from 'axios';
 
 export default function DetailPerKategori({ item, renderItem }) {
-  const [ data, setData ] = useState([]);
+  const [ data, setData ] = useState();
 
   const getData = () => {
     axios.get(assets.api.view)
     .then((res) => {
+      let datas = [];
       for (var i=0; i < res.data.length; i++) {
         if (item.kategori === res.data[i].kategori) {
-          setData(data => [...data, res.data[i]]);
+          datas.push(res.data[i]);
         }
       }
+      setData(datas);
     })
     .catch((err) => console.log(err))
   };
@@ -31,6 +33,11 @@ export default function DetailPerKategori({ item, renderItem }) {
         horizontal={ false }
         numColumns={ 2 }
         showsVerticalScrollIndicator={ false }
+        onEndReachedThreshold={ 50 }
+        getItemLayout={(data, index) => (
+          {length: 40, offset: 40 * index, index}
+        )}
+        initialNumToRender={ 10 }
         style={{ marginVertical: 8 }}
       />
     </View>

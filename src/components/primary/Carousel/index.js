@@ -4,7 +4,7 @@ import CarouselItem from './CarouselItem';
 
 const { width } = Dimensions.get('window');
 
-export default function index({ data }) {
+export default function Carousel({ data }) {
   const scrollX = new Animated.Value(0);
   let position = Animated.divide(scrollX, width);
   const [ dataList, setDataList ] = useState(data);
@@ -65,6 +65,11 @@ export default function index({ data }) {
             }],
             { useNativeDriver: false }
           )}
+          onEndReachedThreshold={ 50 }
+          getItemLayout={(data, index) => (
+            {length: 40, offset: 40 * index, index}
+          )}
+          initialNumToRender={ 10 }
         />
 
         <View style={styles.dotView}>

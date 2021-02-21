@@ -162,7 +162,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
                     <FastImage
                       source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
                       style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
-                    /> 
+                    />
                   </TouchableOpacity>
 
                   <Modal

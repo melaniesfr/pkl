@@ -35,6 +35,11 @@ export default function Kategori({ renderItem }) {
         onRefresh={ getData }
         horizontal={ false }
         numColumns={ 2 }
+        onEndReachedThreshold={ 50 }
+        getItemLayout={(data, index) => (
+          {length: 40, offset: 40 * index, index}
+        )}
+        initialNumToRender={ 10 }
         style={{ marginVertical: 10 }}
       />
     </View>
