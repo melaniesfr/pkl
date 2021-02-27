@@ -42,7 +42,7 @@ export const assets = {
   },
 
   images: {
-    IMLogo: url + 'assets/images/IMLogo.png',
+    IMLogoo: url + 'assets/images/IMLogoo.png',
     IMNoImage: url + 'assets/images/IMNoImage.png',
     IMUser: url + 'assets/images/IMUser.png',
     IMKabBlitar: url + 'assets/images/IMKabBlitar.png',

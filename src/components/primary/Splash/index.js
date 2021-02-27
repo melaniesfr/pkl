@@ -5,11 +5,11 @@ import { colors, fonts, assets } from '../../../utils';
 import Gap from '../Gap';
 
 export default function Splash({ navigation }) {
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.replace('Login');
-    }, 3000);
-  }, [navigation]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     navigation.replace('Login');
+  //   }, 3000);
+  // }, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -23,20 +23,23 @@ export default function Splash({ navigation }) {
       </View>
 
       <View>
-        {/* <View animation="fadeInUpBig" style={{ alignItems: 'center' }}>
-          <Text style={styles.logoTextDark}>SIUMI</Text>
-          <Text style={[styles.logoTextGreen, { fontSize: 14 }]}>(SISTEM INFORMASI USAHA MIKRO POTENSIAL)</Text>
-        </View> */}
+        <View animation="fadeInUpBig" style={{ alignItems: 'center' }}>
+          <Text style={[styles.logoTextDark, { color: 'black' }]}>SI-PUMI</Text>
+          <Text style={[styles.logoTextDark, { fontSize: 14 }]}>(SISTEM INFORMASI POTENSI USAHA MIKRO)</Text>
+          <Text style={[styles.logoTextDark, { fontSize: 14 }]}>KABUPATEN BLITAR</Text>
+        </View>
+
+        <Gap height={30} />
 
         <FastImage
-          source={{uri: assets.images.IMLogo}}
+          source={{uri: assets.images.IMLogoo}}
           style={styles.logoBupati}
         />
 
-        <View animation="fadeInDownBig" style={{ alignItems: 'center' }}>
+        {/* <View animation="fadeInDownBig" style={{ alignItems: 'center' }}>
           <Text style={styles.logoTextDark}>AYO BELA BELI</Text>
           <Text style={styles.logoTextGreen}>PRODUK BLITAR</Text>
-        </View>
+        </View> */}
       </View>
 
       <View>
@@ -54,12 +57,12 @@ export default function Splash({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
-    justifyContent: 'space-around',
+    backgroundColor: colors.green1,
+    justifyContent: 'space-evenly',
     alignItems: 'center'
   },
   logoTextDark: {
-    color: colors.green1,
+    color: colors.white,
     fontSize: 25,
     fontFamily: fonts.primary[800]
   },
@@ -71,9 +74,7 @@ const styles = StyleSheet.create({
   logoBupati: {
     width: 330,
     height: 290,
-    alignSelf: 'center',
-    marginBottom: 50
-    // marginVertical: 50,
+    alignSelf: 'center'
   },
   logoKab: {
     width: 83,
