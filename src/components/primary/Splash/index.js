@@ -14,7 +14,7 @@ export default function Splash({ navigation }) {
   return (
     <View style={styles.container}>
       <View>
-        <Gap height={30} />
+        {/* <Gap height={30} /> */}
 
         <FastImage
           source={{uri: assets.images.IMKabBlitar}}
@@ -23,13 +23,13 @@ export default function Splash({ navigation }) {
       </View>
 
       <View>
-        <View animation="fadeInUpBig" style={{ alignItems: 'center' }}>
+        {/* <View animation="fadeInUpBig" style={{ alignItems: 'center' }}>
           <Text style={styles.logoTextDark}>SIUMI</Text>
           <Text style={[styles.logoTextGreen, { fontSize: 14 }]}>(SISTEM INFORMASI USAHA MIKRO POTENSIAL)</Text>
-        </View>
+        </View> */}
 
         <FastImage
-          source={{uri: assets.images.IMBupati}}
+          source={{uri: assets.images.IMLogo}}
           style={styles.logoBupati}
         />
 
@@ -45,7 +45,7 @@ export default function Splash({ navigation }) {
           <Text style={styles.textDinkop}>KABUPATEN BLITAR</Text>
         </View>
 
-        <Gap height={30} />
+        {/* <Gap height={30} /> */}
       </View>
     </View>
   );
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   logoTextDark: {
@@ -64,22 +64,23 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[800]
   },
   logoTextGreen: {
-    color: colors.dark1,
+    color: colors.black,
     fontSize: 25,
     fontFamily: fonts.primary[800]
   },
   logoBupati: {
-    width: 250,
-    height: 250,
+    width: 330,
+    height: 290,
     alignSelf: 'center',
-    marginVertical: 50
+    marginBottom: 50
+    // marginVertical: 50,
   },
   logoKab: {
     width: 83,
     height: 80
   },
   textDinkop: {
-    color: colors.dark1,
+    color: colors.black,
     fontSize: 18,
     fontFamily: fonts.primary[700]
   }
