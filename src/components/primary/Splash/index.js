@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { colors, fonts, assets } from '../../../utils';
 import Gap from '../Gap';
 
+const { width } = Dimensions.get('window');
+
 export default function Splash({ navigation }) {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     navigation.replace('Login');
-  //   }, 3000);
-  // }, [navigation]);
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.replace('Login');
+    }, 3000);
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
       <View>
-        {/* <Gap height={30} /> */}
-
         <FastImage
           source={{uri: assets.images.IMKabBlitar}}
           style={styles.logoKab}
@@ -32,14 +32,9 @@ export default function Splash({ navigation }) {
         <Gap height={30} />
 
         <FastImage
-          source={{uri: assets.images.IMLogoo}}
+          source={{uri: assets.images.IMLogo}}
           style={styles.logoBupati}
         />
-
-        {/* <View animation="fadeInDownBig" style={{ alignItems: 'center' }}>
-          <Text style={styles.logoTextDark}>AYO BELA BELI</Text>
-          <Text style={styles.logoTextGreen}>PRODUK BLITAR</Text>
-        </View> */}
       </View>
 
       <View>
@@ -47,8 +42,6 @@ export default function Splash({ navigation }) {
           <Text style={styles.textDinkop}>DINAS KOPERASI DAN USAHA MIKRO</Text>
           <Text style={styles.textDinkop}>KABUPATEN BLITAR</Text>
         </View>
-
-        {/* <Gap height={30} /> */}
       </View>
     </View>
   );
@@ -72,8 +65,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary[800]
   },
   logoBupati: {
-    width: 330,
-    height: 290,
+    width: width - 60,
+    height: width - 98,
     alignSelf: 'center'
   },
   logoKab: {
@@ -83,6 +76,6 @@ const styles = StyleSheet.create({
   textDinkop: {
     color: colors.black,
     fontSize: 18,
-    fontFamily: fonts.primary[700]
+    fontFamily: fonts.primary[800]
   }
 });

@@ -24,14 +24,7 @@ export const assets = {
   },
 
   icons: {
-    ICCategory: url + 'assets/icons/ICCategory.png',
-    ICCheckList: url + 'assets/icons/ICCheckList.png',
-    ICEdit: url + 'assets/icons/ICEdit.png',
-    ICList: url + 'assets/icons/ICList.png',
-    ICOther: url + 'assets/icons/ICOther.png',
     ICProfile: url + 'assets/icons/ICProfile.png',
-    ICSettings: url + 'assets/icons/ICSettings.png',
-    ICToDoList: url + 'assets/icons/ICToDoList.png',
     ICFashion: url + 'assets/icons/ICFashion.png',
     ICDrink: url + 'assets/icons/ICDrink.png',
     ICHandmade: url + 'assets/icons/ICHandmade.png',
@@ -42,11 +35,10 @@ export const assets = {
   },
 
   images: {
-    IMLogoo: url + 'assets/images/IMLogoo.png',
+    IMLogo: url + 'assets/images/IMLogo.png',
     IMNoImage: url + 'assets/images/IMNoImage.png',
     IMUser: url + 'assets/images/IMUser.png',
     IMKabBlitar: url + 'assets/images/IMKabBlitar.png',
-    IMBupati: url + 'assets/images/IMBupati.png',
     IMBlank: url + 'assets/images/IMBlank.png',
     IMProdukKosong: url + 'assets/images/IMProdukKosong.png'
   }
