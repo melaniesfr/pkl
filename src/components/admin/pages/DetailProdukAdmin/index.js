@@ -9,11 +9,11 @@ export default function DetailProdukAdmin({ route, navigation }) {
   const [ loading, setLoading ] = useState(false);
 
   const [ data, setData ] = useState({
-    id: route.params.id,
+    id_produk: route.params.id_produk,
     id_umkm: route.params.id_umkm,
-    nama: route.params.nama,
+    nama_produk: route.params.nama_produk,
     harga: route.params.harga,
-    gambar: route.params.gambar,
+    gambar_produk: route.params.gambar_produk,
     isValidNama: true,
     isValidHarga: true
   });
@@ -22,13 +22,13 @@ export default function DetailProdukAdmin({ route, navigation }) {
     if (value.length >= 5) {
       setData({
         ...data,
-        nama: value,
+        nama_produk: value,
         isValidNama: true
       });
     } else {
       setData({
         ...data,
-        nama: value,
+        nama_produk: value,
         isValidNama: false
       });
     }
@@ -50,8 +50,8 @@ export default function DetailProdukAdmin({ route, navigation }) {
     }
   };
 
-  const [ avatarSource, setAvatarSource ] = useState(data.gambar);
-  const [ imgSource, setImgSource ] = useState(data.gambar);
+  const [ avatarSource, setAvatarSource ] = useState(data.gambar_produk);
+  const [ imgSource, setImgSource ] = useState(data.gambar_produk);
   const [ isUploading, setIsUploading ] = useState(false);
 
   const selectImage = async() => {
@@ -99,13 +99,13 @@ export default function DetailProdukAdmin({ route, navigation }) {
   const updateData = () => {
     setLoading(true);
 
-    if (data.nama.length === 0 || data.harga.length === 0) {
+    if (data.nama_produk.length === 0 || data.harga.length === 0) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak boleh ada yang kosong.');
-    } else if (data.nama.length < 5 || data.harga.length < 1) {
+    } else if (data.nama_produk.length < 5 || data.harga.length < 1) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak memenuhi ketentuan.');
-    } else if (data.nama.length >= 5 || data.harga.length > 0) {
+    } else if (data.nama_produk.length >= 5 || data.harga.length > 0) {
       fetch(assets.api.updateProduk, {
         method: 'POST',
         headers: {
@@ -113,11 +113,11 @@ export default function DetailProdukAdmin({ route, navigation }) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          id: data.id,
+          id_produk: data.id_produk,
           id_umkm: data.id_umkm,
-          nama: data.nama,
+          nama_produk: data.nama_produk,
           harga: data.harga,
-          gambar: imgSource
+          gambar_produk: imgSource
         })
       })
       .then((res) => res.json())
@@ -143,7 +143,7 @@ export default function DetailProdukAdmin({ route, navigation }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: data.id
+        id_produk: data.id_produk
       })
     })
     .then((res) => res.json())
@@ -170,7 +170,7 @@ export default function DetailProdukAdmin({ route, navigation }) {
             { isUploading && <ActivityIndicator /> }
           </TouchableOpacity>
 
-          <TextInput placeholder={'Nama Produk'} style={styles.input} onChangeText={(value) => onChangeNama(value)} value={ data.nama } />
+          <TextInput placeholder={'Nama Produk'} style={styles.input} onChangeText={(value) => onChangeNama(value)} value={ data.nama_produk } />
           { data.isValidNama ? null :
           <Animatable.View animation={'fadeInLeft'} duration={500}>
             <Text style={styles.errorMsg}>Panjang minimal nama produk 5 karakter.</Text>

@@ -14,8 +14,8 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
   ];
 
   const [ data, setData ] = useState({
-    id: route.params.id,
-    produk: route.params.produk,
+    id_umkm: route.params.id_umkm,
+    nama_umkm: route.params.nama_umkm,
     pemilik: route.params.pemilik,
     deskripsi: route.params.deskripsi,
     kategori: route.params.kategori,
@@ -23,7 +23,7 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
     facebook: route.params.facebook,
     instagram: route.params.instagram,
     telp: route.params.telp,
-    gambar: route.params.gambar,
+    gambar_umkm: route.params.gambar_umkm,
     isValidProduk: true,
     isValidPemilik: true,
     isValidDeskripsi: true,
@@ -38,13 +38,13 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
     if (value.length >= 5) {
       setData({
         ...data,
-        produk: value,
+        nama_umkm: value,
         isValidProduk: true
       });
     } else {
       setData({
         ...data,
-        produk: value,
+        nama_umkm: value,
         isValidProduk: false
       });
     }
@@ -162,8 +162,8 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
     }
   };
 
-  const [ avatarSource, setAvatarSource ] = useState(data.gambar);
-  const [ imgSource, setImgSource ] = useState(data.gambar);
+  const [ avatarSource, setAvatarSource ] = useState(data.gambar_umkm);
+  const [ imgSource, setImgSource ] = useState(data.gambar_umkm);
   const [ isUploading, setIsUploading ] = useState(false);
 
   const selectImage = async() => {
@@ -211,13 +211,13 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
   const updateData = () => {
     setLoading(true);
 
-    if (data.produk.length === 0 || data.pemilik.length === 0 || data.deskripsi.length === 0 || data.alamat.length === 0 || data.facebook.length === 0 || data.instagram.length === 0 || data.telp.length === 0) {
+    if (data.nama_umkm.length === 0 || data.pemilik.length === 0 || data.deskripsi.length === 0 || data.alamat.length === 0 || data.facebook.length === 0 || data.instagram.length === 0 || data.telp.length === 0) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak boleh ada yang kosong.');
-    } else if (data.produk.length < 5 || data.pemilik.length < 5 || data.deskripsi.length < 10 || data.kategori === 0 || data.alamat.length < 10 || data.telp.length < 11) {
+    } else if (data.nama_umkm.length < 5 || data.pemilik.length < 5 || data.deskripsi.length < 10 || data.kategori === 0 || data.alamat.length < 10 || data.telp.length < 11) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak memenuhi ketentuan.');
-    } else if (data.produk.length >= 5 || data.pemilik.length >= 5 || data.deskripsi.length >= 10 || data.kategori !== 0 || data.alamat.length >= 10 || data.facebook.length > 0 || data.instagram.length > 0 || data.telp.length >= 11 || data.gambar.length > 0) {
+    } else if (data.nama_umkm.length >= 5 || data.pemilik.length >= 5 || data.deskripsi.length >= 10 || data.kategori !== 0 || data.alamat.length >= 10 || data.facebook.length > 0 || data.instagram.length > 0 || data.telp.length >= 11 || data.gambar_umkm.length > 0) {
       fetch(assets.api.updateUMKM, {
         method: 'POST',
         headers: {
@@ -225,8 +225,8 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          id: data.id,
-          produk: data.produk,
+          id_umkm: data.id_umkm,
+          nama_umkm: data.nama_umkm,
           pemilik: data.pemilik,
           deskripsi: data.deskripsi,
           kategori: data.kategori,
@@ -234,7 +234,7 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
           facebook: data.facebook,
           instagram: data.instagram,
           telp: data.telp,
-          gambar: imgSource
+          gambar_umkm: imgSource
         })
       })
       .then((res) => res.json())
@@ -265,7 +265,7 @@ export default function UpdateUMKMAdmin({ route, navigation }) {
               { isUploading && <ActivityIndicator /> }
             </TouchableOpacity>
 
-            <TextInput placeholder={'Nama UMKM'} style={styles.input} onChangeText={(value) => onChangeProduk(value)} value={ data.produk } />
+            <TextInput placeholder={'Nama UMKM'} style={styles.input} onChangeText={(value) => onChangeProduk(value)} value={ data.nama_umkm } />
             { data.isValidProduk ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
               <Text style={styles.errorMsg}>Panjang minimal nama UMKM 5 karakter.</Text>

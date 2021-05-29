@@ -1,7 +1,7 @@
-const url = 'http://192.168.43.89/pkl/';
+const url = 'http://192.168.43.89/sipumi/';
 
 export const assets = {
-  baseURL: 'http://192.168.43.89/pkl/',
+  baseURL: 'http://192.168.43.89/sipumi/',
 
   api: {
     connection: url + 'connection.php',

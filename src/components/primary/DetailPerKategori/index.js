@@ -11,7 +11,7 @@ export default function DetailPerKategori({ item, renderItem }) {
     .then((res) => {
       let datas = [];
       for (var i=0; i < res.data.length; i++) {
-        if (item.kategori === res.data[i].kategori) {
+        if (item.nama_kategori === res.data[i].kategori) {
           datas.push(res.data[i]);
         }
       }
@@ -29,7 +29,7 @@ export default function DetailPerKategori({ item, renderItem }) {
       <FlatList
         data={ data }
         renderItem={ renderItem }
-        keyExtractor={ (item) => item.id }
+        keyExtractor={ (item) => item.id_kategori }
         horizontal={ false }
         numColumns={ 2 }
         showsVerticalScrollIndicator={ false }

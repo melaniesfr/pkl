@@ -33,8 +33,8 @@ export default function Beranda({ renderItem }) {
   const searchFilterFunction = (text) => {
     if (text) {
       const newData = data.filter(function (item) {
-        const itemData = `${item.produk.toUpperCase()} ${item.pemilik.toUpperCase()} ${item.deskripsi.toUpperCase()} ${item.kategori.toUpperCase()} ${item.alamat.toUpperCase()}`
-          ? `${item.produk.toUpperCase()} ${item.pemilik.toUpperCase()} ${item.deskripsi.toUpperCase()} ${item.kategori.toUpperCase()} ${item.alamat.toUpperCase()}`
+        const itemData = `${item.nama_umkm.toUpperCase()} ${item.pemilik.toUpperCase()} ${item.deskripsi.toUpperCase()} ${item.kategori.toUpperCase()} ${item.alamat.toUpperCase()}`
+          ? `${item.nama_umkm.toUpperCase()} ${item.pemilik.toUpperCase()} ${item.deskripsi.toUpperCase()} ${item.kategori.toUpperCase()} ${item.alamat.toUpperCase()}`
           : '';
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
@@ -78,7 +78,7 @@ export default function Beranda({ renderItem }) {
         <FlatList
           data={ filteredDataSource }
           renderItem={ renderItem }
-          keyExtractor={ (item) => item.id }
+          keyExtractor={ (item) => item.id_umkm }
           refreshing={ isLoading }
           onRefresh={ getData }
           horizontal={ false }

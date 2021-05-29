@@ -9,14 +9,14 @@ export default function KategoriUser({ navigation }) {
     render() {
       return (
         <TouchableOpacity onPress={() => navigation.navigate('DetailPerKategoriUser', { item: this.props.item })} style={styles.card}>
-          { (this.props.item.kategori === 'Batik') && <FastImage source={{uri: assets.icons.ICBatik}} style={styles.icon} /> }
-          { (this.props.item.kategori === 'Fashion') && <FastImage source={{uri: assets.icons.ICFashion}} style={styles.icon} /> }
-          { (this.props.item.kategori === 'Kerajinan') && <FastImage source={{uri: assets.icons.ICHandmade}} style={styles.icon} /> }
-          { (this.props.item.kategori === 'Kuliner') && <FastImage source={{uri: assets.icons.ICFood}} style={styles.icon} /> }
-          { (this.props.item.kategori === 'Makanan Olahan') && <FastImage source={{uri: assets.icons.ICFoods}} style={styles.icon} /> }
-          { (this.props.item.kategori === 'Minuman Olahan') && <FastImage source={{uri: assets.icons.ICDrink}} style={styles.icon} /> }
+          { (this.props.item.nama_kategori === 'Batik') && <FastImage source={{uri: assets.icons.ICBatik}} style={styles.icon} /> }
+          { (this.props.item.nama_kategori === 'Fashion') && <FastImage source={{uri: assets.icons.ICFashion}} style={styles.icon} /> }
+          { (this.props.item.nama_kategori === 'Kerajinan') && <FastImage source={{uri: assets.icons.ICHandmade}} style={styles.icon} /> }
+          { (this.props.item.nama_kategori === 'Kuliner') && <FastImage source={{uri: assets.icons.ICFood}} style={styles.icon} /> }
+          { (this.props.item.nama_kategori === 'Makanan Olahan') && <FastImage source={{uri: assets.icons.ICFoods}} style={styles.icon} /> }
+          { (this.props.item.nama_kategori === 'Minuman Olahan') && <FastImage source={{uri: assets.icons.ICDrink}} style={styles.icon} /> }
 
-          <Text style={styles.text}>{ this.props.item.kategori }</Text>
+          <Text style={styles.text}>{ this.props.item.nama_kategori }</Text>
         </TouchableOpacity>
       );
     };

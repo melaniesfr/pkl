@@ -6,7 +6,7 @@ export default function Pengaturan({ onPressTitle, title }) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.contentText}>Versi Aplikasi 0.0.1</Text>
+        <Text style={styles.contentText}>Versi 0.0.1</Text>
         <TouchableOpacity onPress={ onPressTitle } style={styles.button}>
           <Text style={styles.buttonText}>{ title }</Text>
         </TouchableOpacity>

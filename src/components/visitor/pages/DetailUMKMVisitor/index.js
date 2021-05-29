@@ -6,8 +6,8 @@ export default function DetailUMKMVisitor({ route, navigation }) {
   const { item } = route.params;
 
   const [ data, setData ] = useState({
-    id: item.id,
-    produk: item.produk,
+    id_umkm: item.id_umkm,
+    nama_umkm: item.nama_umkm,
     pemilik: item.pemilik,
     deskripsi: item.deskripsi,
     kategori: item.kategori,
@@ -15,7 +15,7 @@ export default function DetailUMKMVisitor({ route, navigation }) {
     facebook: item.facebook,
     instagram: item.instagram,
     telp: item.telp,
-    gambar: item.gambar
+    gambar_umkm: item.gambar_umkm
   });
 
   return (

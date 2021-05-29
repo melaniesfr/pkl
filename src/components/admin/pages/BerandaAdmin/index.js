@@ -8,10 +8,10 @@ export default function BerandaAdmin({ navigation }) {
   class MyListItem extends PureComponent {
     render() {
       const GambarProduk = () => {
-        if (this.props.item.gambar !== '') {
+        if (this.props.item.gambar_umkm !== '') {
           return (
             <FastImage
-              source={{uri: assets.baseURL + `images/${this.props.item.gambar}`}}
+              source={{uri: assets.baseURL + `images/${this.props.item.gambar_umkm}`}}
               style={styles.image}
             />
           );
@@ -32,7 +32,7 @@ export default function BerandaAdmin({ navigation }) {
 
             <View style={styles.garisHitam}>
               <View style={styles.wadahText}>
-                <Text style={styles.text}>{ this.props.item.produk }</Text>
+                <Text style={styles.text}>{ this.props.item.nama_umkm }</Text>
               </View>
             </View>
           </View>

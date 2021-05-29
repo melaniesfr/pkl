@@ -30,7 +30,7 @@ export default function Kategori({ renderItem }) {
       <FlatList
         data={ data }
         renderItem={ renderItem }
-        keyExtractor={ (item) => item.id }
+        keyExtractor={ (item) => item.id_kategori }
         refreshing={ isLoading }
         onRefresh={ getData }
         horizontal={ false }

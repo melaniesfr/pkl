@@ -10,9 +10,9 @@ export default function TambahProdukAdmin({ route, navigation }) {
 
   const [ data, setData ] = useState({
     id_umkm: route.params.id_umkm,
-    nama: '',
+    nama_produk: '',
     harga: '',
-    gambar: '',
+    gambar_produk: '',
     isValidNama: true,
     isValidHarga: true
   });
@@ -21,13 +21,13 @@ export default function TambahProdukAdmin({ route, navigation }) {
     if (value.length >= 5) {
       setData({
         ...data,
-        nama: value,
+        nama_produk: value,
         isValidNama: true
       });
     } else {
       setData({
         ...data,
-        nama: value,
+        nama_produk: value,
         isValidNama: false
       });
     }
@@ -98,13 +98,13 @@ export default function TambahProdukAdmin({ route, navigation }) {
   const saveData = () => {
     setLoading(true);
 
-    if (data.nama.length === 0 || data.harga.length === 0) {
+    if (data.nama_produk.length === 0 || data.harga.length === 0) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak boleh ada yang kosong.');
-    } else if (data.nama.length < 5 || data.harga.length < 1) {
+    } else if (data.nama_produk.length < 5 || data.harga.length < 1) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak memenuhi ketentuan.');
-    } else if (data.nama.length >= 5 || data.harga.length > 0) {
+    } else if (data.nama_produk.length >= 5 || data.harga.length > 0) {
       fetch(assets.api.insertProduk, {
         method: 'POST',
         headers: {
@@ -113,9 +113,9 @@ export default function TambahProdukAdmin({ route, navigation }) {
         },
         body: JSON.stringify({
           id_umkm: data.id_umkm,
-          nama: data.nama,
+          nama_produk: data.nama_produk,
           harga: data.harga,
-          gambar: imgSource
+          gambar_produk: imgSource
         })
       })
       .then((res) => res.json())
@@ -127,9 +127,9 @@ export default function TambahProdukAdmin({ route, navigation }) {
     
           setData({
             ...data,
-            nama: '',
+            nama_produk: '',
             harga: '',
-            gambar: ''
+            gambar_produk: ''
           });
     
           setAvatarSource(null);
@@ -154,7 +154,7 @@ export default function TambahProdukAdmin({ route, navigation }) {
             { isUploading && <ActivityIndicator /> }
           </TouchableOpacity>
 
-          <TextInput placeholder={'Nama Produk'} style={styles.input} onChangeText={(value) => onChangeNama(value)} value={ data.nama } />
+          <TextInput placeholder={'Nama Produk'} style={styles.input} onChangeText={(value) => onChangeNama(value)} value={ data.nama_produk } />
           { data.isValidNama ? null :
           <Animatable.View animation={'fadeInLeft'} duration={500}>
             <Text style={styles.errorMsg}>Panjang minimal nama produk 5 karakter.</Text>

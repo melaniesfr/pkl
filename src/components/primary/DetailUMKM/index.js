@@ -15,10 +15,10 @@ export default function DetailUMKM({ data, onPressNavigation, onPressRate }) {
   const [ dialog, setDialog ] = useState(null);
 
   const GambarProduk = () => {
-    if (data.gambar !== '') {
+    if (data.gambar_umkm !== '') {
       return (
         <FastImage
-          source={{uri: assets.baseURL + `images/${data.gambar}`}}
+          source={{uri: assets.baseURL + `images/${data.gambar_umkm}`}}
           style={{ flex: 1, width: '100%' }}
         />
       );
@@ -67,7 +67,7 @@ const changeRupiah = (value) => {
     axios.get(assets.api.produk)
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
-        if (data.id === res.data[i].id_umkm) {
+        if (data.id_umkm === res.data[i].id_umkm) {
           setProduk(res.data[i]);
         }
       }
@@ -97,7 +97,7 @@ const changeRupiah = (value) => {
   const ProdukA = () => {
     return (
       produks.map((item, index) => {
-        if (data.id === item.id_umkm) {
+        if (data.id_umkm === item.id_umkm) {
           return (
             <View key={ index } style={{ flexDirection: 'row', alignItems: 'center' }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', width: '60%' }}>
@@ -106,7 +106,7 @@ const changeRupiah = (value) => {
                   size={20}
                   color={colors.dark2}
                 />
-                <Text style={styles.informationData}>{ item.nama }</Text>
+                <Text style={styles.informationData}>{ item.nama_produk }</Text>
               </View>
               <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { changeRupiah(item.harga) }</Text>
             </View>
@@ -127,12 +127,12 @@ const changeRupiah = (value) => {
       <ScrollView horizontal>
         <Gap width={20} />
           { produks.map((item, index) => {
-            if (data.id === item.id_umkm) {
+            if (data.id_umkm === item.id_umkm) {
               return (
                 <View key={ index }>
                   <TouchableOpacity onPress={() => setDialog(index)}>
                     <FastImage
-                      source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
+                      source={{uri: assets.baseURL + `/produk/${item.gambar_produk}`}}
                       style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
                     />
                   </TouchableOpacity>
@@ -143,7 +143,7 @@ const changeRupiah = (value) => {
                   >
                     <View style={{ backgroundColor: colors.black, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ImageViewer
-                        imageUrls={dialog !== null ? [{url: assets.baseURL + `/produk/` + produks[dialog].gambar}] : null}
+                        imageUrls={dialog !== null ? [{url: assets.baseURL + `/produk/` + produks[dialog].gambar_produk}] : null}
                         renderIndicator={() => null}
                         onSwipeDown={() => setDialog(null)}
                         enableSwipeDown={true}
@@ -197,7 +197,7 @@ const changeRupiah = (value) => {
           animation={'fadeInUpBig'}
         >
           <View style={styles.title}>
-            <Text style={{ fontSize: 20, fontFamily: fonts.primary[800], color: colors.dark1 }}>{ data.produk }</Text>
+            <Text style={{ fontSize: 20, fontFamily: fonts.primary[800], color: colors.dark1 }}>{ data.nama_umkm }</Text>
 
             <View style={{ marginTop: 20 }}>
               <Text style={{ color: colors.green1, fontSize: 17, marginBottom: 5, fontFamily: fonts.primary[600] }}>Pemilik</Text>

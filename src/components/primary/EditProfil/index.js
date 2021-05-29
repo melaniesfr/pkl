@@ -17,8 +17,8 @@ export default function EditProfil() {
   const [ konfPwBaru, setKonfPwBaru ] = useState('');
 
   const [ data, setData ] = useState({
-    id: '',
-    nama: '',
+    id_users: '',
+    nama_users: '',
     email: '',
     password: '',
     pwLama: '',
@@ -49,8 +49,8 @@ export default function EditProfil() {
         if (users === res.data[i].email) {
           setData({
             ...data,
-            id: res.data[i].id,
-            nama: res.data[i].nama,
+            id_users: res.data[i].id_users,
+            nama_users: res.data[i].nama_users,
             email: res.data[i].email,
             password: res.data[i].password
           });
@@ -68,13 +68,13 @@ export default function EditProfil() {
     if (value.trim().length >= 5) {
       setData({
         ...data,
-        nama: value,
+        nama_users: value,
         isValidNama: true
       });
     } else {
       setData({
         ...data,
-        nama: value,
+        nama_users: value,
         isValidNama: false
       });
     }
@@ -189,13 +189,13 @@ export default function EditProfil() {
   const editProfil = () => {
     setLoading(true);
 
-    if (data.nama.length === 0 || data.email.length === 0) {
+    if (data.nama_users.length === 0 || data.email.length === 0) {
       setLoading(false);
       Alert.alert('Error!', 'Data isian tidak boleh ada yang kosong.');
-    } else if (data.nama.length < 5 || data.email.length < 10) {
+    } else if (data.nama_users.length < 5 || data.email.length < 10) {
       setLoading(false);
       Alert.alert('Error!', 'Data nama atau email tidak memenuhi ketentuan.');
-    } else if (data.nama.length >= 5 && data.email.length >= 10) {
+    } else if (data.nama_users.length >= 5 && data.email.length >= 10) {
       fetch(assets.api.editProfil, {
         method: 'POST',
         headers: {
@@ -203,8 +203,8 @@ export default function EditProfil() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          id: data.id,
-          nama: data.nama,
+          id_users: data.id_users,
+          nama_users: data.nama_users,
           email: data.email
         })
       })
@@ -241,7 +241,7 @@ export default function EditProfil() {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              id: data.id,
+              id_users: data.id_users,
               password: data.konfPwBaru
             })
           })
@@ -392,7 +392,7 @@ export default function EditProfil() {
 
           <TextInput
             placeholder={'Nama'}
-            value={ data.nama }
+            value={ data.nama_users }
             onChangeText={(value) => onChangeNama(value)}
             style={styles.input}
           />

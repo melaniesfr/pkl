@@ -8,8 +8,8 @@ import axios from 'axios';
 
 export default function Profil({ onPressEdit }) {
   const [ data, setData ] = useState({
-    id: '',
-    nama: '',
+    id_users: '',
+    nama_users: '',
     email: '',
     password: ''
   });
@@ -28,8 +28,8 @@ export default function Profil({ onPressEdit }) {
         if (users === res.data[i].email) {
           setData({
             ...data,
-            id: res.data[i].id,
-            nama: res.data[i].nama,
+            id_users: res.data[i].id_users,
+            nama_users: res.data[i].nama_users,
             email: res.data[i].email,
             password: res.data[i].password
           });
@@ -58,7 +58,7 @@ export default function Profil({ onPressEdit }) {
           <View style={{ flexDirection: 'row' }}>
             <Text style={[styles.textInfo, { marginRight: 15 }]}>Nama</Text>
             <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
-            <Text style={styles.textData}>{ data.nama }</Text>
+            <Text style={styles.textData}>{ data.nama_users }</Text>
           </View>
           <View style={{ flexDirection: 'row' }}>
             <Text style={[styles.textInfo, { marginRight: 17 }]}>Email</Text>

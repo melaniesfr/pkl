@@ -13,7 +13,7 @@ export default function Review({ data }) {
     axios.get(assets.api.reviews)
     .then((res) => {
       for (var i = 0; i < res.data.length; i++) {
-        if (res.data[i].id_umkm === data.id) {
+        if (res.data[i].id_umkm === data.id_umkm) {
           setReview(res.data[i]);
         }
       }
@@ -30,8 +30,8 @@ export default function Review({ data }) {
   };
 
   const [ user, setUser ] = useState({
-    id: '',
-    nama: '',
+    id_users: '',
+    nama_users: '',
     email: '',
     password: ''
   });
@@ -57,8 +57,8 @@ export default function Review({ data }) {
         if (users === res.data[i].email) {
           setUser({
             ...user,
-            id: res.data[i].id,
-            nama: res.data[i].nama,
+            id_users: res.data[i].id_users,
+            nama_users: res.data[i].nama_users,
             email: res.data[i].email,
             password: res.data[i].password
           });
@@ -82,7 +82,7 @@ export default function Review({ data }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: value
+        id_review: value
       })
     })
     .then((res) => res.json())
@@ -97,7 +97,7 @@ export default function Review({ data }) {
   const ReviewAda = () => {
     return (
       reviews.map((item, index) => {
-        if (data.id === item.id_umkm) {
+        if (data.id_umkm === item.id_umkm) {
           return (
             <View key={ index }>
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -113,7 +113,7 @@ export default function Review({ data }) {
                 <View style={{ marginTop: 5, marginRight: 5, justifyContent: 'center' }}>
                   <Text style={[styles.textTanggal, { marginBottom: 5 }]}>{ item.tanggal }</Text>
 
-                  { user.nama === item.nama_users && token === 'userToken' ? (
+                  { user.nama_users === item.nama_users && token === 'userToken' ? (
                   <TouchableOpacity
                     onPress={() => deleteReview(item.id)}
                     style={{ paddingVertical: 3, paddingHorizontal: 10, backgroundColor: colors.red, borderRadius: 5 }}

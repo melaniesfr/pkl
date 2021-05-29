@@ -11,7 +11,7 @@ export default function Register({ navigation }) {
   const [ pass, setPass ] = useState('');
 
   const [ data, setData ] = useState({
-    nama: '',
+    nama_users: '',
     email: '',
     password: '',
     check_textNamaChange: false,
@@ -26,14 +26,14 @@ export default function Register({ navigation }) {
     if (value.trim().length >= 5) {
       setData({
         ...data,
-        nama: value,
+        nama_users: value,
         check_textNamaChange: true,
         isValidNama: true
       });
     } else {
       setData({
         ...data,
-        nama: value,
+        nama_users: value,
         check_textNamaChange: false,
         isValidNama: false
       });
@@ -89,11 +89,11 @@ export default function Register({ navigation }) {
   };
 
   const registHandle = () => {
-    if (data.nama.length === 0 || data.email.length === 0 || pass.length === 0) {
+    if (data.nama_users.length === 0 || data.email.length === 0 || pass.length === 0) {
       Alert.alert('Error!', 'Kolom nama/email/password tidak boleh kosong.');
     } else if (data.nama.length < 5 || data.email.length < 10 || pass.length < 8) {
       Alert.alert('Error!', 'Data isian tidak sesuai ketentuan.');
-    } else if (data.nama.length >= 5 && data.email.length >= 10 && pass.length >= 8) {
+    } else if (data.nama_users.length >= 5 && data.email.length >= 10 && pass.length >= 8) {
       fetch(assets.api.registration, {
         method: 'POST',
         headers: {
@@ -101,7 +101,7 @@ export default function Register({ navigation }) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          nama: data.nama,
+          nama_users: data.nama_users,
           email: data.email,
           password: data.password
         })
@@ -119,7 +119,7 @@ export default function Register({ navigation }) {
   
         setData({
           ...data,
-          nama: '',
+          nama_users: '',
           email: '',
           password: '',
           check_textNamaChange: false,
@@ -153,7 +153,7 @@ export default function Register({ navigation }) {
               />
               <TextInput
                 placeholder="Nama"
-                value={ data.nama }
+                value={ data.nama_users }
                 onChangeText={(value) => onChangeNama(value)}
               />
               { data.check_textNamaChange ?

@@ -16,8 +16,8 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   const [ dialog, setDialog ] = useState(null);
 
   const [ data, setData ] = useState({
-    id: item.id,
-    produk: item.produk,
+    id_umkm: item.id_umkm,
+    nama_umkm: item.nama_umkm,
     pemilik: item.pemilik,
     deskripsi: item.deskripsi,
     kategori: item.kategori,
@@ -25,7 +25,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
     facebook: item.facebook,
     instagram: item.instagram,
     telp: item.telp,
-    gambar: item.gambar
+    gambar_umkm: item.gambar_umkm
   });
 
   const ubahKategori = () => {
@@ -45,10 +45,10 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   };
 
   const GambarProduk = () => {
-    if (data.gambar !== '') {
+    if (data.gambar_umkm !== '') {
       return (
         <FastImage
-          source={{uri: assets.baseURL + `images/${data.gambar}`}}
+          source={{uri: assets.baseURL + `images/${data.gambar_umkm}`}}
           style={{ flex: 1, width: '100%' }}
         />
       );
@@ -97,7 +97,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
     axios.get(assets.api.produk)
     .then((res) => {
       for (var i=0; i<res.data.length; i++) {
-        if (data.id === res.data[i].id_umkm) {
+        if (data.id_umkm === res.data[i].id_umkm) {
           setProduk(res.data[i]);
         }
       }
@@ -123,9 +123,9 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   const ProdukA = () => {
     return (
       produks.map((item, index) => {
-        if (data.id === item.id_umkm) {
+        if (data.id_umkm === item.id_umkm) {
           return (
-            <TouchableOpacity key={ index } onPress={() => navigation.navigate('DetailProdukAdmin', { id: item.id, id_umkm: item.id_umkm, nama: item.nama, harga: item.harga, gambar: item.gambar, })}>
+            <TouchableOpacity key={ index } onPress={() => navigation.navigate('DetailProdukAdmin', { id_produk: item.id_produk, id_umkm: item.id_umkm, nama_produk: item.nama_produk, harga: item.harga, gambar_produk: item.gambar_produk, })}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', width: '60%' }}>
                   <Icon
@@ -133,7 +133,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
                     size={20}
                     color={colors.dark2}
                   />
-                  <Text style={styles.informationData}>{ item.nama }</Text>
+                  <Text style={styles.informationData}>{ item.nama_produk }</Text>
                 </View>
                 <Text style={[styles.informationTitle, { fontSize: 14 }]}>: Rp { changeRupiah(item.harga) }</Text>
               </View>
@@ -155,12 +155,12 @@ export default function DetailUMKMAdmin({ route, navigation }) {
       <ScrollView horizontal>
         <Gap width={20} />
           { produks.map((item, index) => {
-            if (data.id === item.id_umkm) {
+            if (data.id_umkm === item.id_umkm) {
               return (
                 <View key={ index }>
                   <TouchableOpacity onPress={() => setDialog(index)}>
                     <FastImage
-                      source={{uri: assets.baseURL + `/produk/${item.gambar}`}}
+                      source={{uri: assets.baseURL + `/produk/${item.gambar_produk}`}}
                       style={{ width: 150, height: 100, marginRight: 10, borderRadius: 5 }}
                     />
                   </TouchableOpacity>
@@ -171,7 +171,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
                   >
                     <View style={{ backgroundColor: colors.black, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                       <ImageViewer
-                        imageUrls={dialog !== null ? [{url: assets.baseURL + `/produk/` + produks[dialog].gambar}] : null}
+                        imageUrls={dialog !== null ? [{url: assets.baseURL + `/produk/` + produks[dialog].gambar_produk}] : null}
                         renderIndicator={() => null}
                         onSwipeDown={() => setDialog(null)}
                         enableSwipeDown={true}
@@ -212,7 +212,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id: data.id
+        id_umkm: data.id_umkm
       })
     })
     .then((res) => res.json())
@@ -248,7 +248,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
           animation={'fadeInUpBig'}
         >
           <View style={styles.title}>
-            <Text style={{ fontSize: 20, fontFamily: fonts.primary[800], color: colors.dark1 }}>{ data.produk }</Text>
+            <Text style={{ fontSize: 20, fontFamily: fonts.primary[800], color: colors.dark1 }}>{ data.nama_umkm }</Text>
 
             <View style={{ marginTop: 20 }}>
               <Text style={{ color: colors.green1, fontSize: 17, marginBottom: 5, fontFamily: fonts.primary[600] }}>Pemilik</Text>
@@ -369,7 +369,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
 
         <View style={styles.footer}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('UpdateUMKMAdmin', { id: data.id, produk: data.produk, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar: data.gambar, })}
+            onPress={() => navigation.navigate('UpdateUMKMAdmin', { id_umkm: data.id_umkm, nama_umkm: data.nama_produk, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar_umkm: data.gambar_umkm, })}
             style={styles.editButton}
           >
             <Icon
@@ -409,7 +409,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
         <Text style={styles.titleButton}>Produk UMKM</Text>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('TambahProdukAdmin', { id_umkm: data.id, })}
+          onPress={() => navigation.navigate('TambahProdukAdmin', { id_umkm: data.id_umkm, })}
           style={styles.addButton}
         >
           <Icon

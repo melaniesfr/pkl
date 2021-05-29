@@ -11,8 +11,8 @@ export default function DetailUMKMUser({ route, navigation }) {
   const [ loading, setLoading ] = useState(false);
 
   const [ data, setData ] = useState({
-    id: item.id,
-    produk: item.produk,
+    id_umkm: item.id_umkm,
+    nama_umkm: item.nama_umkm,
     pemilik: item.pemilik,
     deskripsi: item.deskripsi,
     kategori: item.kategori,
@@ -20,12 +20,12 @@ export default function DetailUMKMUser({ route, navigation }) {
     facebook: item.facebook,
     instagram: item.instagram,
     telp: item.telp,
-    gambar: item.gambar
+    gambar_umkm: item.gambar_umkm
   });
 
   const [ user, setUser ] = useState({
-    id: '',
-    nama: '',
+    id_users: '',
+    nama_users: '',
     email: '',
     password: ''
   });
@@ -44,8 +44,8 @@ export default function DetailUMKMUser({ route, navigation }) {
         if (users === res.data[i].email) {
           setUser({
             ...user,
-            id: res.data[i].id,
-            nama: res.data[i].nama,
+            id_users: res.data[i].id_users,
+            nama_users: res.data[i].nama_users,
             email: res.data[i].email,
             password: res.data[i].password
           });
@@ -60,7 +60,7 @@ export default function DetailUMKMUser({ route, navigation }) {
   }, [users]);
 
   const [ review, setReview ] = useState({
-    id: '',
+    id_reviews: '',
     id_umkm: '',
     id_users: '',
     review: '',
@@ -133,7 +133,7 @@ export default function DetailUMKMUser({ route, navigation }) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={{ alignSelf: 'center', fontSize: 17, fontFamily: fonts.primary[700], color: colors.dark1 }}>{ data.produk }</Text>
+            <Text style={{ alignSelf: 'center', fontSize: 17, fontFamily: fonts.primary[700], color: colors.dark1 }}>{ data.nama_umkm }</Text>
             <TextInput
               placeholder={'Review Anda...'}
               value={ review.review }
