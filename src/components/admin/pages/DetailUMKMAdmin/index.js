@@ -29,17 +29,17 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   });
 
   const ubahKategori = () => {
-    if (data.kategori === 'Batik') {
+    if (data.nama_kategori === 'Batik') {
       setKate(1);
-    } else if (data.kategori === 'Fashion') {
+    } else if (data.nama_kategori === 'Fashion') {
       setKate(2);
-    } else if (data.kategori === 'Kerajinan') {
+    } else if (data.nama_kategori === 'Kerajinan') {
       setKate(3);
-    } else if (data.kategori === 'Kuliner') {
+    } else if (data.nama_kategori === 'Kuliner') {
       setKate(4);
-    } else if (data.kategori === 'Makanan Olahan') {
+    } else if (data.nama_kategori === 'Makanan Olahan') {
       setKate(5);
-    } else if (data.kategori === 'Minuman Olahan') {
+    } else if (data.nama_kategori === 'Minuman Olahan') {
       setKate(6);
     }
   };
@@ -369,7 +369,7 @@ export default function DetailUMKMAdmin({ route, navigation }) {
 
         <View style={styles.footer}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('UpdateUMKMAdmin', { id_umkm: data.id_umkm, nama_umkm: data.nama_produk, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar_umkm: data.gambar_umkm, })}
+            onPress={() => navigation.navigate('UpdateUMKMAdmin', { id_umkm: data.id_umkm, nama_umkm: data.nama_umkm, pemilik: data.pemilik, deskripsi: data.deskripsi, kategori: kate, alamat: data.alamat, facebook: data.facebook, instagram: data.instagram, telp: data.telp, gambar_umkm: data.gambar_umkm, })}
             style={styles.editButton}
           >
             <Icon

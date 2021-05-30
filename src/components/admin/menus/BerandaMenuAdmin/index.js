@@ -30,7 +30,7 @@ export default function BerandaMenuAdmin({ navigation }) {
       />
       <Stack.Screen name="UpdateUMKMAdmin" component={ UpdateUMKMAdmin }
         options={{
-          title: 'Update'
+          title: 'Edit UMKM'
         }}
       />
       <Stack.Screen name="TambahProdukAdmin" component={ TambahProdukAdmin }
@@ -40,7 +40,7 @@ export default function BerandaMenuAdmin({ navigation }) {
       />
       <Stack.Screen name="DetailProdukAdmin" component={ DetailProdukAdmin }
         options={{
-          title: 'Detail Produk'
+          title: 'Edit Produk'
         }}
       />
     </Stack.Navigator>

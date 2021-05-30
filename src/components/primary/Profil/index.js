@@ -63,7 +63,7 @@ export default function Profil({ onPressEdit }) {
           <View style={{ flexDirection: 'row' }}>
             <Text style={[styles.textInfo, { marginRight: 17 }]}>Email</Text>
             <Text style={[styles.textInfo, { marginRight: 5 }]}>:</Text>
-            <Text>{ data.email }</Text>
+            <Text style={styles.textData}>{ data.email }</Text>
           </View>
         </View>
 
