@@ -9,6 +9,7 @@ import axios from 'axios';
 export default function DetailUMKMUser({ route, navigation }) {
   const { item } = route.params;
   const [ loading, setLoading ] = useState(false);
+  const [ modalVisible, setModalVisible ] = useState(false);
 
   const [ data, setData ] = useState({
     id_umkm: item.id_umkm,
@@ -68,7 +69,7 @@ export default function DetailUMKMUser({ route, navigation }) {
   });
 
   const onChangeReview = (value) => {
-    if (value.trim().length >= 10) {
+    if (value.trim().length >= 5) {
       setReview({
         ...review,
         review: value,
@@ -89,10 +90,10 @@ export default function DetailUMKMUser({ route, navigation }) {
     if (review.review.length === 0) {
       setLoading(false);
       Alert.alert('Error!', 'Isi review tidak boleh kosong.');
-    } else if (review.review.length < 10) {
+    } else if (review.review.length < 5) {
       setLoading(false);
       Alert.alert('Error!', 'Data review tidak memenuhi ketentuan.');
-    } else if (review.review.length >= 10) {
+    } else if (review.review.length >= 5) {
       fetch(assets.api.addReview, {
         method: 'POST',
         headers: {
@@ -100,8 +101,8 @@ export default function DetailUMKMUser({ route, navigation }) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          id_umkm: data.id,
-          id_users: user.id,
+          id_umkm: data.id_umkm,
+          id_users: user.id_users,
           review: review.review
         })
       })
@@ -113,6 +114,7 @@ export default function DetailUMKMUser({ route, navigation }) {
           Alert.alert('Error!', resJson);
         } else if (resJson === 'Tambah review berhasil.') {
           Alert.alert('Success!', resJson);
+          setModalVisible(!modalVisible);
         } else {
           Alert.alert('Error!', resJson);
         }
@@ -120,8 +122,6 @@ export default function DetailUMKMUser({ route, navigation }) {
       .catch((err) => console.log(err));
     }
   };
-
-  const [ modalVisible, setModalVisible ] = useState(false);
 
   return (
     <View>
@@ -144,7 +144,7 @@ export default function DetailUMKMUser({ route, navigation }) {
 
             { review.isValidReview ? null :
             <Animatable.View animation={'fadeInLeft'} duration={500}>
-              <Text style={styles.errorMsg}>Panjang minimal review 10 karakter.</Text>
+              <Text style={styles.errorMsg}>Panjang minimal review 5 karakter.</Text>
             </Animatable.View> }
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 15 }}>

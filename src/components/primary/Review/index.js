@@ -82,7 +82,7 @@ export default function Review({ data }) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        id_review: value
+        id_reviews: value
       })
     })
     .then((res) => res.json())
@@ -115,7 +115,7 @@ export default function Review({ data }) {
 
                   { user.nama_users === item.nama_users && token === 'userToken' ? (
                   <TouchableOpacity
-                    onPress={() => deleteReview(item.id)}
+                    onPress={() => deleteReview(item.id_reviews)}
                     style={{ paddingVertical: 3, paddingHorizontal: 10, backgroundColor: colors.red, borderRadius: 5 }}
                   >
                     <Text style={{ fontFamily: fonts.primary.normal, color: colors.white }}>Hapus</Text>
