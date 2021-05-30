@@ -29,17 +29,17 @@ export default function DetailUMKMAdmin({ route, navigation }) {
   });
 
   const ubahKategori = () => {
-    if (data.nama_kategori === 'Batik') {
+    if (data.kategori === 'Batik') {
       setKate(1);
-    } else if (data.nama_kategori === 'Fashion') {
+    } else if (data.kategori === 'Fashion') {
       setKate(2);
-    } else if (data.nama_kategori === 'Kerajinan') {
+    } else if (data.kategori === 'Kerajinan') {
       setKate(3);
-    } else if (data.nama_kategori === 'Kuliner') {
+    } else if (data.kategori === 'Kuliner') {
       setKate(4);
-    } else if (data.nama_kategori === 'Makanan Olahan') {
+    } else if (data.kategori === 'Makanan Olahan') {
       setKate(5);
-    } else if (data.nama_kategori === 'Minuman Olahan') {
+    } else if (data.kategori === 'Minuman Olahan') {
       setKate(6);
     }
   };
